@@ -1,0 +1,68 @@
+\chapter{Resultados clássicos}
+\label{cap:classicos}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}
+
+\theoremstyle{plain}
+\newtheorem{conjecture}{Conjectura}
+
+\theoremstyle{plain}
+\newtheorem{claim}{Afirmação}
+
+\theoremstyle{plain}
+\newtheorem{corollary}{Corolário}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definição}
+
+Seja $G$ um grafo. Defininimos $D(G)$ como o menor tamanho de um $F \subseteq E(G)$ tal que $G-F$ é bipartido.
+
+\begin{theorem}[Mantel]
+  Seja $G$ um grafo livre de triângulos com $n$ vértices.
+  Então $e(G) \leq \left\lceil\frac{n^2}{4}\right\rceil$.
+  Além disso, se vale a igualdade então $G$ é bipartido completo.
+\end{theorem}
+
+\begin{theorem}[Estabilidade] \label{thm:estabilidade}
+  Seja $m$ um inteiro positivo e seja $G$ um grafo livre de triângulos com $n$ vértices e $\frac{n^2}{4}-m$ arestas.
+  Então $D(G) \leq m$.
+\end{theorem}
+
+\begin{conjecture}[Erd\H os] \label{conj:make-bipartite}
+  Seja $G$ um grafo livre de triângulos com $n$ vértices.
+  Então $G$ pode ser tornado bipartido pela remoção de no máximo $\frac{n^2}{25}$ arestas.
+\end{conjecture}
+
+Observe que o Teorema \ref{thm:estabilidade} prova a Conjetura para grafos suficientemente densos (com pelo menos $\frac{n^2}{4} - \frac{n^2}{25}$ arestas).
+
+\begin{definition}
+  Sejam $G$ um grafo e $H$ um blow-up de $G$, com $\phi \colon V(H) \to V(G)$ sendo um homomorfismo que define esse blow-up.
+  Dizemos que um $S \subseteq E(H)$ é \textit{canônico com relação a $\phi$} se para quaisquer $e,f \in E(H)$ com
+  $\phi(e)=\phi(f)$ vale que $e \in S \iff f \in S$.
+  Em outras palavras, entre cada par de classes de $H$ escolhemos ou todas as arestas entre essas classes ou não escolhemos nenhuma dessas arestas.
+  
+  Se $\phi$ for claro do contexto, iremos omitir e dizer apenas que o conjunto de arestas do blow-up é canônico.
+\end{definition}
+
+\begin{theorem}[Simetrização]
+  Seja $G$ um grafo livre de triângulos e seja $H$ um blow-up de $G$.
+  Então existe $F \subseteq E(H)$ canônico com $|F|=D(H)$ e tal que $G-F$ é bipartido.
+\end{theorem}
+
+\begin{corollary}
+  Seja $H$ um blow-up de $C_5$ com $n$ vértices.
+  Então \[ D(H) \leq \frac{n^2}{25}. \]
+  Em particular, a Conjectura \ref{conj:make-bipartite} (se verdadeira) dá a melhor constante possível.
+\end{corollary}
+
+\begin{theorem}
+  Seja $G$ um grafo livre de triângulo com $n$ vértices e $m$ arestas.
+  Então \[ D(G) \leq m-\frac{m^2}{4n}. \]
+\end{theorem}
+
+\begin{corollary} \label{cor:n2/5}
+  Para todo $n$ inteiro positivo, a conjectura \ref{conj:make-bipartite}
+  é verdadeira para grafos com $n$ vértices e pelo menos $\frac{n^2}{5}$
+\end{corollary}
+
