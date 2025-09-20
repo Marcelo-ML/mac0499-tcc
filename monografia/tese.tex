@@ -91,29 +91,17 @@
 % Estes comandos definem o título e autoria do trabalho e devem sempre ser
 % definidos, pois além de serem utilizados para criar a capa, também são
 % armazenados nos metadados do PDF. O subtítulo é opcional.
-\title{Título do trabalho}[um subtítulo]
-\translatedtitle{Title of the document}[a subtitle]
+\title{Grafos: legal demais!}
+\translatedtitle{Graphs: so cool!}
 
-\author[fem]{Nome Completo}
+\author{Marcelo Machado Lage}
 
-\def\profa{Prof\kern.02em.\kern-.07emª\kern.07em}
-\def\dra{Dr\kern-.04em.\kern-.11emª\kern.07em}
+\def\prof{Prof\kern.02em.\kern-.07em\kern.07em}
+\def\dr{Dr\kern-.04em.\kern-.11em\kern.07em}
 
 % Para TCCs, este comando define o supervisor
-\orientador[fem]{\profa{} \dra{} Fulana de Tal}
+\orientador{\prof{} \dr{} Guilherme Oliveira Mota}
 
-% Se não houver, remova; se houver mais de um, basta
-% repetir o comando quantas vezes forem necessárias
-\coorientador{Prof. Dr. Ciclano de Tal}
-\coorientador[fem]{\profa{} \dra{} Beltrana de Tal}
-
-\banca{
-  \profa{} \dra{} Fulana de Tal (orientadora) -- IME-USP [sem ponto final],
-  % Em inglês, não há o "ª"
-  %Prof. Dr. Fulana de Tal (advisor) -- IME-USP [sem ponto final],
-  Prof. Dr. Ciclano de Tal -- IME-USP [sem ponto final],
-  \profa{} \dra{} Convidada de Tal -- IMPA [sem ponto final],
-}
 
 % A página de rosto da versão para depósito (ou seja, a versão final
 % antes da defesa) deve ser diferente da página de rosto da versão
@@ -130,7 +118,7 @@
 
 \defesa{
   local={São Paulo},
-  data=2017-08-10, % YYYY-MM-DD
+  data=2025-12-31, % YYYY-MM-DD
 }
 
 % Se não houve bolsa, remova
@@ -156,7 +144,7 @@
 %\apoio{During the development if this work, the author received\\
 %      financial support from FAPESP -- grant \#aaaa/nnnnn-d}
 \apoio{Durante o desenvolvimento deste trabalho o autor
-       recebeu auxílio financeiro da XXXX}
+       recebeu auxílio financeiro da FAPESP}
 
 % A licença do seu trabalho. Use CC-BY, CC-BY-NC, CC-BY-ND, CC-BY-SA,
 % CC-BY-NC-SA ou CC-BY-NC-ND para escolher a licença Creative Commons
@@ -216,18 +204,6 @@
 % que a página da dedicatória não seja contada.
 \pagenumbering{roman}
 
-% Agradecimentos:
-% Se o candidato não quer fazer agradecimentos, deve simplesmente eliminar
-% esta página. A epígrafe, obviamente, é opcional; é possível colocar
-% epígrafes em todos os capítulos. O comando "\chapter*" faz esta seção
-% não ser incluída no sumário.
-%\chapter*{Agradecimentos}
-%\epigrafe{Do. Or do not. There is no try.}{Mestre Yoda}
-
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto. Texto opcional.
 
 \input{conteudo/resumoabstract}
 
@@ -344,8 +320,12 @@ texto texto texto texto. Texto opcional.
 \pagestyle{mainmatter}
 
 
+
 \input{conteudo/01-resultados-classicos.tex}
 
+\input{conteudo/02-flag-algebras}
+
+\input{conteudo/03-grau-limitado}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% APÊNDICES E ANEXOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -421,6 +401,6 @@ texto texto texto texto. Texto opcional.
   heading=bibintoc, % Inclui a bibliografia no sumário
 ]
 
-\printindex % imprime o índice remissivo no documento (opcional)
+%\printindex % imprime o índice remissivo no documento (opcional)
 
 \end{document}
