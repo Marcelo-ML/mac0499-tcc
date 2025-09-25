@@ -3,7 +3,8 @@
 \label{cap:classicos}
 
 
-Seja $G$ um grafo. Defininimos $D(G)$ como o menor tamanho de um $F \subseteq E(G)$ tal que $G-F$ é bipartido.
+Seja $G$ um grafo.
+Defininimos $D(G)$ como o menor tamanho de um $F \subseteq E(G)$ tal que $G-F$ é bipartido.
 
 \begin{theorem}[Mantel]
   Seja $G$ um grafo livre de triângulos com $n$ vértices.
@@ -16,7 +17,7 @@ Seja $G$ um grafo. Defininimos $D(G)$ como o menor tamanho de um $F \subseteq E(
   Então $D(G) \leq m$.
 \end{theorem}
 
-\begin{conjecture}[Erd\H os] \label{conj:make-bipartite}
+\begin{conjecture} [\cite{erdos1975problems}] \label{conj:make-bipartite}
   Seja $G$ um grafo livre de triângulos com $n$ vértices.
   Então $G$ pode ser tornado bipartido pela remoção de no máximo $\frac{n^2}{25}$ arestas,
   i.e. \[D(G) \leq \frac{n^2}{25}.\]
@@ -24,7 +25,7 @@ Seja $G$ um grafo. Defininimos $D(G)$ como o menor tamanho de um $F \subseteq E(
 
 Uma Conjectura relacionada:
 
-\begin{conjecture} \label{conj:metadinha}
+\begin{conjecture} [\cite{erdos1975problems}] \label{conj:metadinha}
   Seja $G$ um grafo livre de triângulos com $n$ vértices.
   Então existe $X \subseteq V(G)$ com $X = \left\lfloor \frac{n}{2} \right\rfloor$ tal que $e(G[X]) \leq \frac{n^2}{50}$.
 \end{conjecture}
@@ -56,10 +57,10 @@ Observe que o Teorema \ref{thm:estabilidade} prova a Conjetura para grafos sufic
   Então \[ D(G) \leq \left\{m-\frac{m^2}{4n}, \frac{m}{2} - \frac{2m(2m^2-n^3)}{n^2(n^2-2m)}\right\}. \]
 \end{theorem}
 
-\begin{corollary} \label{cor:n2/5}
+\begin{theorem} \label{thm:n2/5}
   Para todo $n$ inteiro positivo, a Conjectura \ref{conj:make-bipartite}
   é verdadeira para grafos com $n$ vértices e pelo menos $\frac{n^2}{5}$ arestas.
-\end{corollary}
+\end{theorem}
 
 \begin{theorem}[Erd\H os - Gy\H ori - Simonovits]
   Seja $G$ um grafo livre de triângulos com $n$ vértices e pelo menos $\frac{n^2}{25}$ arestas.
