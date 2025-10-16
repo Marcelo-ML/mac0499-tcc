@@ -6,7 +6,7 @@
 Seja $G$ um grafo.
 Defininimos $D(G)$ como o menor tamanho de um $F \subseteq E(G)$ tal que $G-F$ é bipartido.
 
-\begin{theorem}[Mantel]
+\begin{theorem}[Mantel]~\label{thm:mantel}
   Seja $G$ um grafo livre de triângulos com $n$ vértices.
   Então $e(G) \leq \left\lfloor\frac{n^2}{4}\right\rfloor$.
   Além disso, se vale a igualdade então $G$ é bipartido completo.
@@ -41,7 +41,7 @@ Observe que o Teorema \ref{thm:estabilidade} prova a Conjetura para grafos sufic
   Se $\phi$ for claro do contexto, iremos omitir e dizer apenas que o conjunto de arestas do blow-up é simplesmente \emph{canônico}.
 \end{definition}
 
-\begin{theorem}[Simetrização]
+\begin{theorem}[Simetrização]\label{thm:simetrizacao}
   Seja $G$ um grafo livre de triângulos e seja $H$ um blow-up de $G$.
   Então existe $F \subseteq E(H)$ canônico com $|F|=D(H)$ e tal que $G-F$ é bipartido.
 \end{theorem}
@@ -53,9 +53,28 @@ Observe que o Teorema \ref{thm:estabilidade} prova a Conjetura para grafos sufic
 \end{corollary}
 
 \begin{theorem}[EFPS] \label{thm:EFPS-bounds}
-  Seja $G$ um grafo livre de triângulo com $n$ vértices e $m$ arestas.
-  Então \[ D(G) \leq \left\{m-\frac{m^2}{4n}, \frac{m}{2} - \frac{2m(2m^2-n^3)}{n^2(n^2-2m)}\right\}. \]
+  Seja $G$ um grafo livre de triângulos com $n$ vértices e $m$ arestas.
+  Então \[ D(G) \leq \min\left\{m-\frac{4m^2}{n}, \frac{m}{2} - \frac{2m(2m^2-n^3)}{n^2(n^2-2m)}\right\} \leq \frac{n^2}{18}. \]
 \end{theorem}
+
+\begin{proof}
+  Provamos primeiro que $D(G) \leq m-\frac{m^2}{4n}$.
+  Para isso, vamos definir para cada vértice $v$ o conjunto $F_v \subseteq E(G)$ de arestas $xy \in E(G)$ tais que $vx,vy \not\in E(G)$.
+  Note que $D(G) \leq |F_v|$ para qualquer vértice $v$, pois a bipartição $\{N_G(v), V(G) \setminus N_G(v)\}$ possui exatamente $|F_v|$ arestas dentro da segunda parte, e a primeira é independente.
+  Assim, temos que
+  \begin{equation}\label{eq:bound-with-Fs}
+     D(G) \leq \min_{v \in V(G)} |F_v| \leq \frac{1}{n} \sum_{v \in V(G)} |F_v|.
+  \end{equation} 
+  Observe que $xy \in F_v \implies v \in V(G) \setminus (N_G(x) \cup N_G(y))$, logo cada aresta $xy \in E(G)$ pertence a no máximo $n-d_G(x)-d_G(y)$ conjuntos $F_v$, logo em~\ref{eq:bound-with-Fs} we have
+  \begin{align*}
+    D(G) &\leq \frac{1}{n} \sum_{v \in V(G)} |F_v| \\
+      &\leq \frac{1}{n} \sum_{xy \in E(G)} (n-d_G(x)-d_G(y)) \\
+      &= m - \frac{1}{n} \sum_{x \in V(G)} d_G(x)^2 \\
+      &\leq m-\left(\frac{\sum_{x \in V(G)} d_G(x)}{n}\right)^2 \\
+      &=m-\frac{4m^2}{n}.
+  \end{align*}
+
+\end{proof}
 
 \begin{theorem} \label{thm:n2/5}
   Para todo $n$ inteiro positivo, a Conjectura \ref{conj:make-bipartite}

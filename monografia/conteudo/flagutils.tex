@@ -3,140 +3,213 @@
 \newcommand{\asigma}{\mathcal{A}^\sigma}
 
 \newcommand{\emptyflag}{\varnothing}
+\newcommand{\aempty}{\mathcal{A}^\emptyflag}
+
 \newcommand{\isom}{\cong}
+\newcommand{\average}[1]{\left\llbracket{#1}\right\rrbracket}
+
+\newcommand{\downward}{\downarrow\!}
 
 % Tikz setup from https://arxiv.org/abs/2103.14179
 
 
-\newcommand{\vc}[1]{\ensuremath{\vcenter{\hbox{#1}}}}
-\tikzset{vtx/.style={inner sep=1.7pt, outer sep=0pt, circle, fill}}
-\tikzset{unlabeled_vertex/.style={inner sep=1.7pt, outer sep=0pt, circle, fill, draw=black}}
+\newcommand{\flagcode}[1]{\ensuremath{\vcenter{\hbox{\begin{tikzpicture}[scale=0.4]{#1}\end{tikzpicture}}}}}
+\tikzset{vtx/.style={inner sep=1.2pt, outer sep=0pt, circle, fill}}
+\tikzset{unlabeled_vertex/.style={inner sep=1.2pt, outer sep=0pt, circle, fill, draw=black}}
 \tikzset{labeled_vertex/.style={inner sep=2.2pt, outer sep=0pt, rectangle, fill=yellow, draw=black}}
-\tikzset{edge_color0/.style={color=black,line width=1.2pt}}
-\tikzset{edge_color1/.style={color=red,  line width=1.2pt,opacity=0}}
-\tikzset{edge_color2/.style={color=blue, line width=1.2pt,opacity=1}}
+\tikzset{edge_color0/.style={color=black,line width=0.9pt}}
+\tikzset{edge_color1/.style={color=red,  line width=0.9pt,opacity=0}}
+\tikzset{edge_color2/.style={color=blue, line width=0.9pt,opacity=1}}
+
+\newcommand{\justavertex}{
+  \flagcode{
+    \draw (0,0) node[unlabeled_vertex]{};
+  }
+}
 
 \newcommand{\flagone}{ % this is the unlabeled triangle
-  \vc{\begin{tikzpicture}[scale=0.5]
+  \flagcode{
     \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
     \draw[edge_color2] (x0)--(x1)--(x2)--(x0);
     \draw (x0) node[unlabeled_vertex]{};
     \draw (x1) node[unlabeled_vertex]{};
     \draw (x2) node[unlabeled_vertex]{};
-  \end{tikzpicture}}
+  }
 }
 \newcommand{\kthree}{\flagone}
 
 \newcommand{\flagtwo}{ % this is the unlabeled edge
-  \vc{\begin{tikzpicture}[scale=0.5]
+  \flagcode{
     \draw (225:0.8) coordinate(x0);
     \draw (45:0.8) coordinate(x1);
     \draw[edge_color2] (x0)--(x1);
     \draw (x0) node[unlabeled_vertex]{};
     \draw (x1) node[unlabeled_vertex]{};
-  \end{tikzpicture}}
+  }
 }
 \newcommand{\edge}{\flagtwo}
 
 \newcommand{\flagthree}{ % this represents the edges among non-neighbors of a vertex
-  \vc{\begin{tikzpicture}[scale=0.5]
+  \flagcode{
     \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
     \draw[edge_color2] (x1)--(x2);
     \draw (x0) node[labeled_vertex,label=below:$1$]{};
     \draw (x1) node[unlabeled_vertex]{};
     \draw (x2) node[unlabeled_vertex]{};
-  \end{tikzpicture}}
+  }
 }
 
 \newcommand{\flagfour}{
-  \vc{\begin{tikzpicture}[scale=0.5]
+  \flagcode{
     \draw \foreach \x in {0,1,2}{(210+\x*360/3:0.8) coordinate(x\x)};
     \draw[edge_color2] (x0)--(x1)--(x2)--(x0);
     \draw (x0) node[labeled_vertex,label=below:$1$]{};
     \draw (x1) node[labeled_vertex,label=below:$2$]{};
     \draw (x2) node[unlabeled_vertex]{};
-  \end{tikzpicture}}
+  }
 }
 \newcommand{\kthreeLabeledEdge}{\flagfour}
 
 \newcommand{\flagfive}{ % this is the labeled edge
-  \vc{\begin{tikzpicture}[scale=0.5]
+  \flagcode{
     \draw (180:0.8) coordinate(x0);
     \draw (360:0.8) coordinate(x1);
     \draw[edge_color2] (x0)--(x1);
     \draw (x0) node[labeled_vertex,label=below:$1$]{};
     \draw (x1) node[labeled_vertex,label=below:$2$]{};
-  \end{tikzpicture}}
+  }
 }
 \newcommand{\labeledEdge}{\flagfive}
 
 \newcommand{\flagsix}{ % this is the labeled non-edge
-  \vc{\begin{tikzpicture}[scale=0.5]
+  \flagcode{
     \draw (180:0.8) coordinate(x0);
     \draw (360:0.8) coordinate(x1);
     \draw (x0) node[labeled_vertex,label=below:$1$]{};
     \draw (x1) node[labeled_vertex,label=below:$2$]{};
-  \end{tikzpicture}}
+  }
 }
 \newcommand{\labeledNonEdge}{\flagsix}
 
 \newcommand{\flagseven}{
-  \vc{\begin{tikzpicture}[scale=0.5]
+  \flagcode{
     \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
     \draw[edge_color2] (x0)--(x1)--(x2);
     \draw (x0) node[labeled_vertex,label=below:$1$]{};
     \draw (x1) node[unlabeled_vertex]{};
     \draw (x2) node[unlabeled_vertex]{};
-  \end{tikzpicture}}
+  }
 }
 
 \newcommand{\flageight}{ % this is the labeled edge with an extra vertex joined to 1
-  \vc{\begin{tikzpicture}[scale=0.5]
+  \flagcode{
     \draw \foreach \x in {0,1,2}{(210+\x*360/3:0.8) coordinate(x\x)};
     \draw[edge_color2] (x2)--(x0)--(x1);
     \draw (x0) node[labeled_vertex,label=below:$1$]{};
     \draw (x1) node[labeled_vertex,label=below:$2$]{};
     \draw (x2) node[unlabeled_vertex]{};
-  \end{tikzpicture}}
+  }
 }
 
 \newcommand{\flagnine}{ % this is the labeled edge with an extra vertex joined to 2
-  \vc{\begin{tikzpicture}[scale=0.5]
+  \flagcode{
     \draw \foreach \x in {0,1,2}{(210+\x*360/3:0.8) coordinate(x\x)};
     \draw[edge_color2] (x0)--(x1)--(x2);
     \draw (x0) node[labeled_vertex,label=below:$1$]{};
     \draw (x1) node[labeled_vertex,label=below:$2$]{};
     \draw (x2) node[unlabeled_vertex]{};
-  \end{tikzpicture}}
+  }
 }
 
 \newcommand{\flagten}{
-  \vc{\begin{tikzpicture}[scale=0.5]
+  \flagcode{
     \draw (225:0.8) coordinate(x0);
     \draw (45:0.8) coordinate(x1);
     \draw[edge_color2] (x0)--(x1);
     \draw (x0) node[labeled_vertex,label=below:$1$]{};
     \draw (x1) node[unlabeled_vertex]{};
-  \end{tikzpicture}}
+  }
 }
 \newcommand{\edgeWithOneLabel}{\flagten}
 
 \newcommand{\flageleven}{
-  \vc{\begin{tikzpicture}[scale=0.5]
+  \flagcode{
     \draw (225:0.8) coordinate(x0);
     \draw (45:0.8) coordinate(x1);
     \draw (x0) node[labeled_vertex,label=below:$1$]{};
     \draw (x1) node[unlabeled_vertex]{};
-  \end{tikzpicture}}
+  }
 }
 \newcommand{\nonEdgeWithOneLabel}{\flageleven}
 
 \newcommand{\flagtwelve}{
-  \vc{\begin{tikzpicture}[scale=0.5]
+  \flagcode{
     \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
     \draw[edge_color2] (x0)--(x1);
     \draw (x0) node[labeled_vertex,label=below:$1$]{};
     \draw (x1) node[unlabeled_vertex]{};
     \draw (x2) node[unlabeled_vertex]{};
-  \end{tikzpicture}}
+  }
+}
+
+\newcommand{\flagthirteen}{
+  \flagcode{
+    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
+    \draw[edge_color2] (x2)--(x0)--(x1);
+    \draw (x0) node[labeled_vertex,label=below:$1$]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[unlabeled_vertex]{};
+  }
+}
+\newcommand{\cherry}{\flagthirteen}
+
+\newcommand{\flagfourteen}{
+  \flagcode{
+    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
+    \draw[edge_color2] (x0)--(x1)--(x2)--(x0);
+    \draw (x0) node[labeled_vertex,label=below:$1$]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[unlabeled_vertex]{};
+  }
+}
+\newcommand{\kthreeLabeledVertex}{\flagfourteen}
+
+\newcommand{\flagfifteen}{ % three vertices, no edge and one vertex is labeled
+  \flagcode{
+    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
+    \draw (x0) node[labeled_vertex,label=below:$1$]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[unlabeled_vertex]{};
+  }
+}
+
+\newcommand{\flagsixteen}{
+  \flagcode{
+    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
+    \draw[edge_color2] (x2)--(x0)--(x1);
+    \draw (x0) node[unlabeled_vertex]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[unlabeled_vertex]{};
+  }
+}
+\newcommand{\unlabeledCherry}{\flagsixteen}
+
+\newcommand{\flagseventeen}{
+  \flagcode{
+    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
+    \draw[edge_color2] (x1)--(x2);
+    \draw (x0) node[unlabeled_vertex]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[unlabeled_vertex]{};
+  }
+}
+\newcommand{\unlabeledCherryComplement}{\flagseventeen}
+
+\newcommand{\flageighteen}{ % three vertices, no edge and no vertex is labeled
+  \flagcode{
+    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
+    \draw (x0) node[unlabeled_vertex]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[unlabeled_vertex]{};
+  }
 }
