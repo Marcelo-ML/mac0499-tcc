@@ -1,0 +1,12 @@
+\babel@toc {brazilian}{}\relax 
+\babel@toc {brazilian}{}\relax 
+\babel@toc {brazilian}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {brazilian}{}\relax 
+\contentsline {chapter}{\numberline {1}Resultados clássicos}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Álgebras de flag}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Aplicações}{3}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Cortes locais}{3}{subsection.2.1.1}%
+\contentsline {chapter}{\numberline {3}Grau limitado}{5}{chapter.3}%
+\vspace {2\baselineskip plus .5\baselineskip minus .5\baselineskip }
+\contentsline {chapter}{Refer\^encias}{7}{annex*.3}%
