@@ -1,4 +1,12 @@
 
+\newcommand{\cala}{\mathcal{A}}
+\newcommand{\calf}{\mathcal{F}}
+\newcommand{\calk}{\mathcal{K}}
+\newcommand{\bbe}{\mathbb{E}}
+\newcommand{\bbr}{\mathbb{R}}
+\newcommand{\bbs}{\mathbb{S}}
+
+
 \newcommand{\rfsigma}{\mathbb{R}\mathcal{F}^\sigma}
 \newcommand{\fsigma}{\mathbb{F}^\sigma}
 \newcommand{\asigma}{\mathcal{A}^\sigma}
@@ -9,12 +17,12 @@
 \newcommand{\isom}{\cong}
 \newcommand{\average}[1]{\left\llbracket{#1}\right\rrbracket}
 
-\newcommand{\downward}{\downarrow\!}
+\newcommand{\downward}{\downarrow\!\!}
 
 % Tikz setup from https://arxiv.org/abs/2103.14179
 
 
-\newcommand{\flagcode}[1]{\ensuremath{\vcenter{\hbox{\begin{tikzpicture}[scale=0.4]{#1}\end{tikzpicture}}}}}
+\newcommand{\flagcode}[1]{\ensuremath{\vcenter{\hbox{\begin{tikzpicture}[scale=0.3]{#1}\end{tikzpicture}}}}}
 \tikzset{vtx/.style={inner sep=1.2pt, outer sep=0pt, circle, fill}}
 \tikzset{unlabeled_vertex/.style={inner sep=1.2pt, outer sep=0pt, circle, fill, draw=black}}
 \tikzset{labeled_vertex/.style={inner sep=2.2pt, outer sep=0pt, rectangle, fill=yellow, draw=black}}
@@ -22,24 +30,7 @@
 \tikzset{edge_color1/.style={color=red,  line width=0.9pt,opacity=0}}
 \tikzset{edge_color2/.style={color=blue, line width=0.9pt,opacity=1}}
 
-\newcommand{\justavertex}{
-  \flagcode{
-    \draw (0,0) node[unlabeled_vertex]{};
-  }
-}
-
-\newcommand{\flagone}{ % this is the unlabeled triangle
-  \flagcode{
-    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
-    \draw[edge_color2] (x0)--(x1)--(x2)--(x0);
-    \draw (x0) node[unlabeled_vertex]{};
-    \draw (x1) node[unlabeled_vertex]{};
-    \draw (x2) node[unlabeled_vertex]{};
-  }
-}
-\newcommand{\kthree}{\flagone}
-
-\newcommand{\flagtwo}{ % this is the unlabeled edge
+\newcommand{\edge}{ % this is the unlabeled edge
   \flagcode{
     \draw (225:0.8) coordinate(x0);
     \draw (45:0.8) coordinate(x1);
@@ -48,154 +39,56 @@
     \draw (x1) node[unlabeled_vertex]{};
   }
 }
-\newcommand{\edge}{\flagtwo}
 
-\newcommand{\flagthree}{ % this represents the edges among non-neighbors of a vertex
-  \flagcode{
-    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
-    \draw[edge_color2] (x1)--(x2);
-    \draw (x0) node[labeled_vertex,label=below:$1$]{};
-    \draw (x1) node[unlabeled_vertex]{};
-    \draw (x2) node[unlabeled_vertex]{};
-  }
-}
-
-\newcommand{\flagfour}{
-  \flagcode{
-    \draw \foreach \x in {0,1,2}{(210+\x*360/3:0.8) coordinate(x\x)};
-    \draw[edge_color2] (x0)--(x1)--(x2)--(x0);
-    \draw (x0) node[labeled_vertex,label=below:$1$]{};
-    \draw (x1) node[labeled_vertex,label=below:$2$]{};
-    \draw (x2) node[unlabeled_vertex]{};
-  }
-}
-\newcommand{\kthreeLabeledEdge}{\flagfour}
-
-\newcommand{\flagfive}{ % this is the labeled edge
+\newcommand{\labeledEdge}{ % this is edge with two label vertices
   \flagcode{
     \draw (180:0.8) coordinate(x0);
-    \draw (360:0.8) coordinate(x1);
+    \draw (0:0.8) coordinate(x1);
     \draw[edge_color2] (x0)--(x1);
     \draw (x0) node[labeled_vertex,label=below:$1$]{};
     \draw (x1) node[labeled_vertex,label=below:$2$]{};
   }
 }
-\newcommand{\labeledEdge}{\flagfive}
 
-\newcommand{\flagsix}{ % this is the labeled non-edge
-  \flagcode{
-    \draw (180:0.8) coordinate(x0);
-    \draw (360:0.8) coordinate(x1);
-    \draw (x0) node[labeled_vertex,label=below:$1$]{};
-    \draw (x1) node[labeled_vertex,label=below:$2$]{};
-  }
-}
-\newcommand{\labeledNonEdge}{\flagsix}
-
-\newcommand{\flagseven}{
-  \flagcode{
-    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
-    \draw[edge_color2] (x0)--(x1)--(x2);
-    \draw (x0) node[labeled_vertex,label=below:$1$]{};
-    \draw (x1) node[unlabeled_vertex]{};
-    \draw (x2) node[unlabeled_vertex]{};
-  }
-}
-
-\newcommand{\flageight}{ % this is the labeled edge with an extra vertex joined to 1
-  \flagcode{
-    \draw \foreach \x in {0,1,2}{(210+\x*360/3:0.8) coordinate(x\x)};
-    \draw[edge_color2] (x2)--(x0)--(x1);
-    \draw (x0) node[labeled_vertex,label=below:$1$]{};
-    \draw (x1) node[labeled_vertex,label=below:$2$]{};
-    \draw (x2) node[unlabeled_vertex]{};
-  }
-}
-
-\newcommand{\flagnine}{ % this is the labeled edge with an extra vertex joined to 2
-  \flagcode{
-    \draw \foreach \x in {0,1,2}{(210+\x*360/3:0.8) coordinate(x\x)};
-    \draw[edge_color2] (x0)--(x1)--(x2);
-    \draw (x0) node[labeled_vertex,label=below:$1$]{};
-    \draw (x1) node[labeled_vertex,label=below:$2$]{};
-    \draw (x2) node[unlabeled_vertex]{};
-  }
-}
-
-\newcommand{\flagten}{
-  \flagcode{
-    \draw (225:0.8) coordinate(x0);
-    \draw (45:0.8) coordinate(x1);
-    \draw[edge_color2] (x0)--(x1);
-    \draw (x0) node[labeled_vertex,label=below:$1$]{};
-    \draw (x1) node[unlabeled_vertex]{};
-  }
-}
-\newcommand{\edgeWithOneLabel}{\flagten}
-
-\newcommand{\flageleven}{
-  \flagcode{
-    \draw (225:0.8) coordinate(x0);
-    \draw (45:0.8) coordinate(x1);
-    \draw (x0) node[labeled_vertex,label=below:$1$]{};
-    \draw (x1) node[unlabeled_vertex]{};
-  }
-}
-\newcommand{\nonEdgeWithOneLabel}{\flageleven}
-
-\newcommand{\flagtwelve}{
-  \flagcode{
-    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
-    \draw[edge_color2] (x0)--(x1);
-    \draw (x0) node[labeled_vertex,label=below:$1$]{};
-    \draw (x1) node[unlabeled_vertex]{};
-    \draw (x2) node[unlabeled_vertex]{};
-  }
-}
-
-\newcommand{\flagthirteen}{
-  \flagcode{
-    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
-    \draw[edge_color2] (x2)--(x0)--(x1);
-    \draw (x0) node[labeled_vertex,label=below:$1$]{};
-    \draw (x1) node[unlabeled_vertex]{};
-    \draw (x2) node[unlabeled_vertex]{};
-  }
-}
-\newcommand{\cherry}{\flagthirteen}
-
-\newcommand{\flagfourteen}{
+\newcommand{\kThree}{ % this is the unlabeled triangle
   \flagcode{
     \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
     \draw[edge_color2] (x0)--(x1)--(x2)--(x0);
-    \draw (x0) node[labeled_vertex,label=below:$1$]{};
-    \draw (x1) node[unlabeled_vertex]{};
-    \draw (x2) node[unlabeled_vertex]{};
-  }
-}
-\newcommand{\kthreeLabeledVertex}{\flagfourteen}
-
-\newcommand{\flagfifteen}{ % three vertices, no edge and one vertex is labeled
-  \flagcode{
-    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
-    \draw (x0) node[labeled_vertex,label=below:$1$]{};
-    \draw (x1) node[unlabeled_vertex]{};
-    \draw (x2) node[unlabeled_vertex]{};
-  }
-}
-
-\newcommand{\flagsixteen}{
-  \flagcode{
-    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
-    \draw[edge_color2] (x2)--(x0)--(x1);
     \draw (x0) node[unlabeled_vertex]{};
     \draw (x1) node[unlabeled_vertex]{};
     \draw (x2) node[unlabeled_vertex]{};
   }
 }
-\newcommand{\unlabeledCherry}{\flagsixteen}
 
-\newcommand{\flagseventeen}{
+\newcommand{\threePoints}{ % this is the "empty triangle"
+  \flagcode{
+    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
+    \draw (x0) node[unlabeled_vertex]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[unlabeled_vertex]{};
+  }
+}
+
+\newcommand{\threePointsWithOneLabel}{ % this is the "empty triangle" with a special vertex
+  \flagcode{
+    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
+    \draw (x0) node[labeled_vertex]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[unlabeled_vertex]{};
+  }
+}
+
+\newcommand{\unlabeledCherry}{ % this is three points with two edges
+  \flagcode{
+    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
+    \draw[edge_color2] (x1)--(x0)--(x2);
+    \draw (x0) node[unlabeled_vertex]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[unlabeled_vertex]{};
+  }
+}
+
+\newcommand{\unlabeledCherryComplement}{ % this is three points with only one edge
   \flagcode{
     \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
     \draw[edge_color2] (x1)--(x2);
@@ -204,13 +97,137 @@
     \draw (x2) node[unlabeled_vertex]{};
   }
 }
-\newcommand{\unlabeledCherryComplement}{\flagseventeen}
 
-\newcommand{\flageighteen}{ % three vertices, no edge and no vertex is labeled
+\newcommand{\aSinglePoint}{ % this a single (labeled) point
+  \flagcode{
+    \draw (0,0) node[labeled_vertex]{};
+  }
+}
+
+\newcommand{\edgeWithOneLabel}{ % this is the edge with one labeled vertex
+  \flagcode{
+    \draw (225:0.8) coordinate(x0);
+    \draw (45:0.8) coordinate(x1);
+    \draw[edge_color2] (x0)--(x1);
+    \draw (x0) node[labeled_vertex]{};
+    \draw (x1) node[unlabeled_vertex]{};
+  }
+}
+
+\newcommand{\nonEdgeWithOneLabel}{ % this is the nonedge with one labeled vertex
+  \flagcode{
+    \draw (225:0.8) coordinate(x0);
+    \draw (45:0.8) coordinate(x1);
+    \draw (x0) node[labeled_vertex]{};
+    \draw (x1) node[unlabeled_vertex]{};
+  }
+}
+
+\newcommand{\labeledCherry}{ % this is the cherry centered at a special point
   \flagcode{
     \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
-    \draw (x0) node[unlabeled_vertex]{};
+    \draw[edge_color2] (x2)--(x0)--(x1);
+    \draw (x0) node[labeled_vertex]{};
     \draw (x1) node[unlabeled_vertex]{};
     \draw (x2) node[unlabeled_vertex]{};
+  }
+}
+
+\newcommand{\labeledCherryComplement}{ % this is the complement of the cherry
+  \flagcode{
+    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
+    \draw[edge_color2] (x1)--(x2);
+    \draw (x0) node[labeled_vertex]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[unlabeled_vertex]{};
+  }
+}
+
+\newcommand{\kThreeWithOneLabel}{ % this is the triangle with a special vertex
+  \flagcode{
+    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
+    \draw[edge_color2] (x2)--(x0)--(x1)--(x2);
+    \draw (x0) node[labeled_vertex]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[unlabeled_vertex]{};
+  }
+}
+
+\newcommand{\asymmetricLabeledCherry}{ % this is like a labeled cherry but the special vertex is a leaf
+  \flagcode{
+    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
+    \draw[edge_color2] (x0)--(x1)--(x2);
+    \draw (x0) node[labeled_vertex]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[unlabeled_vertex]{};
+  }
+}
+
+\newcommand{\asymmetricLabeledCherryComplement}{ % this is the complement of the asymmetric labeled cherry
+  \flagcode{
+    \draw \foreach \x in {0,1,2}{(270+\x*360/3:0.8) coordinate(x\x)};
+    \draw[edge_color2] (x0)--(x1);
+    \draw (x0) node[labeled_vertex]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[unlabeled_vertex]{};
+  }
+}
+
+\newcommand{\cherryWithLabeledEdge}{ % this is a labeled edge and an extra edge joined to 1
+  \flagcode{
+    \draw \foreach \x in {0,1,2}{(-270-\x*360/3:0.8) coordinate(x\x)};
+    \draw[edge_color2] (x1)--(x2)--(x0);
+    \draw (x0) node[unlabeled_vertex]{};
+    \draw (x1) node[labeled_vertex,label=below:$2$]{};
+    \draw (x2) node[labeled_vertex,label=below:$1$]{};
+  }
+}
+
+\newcommand{\anotherCherryWithLabeledEdge}{ % this is a labeled edge and an extra edge joined to 2
+  \flagcode{
+    \draw \foreach \x in {0,1,2}{(-270-\x*360/3:0.8) coordinate(x\x)};
+    \draw[edge_color2] (x2)--(x1)--(x0);
+    \draw (x0) node[unlabeled_vertex]{};
+    \draw (x1) node[labeled_vertex,label=below:$2$]{};
+    \draw (x2) node[labeled_vertex,label=below:$1$]{};
+  }
+}
+
+\newcommand{\fourVerticesOne}{ % this is a labeled edge and an extra edge joined to 2
+  \flagcode{
+    \draw \foreach \x in {0,1,2,3}{(45+\x*360/4:1.5) coordinate(x\x)};
+    \draw[edge_color2] (x0)--(x1);
+    \draw[edge_color2] (x2)--(x3);
+    \draw[edge_color2] (x1)--(x2);
+    \draw (x0) node[unlabeled_vertex]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[labeled_vertex,label=below:$1$]{};
+    \draw (x3) node[labeled_vertex,label=below:$2$]{};
+  }
+}
+
+
+\newcommand{\fourVerticesTwo}{ % this is a labeled edge and an extra edge joined to 2
+  \flagcode{
+    \draw \foreach \x in {0,1,2,3}{(45+\x*360/4:1.5) coordinate(x\x)};
+    \draw[edge_color2] (x0)--(x1);
+    \draw[edge_color2] (x2)--(x3);
+    \draw[edge_color2] (x0)--(x3);
+    \draw (x0) node[unlabeled_vertex]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[labeled_vertex,label=below:$1$]{};
+    \draw (x3) node[labeled_vertex,label=below:$2$]{};
+  }
+}
+
+\newcommand{\fourVerticesThree}{ % this is a labeled edge and an extra edge joined to 2
+  \flagcode{
+    \draw \foreach \x in {0,1,2,3}{(45+\x*360/4:1.5) coordinate(x\x)};
+    \draw[edge_color2] (x0)--(x1);
+    \draw[edge_color2] (x2)--(x3);
+    \draw (x0) node[unlabeled_vertex]{};
+    \draw (x1) node[unlabeled_vertex]{};
+    \draw (x2) node[labeled_vertex,label=below:$1$]{};
+    \draw (x3) node[labeled_vertex,label=below:$2$]{};
   }
 }
