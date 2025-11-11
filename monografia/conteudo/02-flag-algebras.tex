@@ -126,7 +126,7 @@ Começamos fixando um subgrafo especial $\sigma$ (no caso de Mantel, $\sigma = \
 Todos os passos acima podem ser tornados mecânicos, exceto a obtenção da desigualdade quadrática inicial.
 
 A desigualdade em questão deve satisfazer a hipótese de ser não negativa para toda escolha de densidade envolvida.
-Para isso, iremos escolher uma desigualdade da forma $v^\top A v \geq 0$, onde $v$ é um vetor com todas as densidades de certos subgrafos bem escolhidos e $A$ é uma matrix positiva semidefinida.
+Para isso, iremos escolher uma desigualdade da forma $v^\top A v \geq 0$, onde $v$ é um vetor com todas as densidades de certos subgrafos bem escolhidos e $A$ é uma matriz positiva semidefinida.
 Por exemplo, podemos reescrever (\ref{eq:flag-squared-expanded}) como
 \[
   \begin{bmatrix}
@@ -256,7 +256,7 @@ Finalmente, iremos lidar com a noção de ``homomorfismos aproximados'' de $\cal
 Para cada $\sigma$-flag $G$, podemos associar um vetor (de dimensão infinita) $\left(d(F,G)\right)_{F \in \calf^\sigma} \in [0,1]^{\calf^\sigma}$.
 Se $(G_k)_{k \geq 0}$ é uma sequência de $\sigma$-flags tal que tal que $d(F,G_k)$ converge para todo $F \in calf^\sigma$, então dizemos que $(G_k)_{k \geq 0}$ é \emph{convergente}.
 Pelo Teorema de Tychonoff (REFERÊNCIA?), o espaço $[0,1]^{\calf^\sigma}$ com a topologia produto é compacto e portanto para toda sequência infinita $(G_k)_{k \geq 0}$ de $\sigma$-flags, possui uma subsequência infinita que é convergente.
-Para cada sequência convergente, existe um homomorfismo (entre espaços vetoriais) $\phi \colon F \in \calf^\sigma \mapsto \lim_{k \to \infty} d(F,G_{i_k}) \in \bbr$, que pode ser estendido para um homorfismo (entre álgebras) $\phi \colon \cala^\sigma \to \bbr$.
+Para cada sequência convergente, existe um homomorfismo (entre espaços vetoriais) $\phi \colon F \in \calf^\sigma \mapsto \lim_{k \to \infty} d(F,G_{i_k}) \in \bbr$, que pode ser estendido para um homomorfismo (entre álgebras) $\phi \colon \cala^\sigma \to \bbr$.
 Esses homomorfismos serão chamados de \emph{homomorfismos funcionais}.
 Dessa forma, se vale uma desigualdade $\sum a_iF_i \geq 0$ em $\cala^\sigma$, então também vale $\phi\left(\sum a_iF_i\right) \geq 0$ para todo homomorfismo funcional $\phi$, e logo $\sum a_id(F_i,G_k) + o(1) \geq 0$ para toda sequência convergente $(G_k)_{k \geq 0}$, onde o termo $o(1)$ vai para zero quando $|G_k|$ vai para infinito.
 
@@ -338,6 +338,7 @@ Na linguagem de álgebras de flag (sobre os grafos livres de triângulos):
 \end{proof}
 
 \subsection{Cortes locais}
+\label{sub:cortes_locais}
 
 Em~\cite{taisa2021cuts}, os autores provam a seguinte conjectura de Sudakov~\cite{sudakov2007k4}:
 \begin{theorem}
