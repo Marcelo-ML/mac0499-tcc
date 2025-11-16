@@ -10,7 +10,7 @@
 \newcommand{\drawAndrasfai}[1]{%
   \def\d{#1}                              % parâmetro d
   \pgfmathsetmacro\n{int(3*\d - 1)}       % número de vértices n = 3d - 2
-  \begin{tikzpicture}[scale=1.5,
+  \begin{tikzpicture}[scale=1.4,
     every node/.style={circle, draw, fill=white, inner sep=1pt, font=\small}]
   
   % 1. Coloca os vértices uniformemente em círculo
@@ -40,6 +40,8 @@
 
 \newcommand{\homarrow}{\hookrightarrow}
 
+\section{Grafos livres de triângulos com grau mínimo grande}
+
 Na literatura de teoria extremal de grafos, o estudo de grafos livres de certas estruturas com grau mínimo limitado inferiormente merece atenção especial.
 Um dos teoremas mais fundamentais nesse sentido é o Teorema de Andrásfai-Erd\H os, Sós:
 \begin{theorem}[\cite{andrasfai19742n5}]\label{thm:a-e-s}
@@ -66,7 +68,9 @@ De fato, para todo $\varepsilon > 0$, existem grafos de $n$ vértices com grau m
 O Teorema~\ref{thm:brandt-thomasse} permite descrever exatamente quem são os conjuntos de arestas que podemos remover para calcular $D(G)$ sempre que $\delta(G)>n/3$ usando o Teorema~\ref{thm:simetrizacao}.
 Porém, a estrutura dos grafos Vega é não-trivial (o menor deles tem 11 vértices), e por isso iremos restringir a nossa análise a um teorema estrutural mais simples com a restrição adicional de $\chi(G)=3$ ou a restrição de grau mínimo substituída por $\delta(G) > 10n/29$.
 
-Para isso, precisamos definir os grafos de Andrásfai.
+\subsection{Grafos de Andrásfai}
+
+Os grafos de Andrásfai são importantes estruturas no estudo de propriedade de estabilidade em grafos livres de triângulo e são definidos da seguinte forma.
 
 \begin{definition}
   Seja $d \geq 1$ um inteiro positivo.
@@ -119,34 +123,38 @@ Os Teoremas~\ref{thm:jin} e~\ref{thm:hom-to-Fd} formam a caracterização estrut
 
 Do Teorema~\ref{thm:hom-to-Fd}, segue diretamente que se $G$ é um grafo livre de triângulos com $n$ vértices, grau mínimo $\delta(G) > n/3$ e $\chi(G) \leq 3$, então $G$ é homomórfico a algum $F_d$.
 
-\section{A Conjectura~\ref{conj:make-bipartite} para grafos homomórficos a $F_d$}
-
+\section{A Conjectura~\ref{conj:make-bipartite} para grafos de Andrásfai}
 
 Em~\cite{mota2019andrasfai}, os autores verificam o seguinte resultado para a Conjectura~\ref{conj:metadinha}:
 
-\begin{theorem}
+\begin{theorem}[\cite{mota2019andrasfai}]
   Se um grafo $G$ com $n$ vértices é homomórfico a um grafo de Andrásfai $F_d$ para algum $d \geq 1$, então existe $X \subseteq V(G)$ com $|X| \leq \lfloor n/2 \rfloor$ e $e(G[X]) \leq n^2/50$.
 \end{theorem}
 
-As técnicas utilizadas em~\cite{mota2019andrasfai} envolvem a representação de grafos de Andrásfai como subgrafos finitos de um grafo infinito com vértices no círculo unitário, e o conjunto $X$ é escolhido de forma geométrica, como a interseção de um intervalo no círculo com os vértices de $G$.
+Para isso, os autores utilizaram a seguinte representação envolvem a representação de grafos de Andrásfai como subgrafos finitos de um grafo infinito com vértices no círculo unitário, e o conjunto $X$ é escolhido de forma geométrica, como os pontos em um intervalo no círculo com os vértices de $G$.
+
+
 
 Nessa seção, provamos o seguinte resultado:
 
 \begin{theorem}
   Seja $G$ um grafo livre de triângulos isomorfo a $F_d$ para algum $d \geq 1$.
   Então $G$ satisfaz a Conjectura~\ref{conj:make-bipartite} se alguma das condições abaixo vale:
-  \begin{itemize}
-    \item $d \leq 4$;
-    \item $\alpha(G) = \frac{d}{3d-1}$.
-  \end{itemize}
+  \begin{enumerate}
+    \item $d \leq 3$; \label{cond:cond-1}
+    \item Cada uma das $3d-1$ classes de $G$ tem tamanho no máximo $\tfrac{2}{5d}|G|$. \label{cond:cond-2}
+  \end{enumerate}
 \end{theorem}
 
 
-A seguir, apresentamos uma prova da Conjectura~\ref{conj:make-bipartite} para grafos homomórficos a $F_4$.
-Para começar, apresentamos um lema geral sobre partições do conjunto de arestas em grafos livres de triângulos.
+\subsection{Condição~\ref{cond:cond-1}}
+\label{sub:cond-1}
+
+A seguir, apresentamos uma prova da Conjectura~\ref{conj:make-bipartite} para grafos homomórficos a $F_3$.
+Inicialmente, verificamos um lema geral sobre partições do conjunto de arestas em grafos livres de triângulos.
 
 \begin{lemma} \label{lem:odd-transversal}
-  Seja $G$ um grafo e suponha que existem conjuntos dois a dois disjuntos $E_1,E_2,E_3,E_4,E_5 \subseteq E$ tais que
+  Seja $G$ um grafo e suponha que existem $E_1,E_2,E_3,E_4,E_5 \subseteq E$, dois a dois disjuntos, tais que
   $G-E_i$ é bipartido para cada $i \in \{1,2,3,4,5\}$.
   Então $G$ satisfaz a Conjectura \ref{conj:make-bipartite}.
 \end{lemma}
@@ -159,7 +167,7 @@ Para começar, apresentamos um lema geral sobre partições do conjunto de arest
 \end{proof}
 
 Dessa forma, se apresentarmos uma tal partição para $F_d$, ela também valerá para qualquer blow-up de $F_d$, independentemente dos tamanhos relativos entre as classes no blow-up.
-A figura a seguir mostra que tal partição existe para $F_4$:
+A figura a seguir mostra que tal partição existe para $F_3$:
 
   \begin{center}
     \begin{tikzpicture}[scale=3,
@@ -191,30 +199,76 @@ A figura a seguir mostra que tal partição existe para $F_4$:
     \end{tikzpicture}
   \end{center}
 
-
-
-%% Contudo, é fácil ver que tal partição não existe para $F_5$.
-
 O seguinte resultado é imediato da partição acima e dos Teoremas~\ref{thm:jin} e~\ref{thm:hom-to-Fd}.
 \begin{corollary}
   Se $G$ é um grafo livre de triângulo com $n$ vértices e $\delta(G) > 4n/11$, então $D(G) \leq \frac{n^2}{25}$.
 \end{corollary}
-
 %\begin{proof}
 %  Veja que $4/11 > 10/29$, logo pelo Teorema \ref{thm:jin}, temos que $G \homarrow F_9$.
 %  Em particular, $\chi(G) \leq \chi(F_9) = 3$.
 %  Assim, pelo Teorema \ref{thm:hom-to-Fd} com $d=3$, vale que $G \homarrow F_4$.
 %  Considere a seguinte partição das arestas de $G$, em que cada classe está representada por um vértice e todos as arestas entre o mesmo par de classes estão na mesma parte:
 
-
-%  Como a remoção de cada uma das partes deixa $G$ bipartido, podemos aplicar o Lema \ref{lem:odd-transversal} a $G$.
-%  Isso conclui a prova do Teorema. 
-%\end{proof}
+A partição do Lema~\ref{lem:odd-transversal} não ocorre em geral, e é fácil ver que tal partição não existe já para $F_4$.
 
 
+\subsection{Condição~\ref{cond:cond-2}}
+\label{sub:cond-2}
 
+Na Seção~\ref{sub:cond-1}, utilizamos a estratégia de tentar encontrar conjuntos explícitos de arestas $F \subseteq E(F_d)$ tais que $F_d - F$ é bipartido e transferir as propriedades dessas arestas para blow-ups de $F_d$.
+Pelo Teorema~\ref{thm:simetrizacao}, essa estratégia não é somente razoável, mas suficiente para encontrar conjuntos de arestas de grafos $H \homarrow F_d$ que realizem $D(H)$.
 
+Assim, seguimos a estratégia geral de procurar, em $F_d$, conjuntos de arestas pequenos cuja remoção torna $F_d$ bipartido.
+É fácil ver que os conjuntos independentes maximais de $F_d$ são conjuntos de vértices consecutivos (módulo $3d-1$), e portanto é natural considerar conjuntos que possuem a maior quantidade possível de vértices consecutivos, ou seja, com uma das partes tendo os vértices de $0$ a $\lfloor3d/2\rfloor-1$ e a outra parte tendo os vértices de $\lfloor 3d/2 \rfloor$ a $3d-1$.
 
-Vamos tentar resolver quando $\delta(G)$ é grande?
-Ok, ok, você vai dizer ``mas o resultado do capítulo 2 já cobre isso''.
-Verdade, mas queremos mais \textit{estrutura} sobre os conjuntos que geram $D(G)$, então ainda vale a pena estudar esses casos!
+\begin{theorem}[NÃO SEI SE É VERDADE]
+  Seja $d \geq 1$.
+  Então
+  \[ D(F_d) = \left\lfloor\frac{d}{2}\right\rfloor \left\lceil\frac{d}{2}\right\rceil. \]
+\end{theorem}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[scale=2.5,
+    every node/.style={circle, draw, fill=white, inner sep=1pt, font=\small}]
+  
+  % 1. Coloca os vértices uniformemente em círculo
+  \foreach \i in {0,...,13} {
+    \pgfmathsetmacro\angle{90-360*\i/14+360/28}
+    \node (v\i) at (\angle:1) {};       % vértice v_i na posição angular correspondente
+  }
+
+  % 2. Para cada vértice, conecta aos d vértices mais distantes
+  \foreach \i in {0,...,13} {
+    \foreach \offset in {0,...,4} {
+      \pgfmathsetmacro\j{mod(\i + 5 + \offset, 14)} % vértice mais distante no ciclo
+      \pgfmathtruncatemacro{\ii}{\i}
+      \pgfmathtruncatemacro{\jj}{\j}
+      \ifnum\ii<\jj
+        \draw[black!20] (v\ii) -- (v\jj);          % desenha aresta se ii < jj (para evitar duplicação)
+      \fi
+    }
+  }
+
+  \draw[red, line width = 1.5pt] (v2) -- (v7) -- (v1) -- (v6);
+  \draw[red, line width = 1.5pt] (v9) -- (v0) -- (v8) -- (v13);
+  \draw[line width = 2pt] (0,1.2) -- (0,-1.2);
+  \end{tikzpicture}
+  \caption{Exemplo da bipartição para $F_5$.}
+\end{figure}
+
+Finalmente, se toda classe de $G$ tem tamanho no máximo $2|G|/5d$, segue que
+\[ D(G) \leq D(F_d) \cdot \frac{4|G|^2}{25d^2} \leq \frac{d^2}{4} \cdot \frac{4|G|^2}{25d^2} = \frac{|G|^2}{25}. \]
+
+O resultado de~\ref{cond:cond-2} pode ser melhorado utilizando os mesmos conjuntos de arestas mas tomando de vértices geradas rotacionando a linha que separa as partes do subgrafo bipartido final.
+Para casos mais gerais, pode-se incluir pesos $x_0,x_2,\dots,x_{3d-2} \in [0,1]$ com $\sum_{i=0}^{3d-2} x_i = 1$ e modelar o número de arestas removidas como uma expressão da forma $\sum_{ij \in F} x_ix_j$, onde $F \subseteq E(F_d)$ é tal que $F_d - F$ é bipartido.
+
+Contudo, a região factível do programa resultante não é côncava.
+Uma forma fácil de verificar isso é que tomando $U \subseteq V(F_d)$ tal que $G[U] \cong F_2$ e a atribuição
+\[ \begin{cases}
+  x_v = \frac{1}{5} & \text{se } v \in U, \\
+  x_v = 0 & \text{se } v \not\in U.
+\end{cases} \]
+Essa atribuição equivale a um blow-up de $F_d$ que também é um blow-up balanceado de  essencialmente toma um blow-up $F_d$ que é isomorfo a um blow-up balanceado de $F_2$, que não pode ser tornado bipartido pela deleção de menos que $n^2/5$ arestas.
+Dessa forma, todas essas atribuições são extremos locais para os problemas de otimização razoáveis que podem ser considerados.
+Para $d$ pequeno, verificamos empiricamente que, de fato, esses são os únicos extremos locais.
