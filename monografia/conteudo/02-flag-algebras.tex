@@ -4,8 +4,14 @@
 
 \input{conteudo/flagutils}
 
-A estrutura desse capítulo segue o jeito que o Andrzej Grzesik faz na tese de doutorado dele.
-É menos técnico e mais motivado.
+Nesse capítulo, introduzimos alguns aspectos do poderoso método de álgebras de flag, introduzido por Alexander Razborov em 2007 (\cite{razborov2007flag}).
+O método tem sido usado de forma diversa para obter resultados acerca de problemas em combinatória extremal, particularmente pela sua capacidade expressiva de realizar cálculos com densidades e homomorfismos de estruturas combinatórias variadas (grafos, grafos orientados, permutações...)
+
+Para uma visão histórica do uso das álgebras de flag e resultados importantes alcançados ainda nos primeiros anos após a introdução do método, ver~\cite{razborov2013survey}.
+
+Nesse capítulo, introduzimos a teoria de álgebras de flag aplicada a grafos simples e densidades de subgrafos.
+A estrutura é fortemente baseada na exposição feita em~\cite{grzesik2014thesis} e também na exposição de~\cite{marcel2016flag}.
+Deixamos muitos dos detalhes técnicos das definições de lado em um primeiro momento, focando em uma abordagem direta que motive a utilização das álgebras de flag para problemas extremais em grafos livres de triângulos.
 
 \section{Preliminares}
 
@@ -171,7 +177,7 @@ Observe que para $s=0$ (isto é, não estamos efetivamente rotulando nenhuma par
 
 Se $F_a,F_b \in \calf_m^\sigma$ e $\theta \in \Theta$, definimos $d(F_a,F_b,G;\theta)$ como a probabilidade de, ao escolhermos dois conjuntos $V_a,V_b \subseteq V(G)$ com $V_a \cap V_b = \mathrm{im}(\theta)$, uniformemente ao acaso, então os $\sigma$-flags induzidos por $V_a$ e $V_b$ são isomórficos a $F_a$ e $F_b$ respectivamente.
 Essa definição é importante para lidar com produtos de densidades, como diz o próximo teorema:
-\begin{theorem}[CITA ALGUÉM]\label{thm:multiplying-densities}
+\begin{theorem}[~\cite{razborov2007flag}]\label{thm:multiplying-densities}
   Para $F_a,F_b \in \calf_m^\sigma$ e $\theta \in \Theta$, vale
   \[ d(F_a,G;\theta)d(F_b,G;\theta) = d(F_a,F_b,G;\theta) + o(1), \]
   onde o termo $o(1)$ vai para zero quando $|G|$ vai para infinito.
@@ -198,8 +204,9 @@ Definindo $c_H(\sigma,m,Q) \coloneqq \sum_{F_i,F_j \in \calf_m^\sigma} Q_{ij} \b
   \sum_{H \in \calf_l^\emptyflag} c_H(\sigma,m,Q)d(H,G) + o(1) \geq 0.
 \end{equation}
 
-Combinando (\ref{eq:chain-rule-2}) e (\ref{eq:general-density-ineq}), é possível obter cotas para problemas de Turán ao variar os hiperparâmetros $m,l,\sigma$ do modelo e utilizar a cota de (\ref{eq:max-bound}) [CITAÇÕES].
-Também é possível combinar escolhas de hiperparâmetros $c_H(\sigma_i,m_i,Q_i)$ para obter cotas mais refinadas [CITAÇÕES].
+Combinando (\ref{eq:chain-rule-2}) e (\ref{eq:general-density-ineq}), é possível obter cotas para problemas de Turán ao variar os hiperparâmetros $m,l,\sigma$ do modelo e utilizar a cota de (\ref{eq:max-bound}).
+Uma lista de resultados desse estilo, utilizando o software \texttt{flagmatic}, podem ser encontrados~\href{https://lidicky.name/flagmatic/}{aqui}.
+Também é possível combinar escolhas de hiperparâmetros $c_H(\sigma_i,m_i,Q_i)$ para obter cotas mais refinadas (ver~\cite{grzesik2012pentagon}).
 
 \subsection{A álgebra}
 

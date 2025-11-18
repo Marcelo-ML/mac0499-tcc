@@ -2,12 +2,14 @@
 \chapter{Resultados clássicos}
 \label{cap:classicos}
 
+\section{Estabilidade em grafos livres de triângulos}
+
 Nesse capítulo, iremos apresentar alguns resultados clássicos sobre grafos livres de triângulos, bem como os problemas principais que iremos explorar nos demais capítulos dessa tese.
 Historicamente, um dos primeiros resultados na teoria extremal de grafos é o Teorema de Mantel.
 
 \begin{theorem}[\cite{mantel1907problem}]~\label{thm:mantel}
   Seja $G$ um grafo livre de triângulos com $n$ vértices.
-  Então $e(G) \leq \left\lfloor\frac{n^2}{4}\right\rfloor$.
+  Então $e(G) \leq \lfloor n^2/4 \rfloor$.
   Além disso, $e(G)=\lfloor n^2/4 \rfloor$ se e somente se $G$ é um grafo bipartido completo em que uma das classes tem tamanho $\lfloor n/2 \rfloor$, e a outra tem tamanho $\lceil n/2 \rceil$.
 \end{theorem}
 Omitimos a prova do Teorema~\ref{thm:mantel} nessa seção.
@@ -23,8 +25,8 @@ Além disso, um grafo bipartido $G$ com bipartição $V(G) = A \cup B$ possui, n
 
 Em conclusão, observa-se uma relação muito próxima entre a família de grafos livres de triângulos densos e a família de grafos bipartidos.
 O Teorema~\ref{thm:mantel} prova que, de fato, todo grafo livre de triângulos tão denso quanto possível é bipartido.
-É, portanto, natural se perguntar, até onde se estende tal analogia entre as duas classes de grafos e, mais ainda, quão ``distante'' pode estar um grafo livre de triângulos de ser bipartido.
-Essa noção de distância é formalizada pela definição a seguir:
+É, portanto, natural se perguntar, até onde se estende tal analogia entre as duas classes de grafos: \emph{quão ``distante'' pode estar um grafo livre de triângulos de ser bipartido?}
+A noção de distância que iremos utilizar é formalizada pela definição a seguir:
 
 \begin{definition}
   Seja $G$ um grafo.
@@ -40,6 +42,7 @@ O próximo teorema é um teorema clássico de \emph{estabilidade}, e dá uma res
 
 O Teorema~\ref{thm:estabilidade} pode ser interpretado como um resultado estrutural: quanto mais arestas queremos que um grafo livre de triângulos tenha, mais restrita será a estrutura desse grafo.
 Esse paradigma voltará no Capítulo~\ref{cap:grau-limitado}, quando em vez de usarmos o número de arestas para parametrizar a densidade de grafos livres de triângulos, usarmos o seu grau mínimo.
+
 A prova do Teorema~\ref{thm:estabilidade} pode ser encontrada no capítulo 3 de~\cite{livrocombinatoria}, mas os métodos utilizados na prova do Teorema de Mantel que apresentaremos no Capítulo~\ref{cap:flag-algebras} permitem obter resultados similares de estabilidade.
 Mais resultados relacionados a estabilidade em grafos podem ser vistos em~\cite{furedi2015stability,taisa2021cuts,sudakov2007k4}.
 
@@ -69,7 +72,7 @@ Por outro lado, segue do Teorema~\ref{thm:simetrizacao} que existe uma coleção
 Ou seja, $D(G) \geq m^2$.
 
 O grafo da Figura~\ref{fig:c5-blowup} pode ser visto como um grafo obtido a partir de uma ``explosão'' dos vértices de $C_5$.
-Essa noção pode ser formalizada pela definição de \emph{blow-up} de um grafo:
+Tal explosão é chamada de \emph{blow-up} de um grafo:
 
 \begin{definition}
   Seja $G$ um grafo.
@@ -77,11 +80,12 @@ Essa noção pode ser formalizada pela definição de \emph{blow-up} de um grafo
   Formalmente, para cada $v \in V(G)$, existe $S_v \subseteq V(H)$ e:
   \begin{itemize}
     \item $\{S_v : v \in V(G)\}$ é uma partição de $V(H)$;
-    \item Para cada $xy \in E(H)$, vale que $(x,y) \in S_u \times S_v \iff uv \in E(G)$. 
+    \item Para cada $xy \in E(H)$ e $u,v \in V(G)$, vale que $(x,y) \in S_u \times S_v \iff uv \in E(G)$. 
   \end{itemize}
 \end{definition}
 
 Um blow-up é chamado de \emph{balanceado} se todos os conjuntos $S_v$ têm o mesmo tamanho.
+Observe que um grafo $G$ é homomórfico a um grafo $H$ se, e somente se, $G$ é um subgrafo de um blow-up adequado de $H$.
 
 Blow-ups serão amplamente utilizados nos capítulos a seguir, e são úteis porque se um grafo (grande) $H$ é um blow-up de um grafo (pequeno) $G$, então uma série de comportamentos em $H$ imitam os comportamentos ``análogos'' em $G$, e portanto podemos descrever certas propriedades de $H$ usando os parâmetros de $G$.
 O Teorema~\ref{thm:simetrizacao} deixará isso claro, mas antes de prová-lo precisamos definir de forma precisa a ``analogia'' entre $G$ e $H$.
@@ -122,10 +126,12 @@ O teorema a seguir é um resultado fundamental para calcular o valor de $D$ para
   Pela definição de $D(H)$, segue que $|F| = D(H)$, como desejado.
 \end{proof}
 
-Dada a dificuldade de atacar a forma geral da Conjectura~\ref{conj:make-bipartite}, resultados parciais em sua direção foram atingidos ao longo dos anos.
+\section{Avanços parciais na Conjectura~\ref{conj:make-bipartite}}
+
+Tendo em vista a dificuldade de atacar a forma geral da Conjectura~\ref{conj:make-bipartite}, resultados parciais em sua direção foram atingidos ao longo dos anos.
 Existem duas formas principais de produzir resultados parciais na direção da Conjectura~\ref{conj:make-bipartite}: restringindo a família de grafos $G$ (por exemplo, a um número máximo/mínimo de arestas) ou provando cotas mais fracas para $D(G)$.
 
-O Teorema~\ref{thm:EFPS-bounds} foi um dos primeiros resultados nessa direção, e pode ser usado para resultados parciais nas duas condições (Corolário~\ref{cor:n2/18} e Teorema~\ref{thm:n2/5}).
+O seguinte teorema foi um dos primeiros resultados nessa direção, e pode ser usado para resultados parciais nas duas condições (Corolário~\ref{cor:n2/18} e Teorema~\ref{thm:n2/5}).
 
 \begin{theorem}[\cite{erdos1988make}] \label{thm:EFPS-bounds}
   Seja $G$ um grafo livre de triângulos com $n$ vértices e $m$ arestas.
@@ -156,7 +162,7 @@ O Teorema~\ref{thm:EFPS-bounds} foi um dos primeiros resultados nessa direção,
 \begin{corollary}[\cite{erdos1988make}] \label{cor:n2/18}
   Se $G$ é um grafo livre de triângulos com $n$ vértices, então $D(G) \leq n^2/18$.
 \end{corollary}
-De fato, analisando os casos próximos à igualdade, é possível provar que existe $\epsilon>0$ tal que $D(G) \leq (1/18-\epsilon)n^2$.
+De fato, analisando os casos próximos à igualdade, é possível provar que existe $\varepsilon>0$ tal que $D(G) \leq (1/18-\varepsilon)n^2$.
 Ainda que direta, a análise é não trivial e não segue imediatamente das cotas do Teorema~\ref{thm:EFPS-bounds}.
 
 \begin{theorem}[\cite{erdos1988make}] \label{thm:n2/5}
@@ -170,23 +176,43 @@ Por exemplo, o único grafo que se conhece com $D(G) \geq n^2/25$ possui exatame
 O seguinte teorema também evidencia uma mudança de comportamento para $e(G) \geq n^2/5$.
 
 \begin{theorem}[\cite{erdos1992many}]\label{thm:dG-dH-blowup-C5}
-  Seja $G$ um grafo livre de triângulos com $n$ vértices e pelo menos $\frac{n^2}{25}$ arestas.
+  Seja $G$ um grafo livre de triângulos com $n$ vértices e pelo menos $n^2/5$ arestas.
   Então existe um grafo $H^*$ também com $n$ vértices tal que $H^*$ é um blow-up de $C_5$ e, além disso,
   $e(G) \leq e(H^*)$ e $D(G) \leq D(H^*)$.
 \end{theorem}
 
 Essencialmente, o Teorema~\ref{thm:dG-dH-blowup-C5} diz que, se $e(G) \geq n^2/5$, então é possível cotar $D(G)$ superiormente considerando os blow-ups de $C_5$ com $n$ vértices e pelo menos $e(G)$ arestas.
 É fácil ver que $\max_{e(H^*) \geq m}D(H^*)$ (máximo tomado sobre os blow-ups $H^*$ de $C_5$) é decrescente em $m$ para $m \geq n^2/5$, o que dá uma cota melhor que $n^2/5$ para $e(G) \geq n^2/5$, condicionando no valor de $e(G)$.
+Do resultado do Teorema~\ref{thm:dG-dH-blowup-C5} também segue que o único exemplo extremal para a Conjectura~\ref{conj:make-bipartite} quando $e(G) \geq n^2/5$ são os blow-ups balanceados de $C_5$.
+Não se conhece outros exemplos extremais abaixo desse limiar.
 
-Omitiremos a prova do Teorema~\ref{thm:dG-dH-blowup-C5}.
-A prova é algorítmica, e define a bipartição final adicionando um vértice por vez a um lado bem escolhido de uma partição inicial já grande.
-As técnicas utilizadas são específicas e requerem muitos cuidados com contas que não serão retomadas em outras partes desse trabalho.
+Omitiremos a prova do Teorema~\ref{thm:dG-dH-blowup-C5} e daremos apenas um brevíssimo esboço.
+As técnicas utilizadas não serão replicadas em outras partes desse trabalhos e requerem muitos cuidados com as contas.
+Os detalhes podem ser encontrados em~\cite{erdos1992many}.
+
+\begin{proof}[Esboço da prova do Teorema~\ref{thm:dG-dH-blowup-C5}]
+  A prova inicialmente define dois conjuntos que formam uma quase bipartição do grafo de forma algorítmica.
+  Primeiro, escolhe-se a aresta $xy$ com $d_G(x)+d_G(y)$ e os conjuntos da bipartição $A_1 \coloneqq N_G(x)$ e $A_2 \coloneqq N_G(y)$.
+  Como $G$ é livre de triângulos, cada vértice pertence a no máximo uma dessa partes.
+  Além disso, se $e(G) \geq n^2/5$, então é fácil ver que o número de vértices que ainda não tem lado definido é no máximo $n^2/5$.
+  Iterativamente, adiciona-se cada um dos vértices restantes a um dos lados dessa partição de forma a minimizar o número de arestas ``monocromáticas'' (isso é, entre vértices da mesma parte).
+  Esses novos vértices formam conjuntos $C_1$ e $C_2$, respectivamente.
+
+  A partir desse ponto, a prova segue dois caminhos:
+  \begin{itemize}
+    \item Se existe algum vértice $x_0 \in C_1 \cup C_2$ (suponha sem perda de generalidade que $x \in C_1$) que tem pelo menos $|C_1 \cup C_2|$ vizinhos em $C_1$, então é possível definir os tamanhos das classe de $H^*$ usando os conjuntos que já temos e as vizinhanças de $x_0$ em $C_1$ e $C_2$.
+    As definições precisas dos tamanhos das classes são omitidas aqui.
+    \item Se não existe tal vértice, então usando emparelhamentos máximos (de tamanho cotado superiormente) em $A_1 \cup C_1$ e $A_2 \cup C_2$, é possível descrever os tamanhos das classes de $H^*$ de forma similar.
+    Os detalhes numéricos desse caso também são omitidos aqui.
+  \end{itemize}
+\end{proof}
+
 
 Por fim, apresentamos uma conjectura relacionada à Conjectura~\ref{conj:make-bipartite}:
 
 \begin{conjecture} [\cite{erdos1975problems}] \label{conj:metadinha}
   Seja $G$ um grafo livre de triângulos com $n$ vértices.
-  Então existe $X \subseteq V(G)$ com $X = \left\lfloor \frac{n}{2} \right\rfloor$ tal que $e(G[X]) \leq \frac{n^2}{50}$.
+  Então existe $X \subseteq V(G)$ com $X = \lfloor n/2 \rfloor$ tal que $e(G[X]) \leq n^2/50$.
 \end{conjecture}
 
 Resultados similares ao Teorema~\ref{thm:n2/5} foram verificados para a Conjectura~\ref{conj:metadinha} (ver~\cite{keevash2006sparsehalves}).

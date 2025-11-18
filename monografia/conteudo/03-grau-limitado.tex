@@ -169,6 +169,7 @@ Inicialmente, verificamos um lema geral sobre partições do conjunto de arestas
 Dessa forma, se apresentarmos uma tal partição para $F_d$, ela também valerá para qualquer blow-up de $F_d$, independentemente dos tamanhos relativos entre as classes no blow-up.
 A figura a seguir mostra que tal partição existe para $F_3$:
 
+\begin{figure}[htbp]
   \begin{center}
     \begin{tikzpicture}[scale=3,
       every node/.style={circle, draw, fill=white, inner sep=1pt, font=\small}]
@@ -198,6 +199,7 @@ A figura a seguir mostra que tal partição existe para $F_3$:
 
     \end{tikzpicture}
   \end{center}
+\end{figure}
 
 O seguinte resultado é imediato da partição acima e dos Teoremas~\ref{thm:jin} e~\ref{thm:hom-to-Fd}.
 \begin{corollary}
@@ -221,11 +223,23 @@ Pelo Teorema~\ref{thm:simetrizacao}, essa estratégia não é somente razoável,
 Assim, seguimos a estratégia geral de procurar, em $F_d$, conjuntos de arestas pequenos cuja remoção torna $F_d$ bipartido.
 É fácil ver que os conjuntos independentes maximais de $F_d$ são conjuntos de vértices consecutivos (módulo $3d-1$), e portanto é natural considerar conjuntos que possuem a maior quantidade possível de vértices consecutivos, ou seja, com uma das partes tendo os vértices de $0$ a $\lfloor3d/2\rfloor-1$ e a outra parte tendo os vértices de $\lfloor 3d/2 \rfloor$ a $3d-1$.
 
-\begin{theorem}[NÃO SEI SE É VERDADE]
+%\begin{theorem}
+%  Seja $d \geq 1$.
+%  Então
+%  \[ D(F_d) = \left\lfloor\frac{d^2}{4}\right\rfloor. \]
+%\end{theorem}
+
+\begin{theorem}
   Seja $d \geq 1$.
-  Então
-  \[ D(F_d) = \left\lfloor\frac{d}{2}\right\rfloor \left\lceil\frac{d}{2}\right\rceil. \]
+  Então \[ D(F_d) \leq \left\lfloor \frac{d^2}{4} \right\rfloor. \]
 \end{theorem}
+
+\begin{proof}
+Basta apresentar uma bipartição $(A, B)$ de $F_d$ com $e(G[A]), e(G[B]) = \lfloor d^2/4 \rfloor$.
+
+Considere a bipartição em que cada parte é formada por (aproximadamente) metade dos vértices de $F_d$.
+Mais precisamente, considere a bipartição
+\[ (A,B) = (\{0,1,\dots,\lfloor (3d-1)/2\rfloor -1\}, \{3d-2,3d-3,\dots,\lfloor (3d-1)/2\rfloor).\]
 
 \begin{figure}[htbp]
   \centering
@@ -254,8 +268,21 @@ Assim, seguimos a estratégia geral de procurar, em $F_d$, conjuntos de arestas 
   \draw[red, line width = 1.5pt] (v9) -- (v0) -- (v8) -- (v13);
   \draw[line width = 2pt] (0,1.2) -- (0,-1.2);
   \end{tikzpicture}
-  \caption{Exemplo da bipartição para $F_5$.}
+  \caption{Exemplo da bipartição para $d=5$.}
 \end{figure}
+
+Em $A$, as arestas que ligam vértices a uma distância $\ell$ (percorrida no círculo no sentido mais próximo) são $\lfloor (3d-1)/2 \rfloor- \ell$, para cada $\ell \in \{d,d+1,\dots,|A|-1\}$.
+Fazendo a contagem análoga para $B$, obtemos:
+\begin{align*}
+  e(G[A])+e(G[B])
+  &= \sum_{\ell = d}^{\left\lfloor\frac{3d-1}{2}\right\rfloor-1} \left\lfloor\frac{3d-1}{2}\right\rfloor-\ell + \sum_{\ell = d}^{\left\lceil\frac{3d-1}{2}\right\rceil-1} \left\lceil\frac{3d-1}{2}\right\rceil-\ell \\
+  &= \sum_{i=1}^{\left\lfloor\frac{d-1}{2}\right\rfloor}i+\sum_{i=0}^{\left\lceil\frac{d-1}{2}\right\rceil}i \\
+  &= \frac12\left(\left\lfloor\frac{d-1}{2}\right\rfloor\left\lfloor\frac{d+1}{2}\right\rfloor+\left\lceil\frac{d-1}{2}\right\rceil\left\lceil\frac{d+1}{2}\right\rceil\right).
+\end{align*}
+Se $d$ é ímpar, temos $e(G[A])+e(G[B])=2(d^2-1)/8=\lfloor d^2/4 \rfloor$.
+Se $d$ é par, temos $e(G[A])+e(G[B])=2d^2/8=\lfloor d^2/4 \rfloor$.
+
+\end{proof}
 
 Finalmente, se toda classe de $G$ tem tamanho no máximo $2|G|/5d$, segue que
 \[ D(G) \leq D(F_d) \cdot \frac{4|G|^2}{25d^2} \leq \frac{d^2}{4} \cdot \frac{4|G|^2}{25d^2} = \frac{|G|^2}{25}. \]
