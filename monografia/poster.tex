@@ -156,11 +156,11 @@
 
 \posterbox[adjusted title=Introdução e motivação]{name=introbox, column=1, span=4, below=titlebox}{
   Um grafo $G$ é um par $(V,E)$, onde $V$ são os \emph{vértices} e $E$ são as \emph{arestas} (pares não ordenados de vértices).
-  A Teoria Extremal dos Grafos estuda propriedades de grafos sob restrições: compreender propriedades extremais tem aplicações em análise de algoritmos, modelagem de redes e otimização.
+  A Teoria Extremal dos Grafos estuda propriedades de grafos sob restrições estruturais. Compreender propriedades extremais tem aplicações em análise de algoritmos, modelagem de redes e otimização.
   
   \begin{itemize}
     \item Grafos livres de triângulos não contêm ciclos de tamanho $3$.
-    \item Pergunta natural: quantas arestas um grafo sem triângulos pode ter?
+    \item Pergunta natural: quantas arestas um grafo livre de triângulos pode ter?
     \item \textbf{Teorema de Mantel.} Um grafo com $n$ vértices sem triângulos possui no máximo $\left\lfloor\frac{n^2}{4}\right\rfloor$ arestas.
   \end{itemize}
 }
@@ -168,9 +168,9 @@
 \posterbox[adjusted title=Problema e objetivos]{name=problembox, column=1, span=4, between=introbox and footerbox}{
   Os únicos grafos que satisfazem igualdade no Teorema de Mantel são bipartidos.
   \begin{itemize}
-    \item Quão ``distante'' pode estar um grafo sem triângulos de um bipartido?
+    \item Pergunta natural: quão ``distante'' pode estar um grafo sem triângulos de um bipartido?
     %\item Grafos pouco densos são quase bipartidos pois o grafo vazio é bipartido; grafos muito densos são quase bipartidos porque o exemplo extremal de Mantel é bipartido.
-    \item $D(G)$ mede essa distância pela remoção de um menor conjunto de arestas.
+    \item $D(G)$ mede essa distância pela remoção de um menor conjunto de arestas que torna $G$ bipartido.
   \end{itemize}
   \textbf{Conjectura 1 (Erd\H os, 1975).} Todo grafo livre de triângulos $G$ com $n$ vértices satisfaz $D(G) \leq \frac{n^2}{25}$.
 
@@ -187,8 +187,8 @@
 
 \posterbox[adjusted title=Metodologia]{name=methodbox, column=5, span=8, below=titlebox}{
   \begin{itemize}
-    \item Álgebras de flag\\$\rightarrow$ traduzem problemas de densidade em programas semidefinidos;
-    \item Blow-ups\\$\rightarrow$ expandem vértices para conjuntos independentes mantendo estrutura;
+    \item Álgebras de flag\\$\rightarrow$ traduzem problemas de densidade em programas semidefinidos.
+    \item Blow-ups\\$\rightarrow$ expandem vértices para conjuntos independentes mantendo estrutura.
     \item Condições de grau mínimo\\$\rightarrow$ permitem simplificar o problema para blow-ups de grafos pequenos.
   \end{itemize}
 }
@@ -196,16 +196,16 @@
 
 \posterbox[adjusted title=Resultados principais]{name=resultbox, column=5, span=8, below=methodbox}{
     \begin{itemize}
-      \item \textit{(Simonovits 1968)} Se $e(G) = \frac{n^2}{4}-m$, então $D(G) \leq m$.
+      \item \textit{(Simonovits 1968)} $\rightarrow$ Se $e(G) = \frac{n^2}{4}-m$, então $D(G) \leq m$.
         \begin{itemize}
           \item Resolve a Conjectura 1 se $e(G) \geq 0.21n^2$.
         \end{itemize}
-      \item \ref{EFPS} $D(G) \leq \frac{4e(G)^2}{n^2}$ e $D(G) \leq \frac{n^2}{18+\epsilon}$
+      \item \ref{EFPS} $\rightarrow$ Prova de $D(G) \leq \frac{4e(G)^2}{n^2}$ e $D(G) \leq \frac{n^2}{18+\epsilon}$ (para algum $\epsilon>0$).
         \begin{itemize}
-          \item Cota explícita sobre $D(G)$; resolve a Conjectura 1 se $e(G) \geq 0.20n^2 = \frac{n^2}{5}$.
+          \item Cota explícita sobre $D(G)$; resolve a Conjectura 1 se $e(G) \geq \frac{n^2}{5} = 0.20n^2$.
         \end{itemize}
-      \item \ref{BCL} Generalização de~\ref{EFPS} EFPS: prova a Conjectura 1 se $e(G) \geq 0.159n^2$ e outros resultados parciais usando \emph{álgebras de flag}.
-      \item A Conjectura 1 pode ser resolvida quando $\delta(G) \geq \frac{4n}{11}$ (ver~\ref{CJK}).
+      \item \ref{BCL} $\rightarrow$ Generaliza~\ref{EFPS}: prova a Conjectura 1 se $e(G) \geq 0.159n^2$ e outros resultados parciais usando \emph{álgebras de flag}.
+      \item A Conjectura 1 também pode ser resolvida quando $\delta(G) \geq \frac{4n}{11}$ usando~\ref{CJK}.
     \end{itemize}
 
     \centering
@@ -220,23 +220,23 @@
       \begin{subfigure}[c]{.48\textwidth}
         \centering
         \include{figuras/f4-blowup-tikz}
-        \caption*{Se~$\textstyle{\delta(G) \geq \frac{4n}{11}}$, então $G$ é da forma acima, e é possível demonstrar a Conjectura 1 diretamente para $G$.}
+        \caption*{Se~$\textstyle{\delta(G) \geq \frac{4n}{11}}$, então $G$ é da forma acima, e é possível demonstrar a Conjectura 1 usando essa informação estrutural extra.}
       \end{subfigure}
     \end{figure}
 }
 
 
-\posterbox[adjusted title=Discussão]{name=discussbox, column=5, span=5, between=resultbox and refbox}{
+\posterbox[adjusted title=Discussão]{name=discussbox, column=5, span=4.5, between=resultbox and refbox}{
   \begin{itemize}
     \item As cotas conhecidas funcionam melhor para grafos densos: resultados do tipo ``a Conjectura 1 vale se $e(G) \geq \alpha n^2$'';
-    \item Uso de álgebras de flag fornecem desigualdades assintóticas a partir de métodos numéricos;
-    \item Condições de grau mínimo permite simplificação estrutural e estudo da Conjectura 1 para certos grafos abaixo do limiar $e(G) \geq \frac{n^2}{5}$.
+    \item Uso de álgebras de flag fornece desigualdades assintóticas a partir de otimização (numérico);
+    \item Condições de grau mínimo permite simplificação estrutural e estudo da Conjectura 1 para certos grafos abaixo do limiar $e(G) \geq \frac{n^2}{5}$ (estrutural).
   \end{itemize}
 }
 
-\posterbox[adjusted title=Conclusão]{name=conclusionbox, column=10, span=3, between=resultbox and refbox}{
-  O uso de álgebras de flag e homomorfismos a partir de grafos de grau mínimo alto confirmam a Conjectura 1 em subclasses de grafos densos.
-  O trabalho contribui revisando os métodos usados para avançar na Conjectura.
+\posterbox[adjusted title=Conclusão]{name=conclusionbox, column*=12, span=3.5, between=resultbox and refbox}{
+  O uso de álgebras de flag e condições de grau mínimo confirmam a Conjectura 1 em subclasses de grafos densos.
+  O trabalho contribui revisando os métodos usados no problema e com uma prova alternativa para o caso $\delta(G) > \frac{4n}{11}$.
 }
 
 
