@@ -1,0 +1,254 @@
+% Author: Nelson Lago
+% This file is distributed under the MIT Licence
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PREÂMBULO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% A língua padrão é a última da lista
+\documentclass[a1paper,brazilian,english]{article}
+
+% Vários pacotes e opções de configuração genéricos
+\usepackage{imegoodies}
+\usepackage[poster,hidelinks]{imelooks}
+\tcbposterset{fontsize = 30pt} % default, mude se necessário
+
+% Diretórios onde estão as figuras; com isso, não é necessário (mas
+% é permitido) colocar o caminho completo em \includegraphics. Note
+% que a extensão nunca é necessária (mas é permitida), ou seja, o
+% resultado é o mesmo com "\includegraphics{figuras/foto.jpeg}",
+% "\includegraphics{foto.jpeg}", "\includegraphics{figuras/foto}"
+% ou "\includegraphics{foto}".
+\graphicspath{{figuras/},{fig/},{logos/},{img/},{images/},{imagens/}}
+
+% Comandos rápidos para mudar de língua:
+% \en -> muda para o inglês
+% \br -> muda para o português
+% \texten{blah} -> o texto "blah" é em inglês
+% \textbr{blah} -> o texto "blah" é em português
+\babeltags{br = brazilian, en = english}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% METADADOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% O arquivo com os dados bibliográficos para biblatex; você pode usar
+% este comando mais de uma vez para acrescentar múltiplos arquivos
+\addbibresource{bibliografia.bib}
+
+% Este comando permite acrescentar itens à lista de referências sem incluir
+% uma referência de fato no texto (pode ser usado em qualquer lugar do texto)
+%\nocite{bronevetsky02,schmidt03:MSc, FSF:GNU-GPL, CORBA:spec, MenaChalco08}
+% Com este comando, todos os itens do arquivo .bib são incluídos na lista
+% de referências
+%\nocite{*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% INÍCIO DO POSTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Existem várias packages para criar pôsteres com LaTeX (a0poster, baposter,
+% tikzposter, sciposter...). As mais comuns atualmente são beamerposter
+% e tcolorbox (com sua biblioteca "poster"). Ambas funcionam muito bem;
+% beamerposter é mais familiar (ela simplesmente utiliza beamer com alguns
+% ajustes no tamanho das fontes e do papel), mas com tcolorbox o alinhamento
+% vertical dos elementos é MUITO mais simples, e esta é a solução adotada
+% aqui. Vale muito a pena ler a documentação com "texdoc tcolorbox" e
+% "texdoc tcolorbox-tutorial-poster".
+
+% Um pôster com tcolorbox é composto por blocos (posterboxes) coloridos
+% de tamanho variável; cada bloco pode conter textos ou imagens e um
+% título opcional. O pôster utiliza uma grade de dimensões definidas em
+% \begin{tcposter} com "rows=" e "columns=" para fazer o alinhamento:
+% para cada posterbox, podemos dizer "row=X, column=Y" para definir sua
+% posição. Além disso, podemos dizer "span=A, rowspan=B" para fixar
+% seu tamanho. Sem "span" e "rowspan", uma posterbox tem pelo menos o
+% tamanho de uma célula da grade, mas se seu tamanho natural for maior
+% ela extrapola esse tamanho. "span" e "rowspan" podem ser números
+% não-inteiros (como 0.8 ou 1.4).
+%
+% "\begin{posterbox}" recebe um conjunto de parâmetros opcional e um
+% conjunto de parâmetros obrigatório:
+%
+% "\begin{posterbox}[opcional]{obrigatório}".
+%
+% O conjunto de parâmetros opcional é onde inserimos os parâmetros comuns
+% de tcolorbox, como "adjusted title", "coltext", "titlerule" etc.; o
+% conjunto de parâmetros obrigatório é usado para determinar as dimensões
+% e a posição da posterbox, ou seja, as opções "name", "column", "below",
+% "span" etc.
+%
+% ALINHAMENTO HORIZONTAL
+%
+% É possível definir um poster com 2 colunas e fazer algo como
+%
+% \posterbox{column=1, span=1.3}{blah}
+% \posterbox{column*=2, span=0.7}{blah}
+%
+% A segunda posterbox será alinhada à direita ("column*="), então as
+% duas serão colocadas lado-a-lado sem sobreposições.
+%
+% Na prática, no entanto, é mais fácil fazer como no exemplo abaixo:
+% definimos que o poster tem 12 colunas, o que nos permite dividir
+% sua largura em 2, 3, 4 ou 6 colunas iguais ou diferentes (como
+% 1/2 + 1/2, 2/3 + 1/3, 1/4 + 1/4 + 1/2, 1/4 + 1/6 + 1/4 + 1/3 etc).
+%
+% ALINHAMENTO VERTICAL
+%
+% Embora seja possível alinhar as posterboxes em função da grade na
+% vertical, uma outra possibilidade é utilizar "above", "below" e
+% "between", como no exemplo abaixo: basta associar um nome "blah" a
+% uma determinada posterbox e, em outra, dizer "below=blah". Lembre-se
+% que a posterbox de nome "blah" deve ser definida *antes* que outra
+% possa fazer referência a ela. Também é possível fazer "below=top",
+% "above=bottom" etc. A opção "equal height group" também é muito útil.
+% Nada impede que você use estratégias de alinhamento diferentes para
+% cada posterbox.
+
+% Este modelo define a opção "smallmargins", que diminui a distância
+% entre o conteúdo de uma posterbox e suas bordas. Use com parcimônia!
+
+\include{conteudo/flagutils}
+
+\begin{document}
+
+% Em um poster não há \maketitle
+
+\begin{tcbposter}[
+  poster = {
+    %showframe, % muito útil durante a preparação do poster
+    rows = 6,
+    columns = 12,
+    colspacing = 1.2cm,
+    rowspacing = .8cm,
+  },
+]
+
+
+\posterbox[titlebox]{name=titlebox, below=top, column=1, span=12}{
+    Sobre uma conjectura de Erd\H os acerca de grafos livres de triângulos
+}
+
+\posterbox[footerbox]{name=footerbox, above=bottom, column=1, span=12}{
+    \large
+    Aluno: Marcelo Machado Lage\par
+    \vspace{4pt}
+    \large
+    Orientador: Prof.~Dr.~Guilherme Oliveira Mota\par
+    \vspace{4pt}
+    \small
+    \textcolor{imesoftblue!30!white}
+      {Departmento de Ciência da Computação --- Instituto de Matemática e Estatística --- Universidade de São Paulo}\\
+    \small    
+    \textit{Durante a realização desse projeto, o aluno recebeu apoio da FAPESP. Processos nº 2025/06707-6, 2025/14743-2.}\relax
+}
+
+\posterbox[adjusted title=Referências]{name=refbox, column=5, span=8, above=footerbox}{
+  \begin{enumerate}[label={[\arabic*]}]
+    \item\label{EFPS} Erd\H os, Faudree et. al.. \textit{How to Make a Graph Bipartite. (1988)}
+    \item\label{BCL} Balogh et. al. \textit{Max cuts in triangle-free graphs. (2021)}
+    \item\label{CJK} Chen et. al. \textit{Triangle-free graphs with large degree. (1997)}
+\end{enumerate}
+}
+
+\posterbox[adjusted title=Introdução e motivação]{name=introbox, column=1, span=4, below=titlebox}{
+  Um grafo $G$ é um par $(V,E)$, onde $V$ são os \emph{vértices} e $E$ são as \emph{arestas} (pares não ordenados de vértices).
+  A Teoria Extremal dos Grafos estuda propriedades de grafos sob restrições: compreender propriedades extremais tem aplicações em análise de algoritmos, modelagem de redes e otimização.
+  
+  \begin{itemize}
+    \item Grafos livres de triângulos não contêm ciclos de tamanho $3$.
+    \item Pergunta natural: quantas arestas um grafo sem triângulos pode ter?
+    \item \textbf{Teorema de Mantel.} Um grafo com $n$ vértices sem triângulos possui no máximo $\left\lfloor\frac{n^2}{4}\right\rfloor$ arestas.
+  \end{itemize}
+}
+
+\posterbox[adjusted title=Problema e objetivos]{name=problembox, column=1, span=4, between=introbox and footerbox}{
+  Os únicos grafos que satisfazem igualdade no Teorema de Mantel são bipartidos.
+  \begin{itemize}
+    \item Quão ``distante'' pode estar um grafo sem triângulos de um bipartido?
+    %\item Grafos pouco densos são quase bipartidos pois o grafo vazio é bipartido; grafos muito densos são quase bipartidos porque o exemplo extremal de Mantel é bipartido.
+    \item $D(G)$ mede essa distância pela remoção de um menor conjunto de arestas.
+  \end{itemize}
+  \textbf{Conjectura 1 (Erd\H os, 1975).} Todo grafo livre de triângulos $G$ com $n$ vértices satisfaz $D(G) \leq \frac{n^2}{25}$.
+
+  O caso geral da Conjectura 1 permanece em aberto.
+
+  \centering
+  \begin{figure}[H]
+    \include{figuras/c5-blowup-tikz}
+    \caption*{O blow-up de $C_5$ em que cada classe tem $\frac{n}{5}$ vértices satisfaz $e(G)=\frac{n^2}{5}$ e $D(G)=\frac{n^2}{25}$.}
+  \end{figure}
+}
+
+
+
+\posterbox[adjusted title=Metodologia]{name=methodbox, column=5, span=8, below=titlebox}{
+  \begin{itemize}
+    \item Álgebras de flag\\$\rightarrow$ traduzem problemas de densidade em programas semidefinidos;
+    \item Blow-ups\\$\rightarrow$ expandem vértices para conjuntos independentes mantendo estrutura;
+    \item Condições de grau mínimo\\$\rightarrow$ permitem simplificar o problema para blow-ups de grafos pequenos.
+  \end{itemize}
+}
+
+
+\posterbox[adjusted title=Resultados principais]{name=resultbox, column=5, span=8, below=methodbox}{
+    \begin{itemize}
+      \item \textit{(Simonovits 1968)} Se $e(G) = \frac{n^2}{4}-m$, então $D(G) \leq m$.
+        \begin{itemize}
+          \item Resolve a Conjectura 1 se $e(G) \geq 0.21n^2$.
+        \end{itemize}
+      \item \ref{EFPS} $D(G) \leq \frac{4e(G)^2}{n^2}$ e $D(G) \leq \frac{n^2}{18+\epsilon}$
+        \begin{itemize}
+          \item Cota explícita sobre $D(G)$; resolve a Conjectura 1 se $e(G) \geq 0.20n^2 = \frac{n^2}{5}$.
+        \end{itemize}
+      \item \ref{BCL} Generalização de~\ref{EFPS} EFPS: prova a Conjectura 1 se $e(G) \geq 0.159n^2$ e outros resultados parciais usando \emph{álgebras de flag}.
+      \item A Conjectura 1 pode ser resolvida quando $\delta(G) \geq \frac{4n}{11}$ (ver~\ref{CJK}).
+    \end{itemize}
+
+    \centering
+    \begin{figure}[H]
+      \begin{subfigure}[c]{.48\textwidth}
+        \centering
+        \include{figuras/local-cut-efps-tikz}
+        \caption*{Observe que~$\textstyle{D(G) \leq e(G-N(v))}$.
+        Na linguagem de álgebras de flag, essa figura representa o corte local gerado relacionado à restrição $\average{\labeledCherryComplement} \geq \frac{2}{25}$.}
+      \end{subfigure}
+      \hfill
+      \begin{subfigure}[c]{.48\textwidth}
+        \centering
+        \include{figuras/f4-blowup-tikz}
+        \caption*{Se~$\textstyle{\delta(G) \geq \frac{4n}{11}}$, então $G$ é da forma acima, e é possível demonstrar a Conjectura 1 diretamente para $G$.}
+      \end{subfigure}
+    \end{figure}
+}
+
+
+\posterbox[adjusted title=Discussão]{name=discussbox, column=5, span=5, between=resultbox and refbox}{
+  \begin{itemize}
+    \item As cotas conhecidas funcionam melhor para grafos densos: resultados do tipo ``a Conjectura 1 vale se $e(G) \geq \alpha n^2$'';
+    \item Uso de álgebras de flag fornecem desigualdades assintóticas a partir de métodos numéricos;
+    \item Condições de grau mínimo permite simplificação estrutural e estudo da Conjectura 1 para certos grafos abaixo do limiar $e(G) \geq \frac{n^2}{5}$.
+  \end{itemize}
+}
+
+\posterbox[adjusted title=Conclusão]{name=conclusionbox, column=10, span=3, between=resultbox and refbox}{
+  O uso de álgebras de flag e homomorfismos a partir de grafos de grau mínimo alto confirmam a Conjectura 1 em subclasses de grafos densos.
+  O trabalho contribui revisando os métodos usados para avançar na Conjectura.
+}
+
+
+
+
+
+
+
+
+
+
+
+\end{tcbposter}
+
+\end{document}

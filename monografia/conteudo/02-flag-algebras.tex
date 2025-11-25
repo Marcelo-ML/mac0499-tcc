@@ -360,14 +360,102 @@ A mesma ideia pode ser usada para definir cortes a partir de outros conjuntos pe
 Por exemplo, se $G$ é livre de triângulos e $uv \in E(G)$, então é possível definir um corte com $N(u)$ em uma das parte, $N(v)$ em outra das partes e, para cada vértice em $V(G) \setminus (N(u) \cup N(v))$, decidimos uniformemente ao acaso em qual das partes definidas por $N(u)$ e $N(v)$ ele será colocado.
 Se nenhum desses cortes deixa no máximo $n^2/25$ arestas de fora, então a densidade esperada das arestas fora de qualquer um desses cortes definidos localmente é pelo menos $2/25$, o que pode ser expressado da seguinte maneira:
 
-\[ \average{\frac12 \fourVerticesOne + \frac12 \fourVerticesTwo + \frac12 \fourVerticesThree} \geq \frac{2}{25}.\]
+\begin{equation}\label{eq:local-cut-2}
+  \average{\frac12 \fourVerticesOne + \frac12 \fourVerticesTwo + \frac12 \fourVerticesThree} \geq \frac{2}{25}.
+\end{equation}
 
 Um \emph{corte local} é definido a partir de um tipo $\sigma$ de tamanho $k$ (nos exemplos que já vimos, usamos os tipos $\aSinglePoint$ e $\labeledEdge$).
 Esse tipo está associado a uma estrutura pequena do grafo grande livre de triângulos $G$ a partir da qual definiremos o corte particionando os demais vértices de $G$ em $2^k$ conjuntos $X_1,X_2,\dots,X_{2^k}$ a partir das arestas entre esse vértice e $\sigma$.
 (Na prática, o número de conjuntos é menor, uma vez que um vértice não pode ser simultaneamente adjacente a dois vértices adjacentes de $\sigma$.)
 
-Após definir esses $X_{2^k}$ conjuntos, adcionamos cada elemento de $X$ independentemente a um conjunto $A$ (inicialmente vazio) com probabilidade $p_i$ ou a $B$ com probabilidade $1-p_i$, onde $p_1,p_2,\dots,p_{2^k}$ são hiperparâmetros do modelo.
+Após definir esses $X_{2^k}$ conjuntos, adicionamos cada elemento de $X$ independentemente a um conjunto $A$ (inicialmente vazio) com probabilidade $p_i$ ou a $B$ com probabilidade $1-p_i$, onde $p_1,p_2,\dots,p_{2^k}$ são hiperparâmetros do modelo.
 
+\subsection{Como construir}
+
+\subsubsection*{As condições de cortes locais}
+\begin{itemize}
+  \item Vamos fixar um tipo $\sigma$ de tamanho $k$ (no caso de (\ref{eq:local-cut-2}), $\sigma=\labeledEdge$.)
+  \item Vamos pegar esse tipo e considerar os flags que tem uma aresta $uv$ além do tipo $\sigma$.
+  \item Sejam $X \coloneqq N(u) \cap V(\sigma)$ e $Y \coloneqq N(v) \cap V(\sigma)$.
+  \item Para cada um dos flags $F_{X,Y}$ gerados, jogamos cada vértice para um lado com probabilidade $p_X$ e $p_Y$, respectivamente. Então o coeficiente que multiplica é $p_Xp_Y + (1-p_X)(1-p_Y)$, que é a probabilidade que a aresta fique entre dois vértices da mesma classe (que ela tenha que ser apagada).
+  \item Logo, para cada uma das condições $(\sigma, p)$ com $p \colon \calp(V(\sigma)) \to [0,1]$, temos a desigualdade gerada a partir de um corte local a seguir:
+  \[ \average{\sum_{X,Y \subseteq V(\sigma)} (p_Xp_Y+(1-p_X)(1-p_Y)) F_{X,Y}} \geq \frac{2}{25}. \]
+\end{itemize}
+
+\subsubsection*{As condições semidefinidas}
+\begin{itemize}
+  \item Vamos fixar um tipo $\pi$ e um inteiro $m$ com $2m-\pi \geq k$ para gerar condições ``inerentes'' de contagem.
+  \item Vamos então escrever os flags de tipo $\pi$ e tamanho $m$ como $F_1,F_2,\dots,F_\ell$.
+  \item Sendo $A$ positiva semidefinida de dimensões $\ell \times \ell$, obtemos a condição
+  \[ \sum_{i,j=1}^\ell A_{ij}\average{F_iF_j} \geq 0. \]
+\end{itemize}
+
+\subsubsection*{Combinando as condições}
+\begin{itemize}
+  \item Sejam $(\sigma_1,p_1),(\sigma_2,p_2),\dots,(\sigma_r,p_r)$ as condições de cortes locais.
+  \item Sejam $(\pi_1,m_1,A_1),(\pi_2,m_2,A_2),\dots,(\pi_s,m_s,A_s)$ as condições semidefinidas.
+  \item Para cada tipo $F \in \calf_m^\emptyflag$, podemos definir os coeficientes de $F$ em cada uma das condições
+    \[ coef^1_i(F) \coloneqq [F]\average{\sum_{X,Y \subseteq V(\sigma_i)} (p_i(X)p_i(Y)+(1-p_i(X))(1-p_i(Y))) F_{X,Y}} \]
+    e
+    \[ coef^2_k(F) \coloneqq [F]\sum_{i,j=1}^\ell (A_k)_{ij}\average{F_iF_j}. \]
+    Logo, as condições se reescrevem como
+    \[ \sum_{F \in \calf_m^\emptyflag} coef^1_i(F) F \geq 2/25, \qquad
+    \sum_{F \in \calf_m^\emptyflag coef^2_i(F) \geq 0}. \]
+    Se escrevemos
+    \[ \edge = \sum_{F \in \calf_m^\emptyflag} coef^3(F), \]
+    então segue que
+    \[ \edge + \frac{2}{25}\sum_{i=1}^r \alpha_i
+      \leq \sum_{F \in \calf_m^\emptyflag}
+        \left(coef^3(F) + \sum_{i=1}^r \alpha_i coef^1_i(F) + \sum_{i=1}^s coef^3_i(F)\right) F, \]
+    logo obtemos a cota
+    \[ \edge \leq \max_{F \in \calf_m^\emptyflag} \left( coef^3(F) + \sum_{i=1}^r \alpha_i coef^1_i(F) + \sum_{i=1}^s coef^2_i(F) \right) - \frac{2}{25}\sum_{i=1}^r \alpha_i. \]
+\end{itemize}
+
+Claro, falta incorporar que $coef^2$ têm as variáveis que colocam a parte semidefinida.
+Mas agora podemos já listar todos os flags em $F_m^\emptyflag$, e para cada um deles escrever a restrição correspondente.
+
+O programa é então de minimizar $M-0.08 \sum_{i=1}^r \alpha_i$, sujeito a que $M \geq$ cada um dos coeficientes de flags.
+Ou seja, basta construir a restrição correspondente a cada flag $F \in \calf_m^\emptyflag$ uma a uma.
+
+\subsubsection*{Quais são os parâmetros?}
+Os parâmetros são os conjuntos $\{(\sigma_1,p_1),(\sigma_2,p_2),\dots,(\sigma_r,p_r)\}$ e $\{(\pi_1,m_1),(\pi_2,m_2),\dots,(\pi_s,m_s)\}$.
+O inteiro $m$ também pode ser tratado como parâmetro, mas não tem razão de por que não escolher ele mínimo possível tal que as coisas funcionam.
+
+\subsubsection*{Quais são as variáveis?}
+As variáveis são os escalares $\alpha_1,\alpha_2,\dots,\alpha_r \geq 0$ e as matrizes $A_1,A_2,\dots,A_s \succeq 0$.
+Também tem a variável $M$ que controla o máximo.
+
+\subsubsection*{Como fica o programa?}
+A função objetivo é simplesmente $M - 0.08 \sum_{i=1}^r \alpha_i$.
+
+Para as restrições, temos para $F \in \calf_m^\emptyflag$, uma restrição correspondente do tipo
+\[ M \geq b + \sum_{i=1}^r \alpha_i c_i + \sum_{k=1}^s \sum_{i,j=1}^{\ell_k} (A_k)_{ij}d_{kij}, \]
+
+onde $b$, $c_i$ e $d_{kij}$ são constantes que precisamos calcular.
+
+\subsubsection*{Como calcula $b$?}
+Basta expandir $\edge$ como soma de flags de tamanho $k$ e tomar o coeficiente corresponde a $F$.
+Isso posso fazer usando o \texttt{ExpandFlagGraph}.
+
+\subsubsection*{Como calcular $c_i$?}
+Tendo $(\sigma,p)$, então precisa calcular o coeficiente de $F$ quando expande
+\[ \average{\sum_{X,Y \subseteq V(\sigma_i)} (p_i(X)p_i(Y)+(1-p_i(X))(1-p_i(Y))) F_{X,Y}} \]
+em flags de tamanho $m$.
+Mas isso é a mesma coisa que
+\[ \sum_{X,Y \subseteq V(\sigma_i)} (p_i(X)p_i(Y)+(1-p_i(X))(1-p_i(Y))) [F]\average{F_{X,Y}}, \]
+e o último termo pode ser calculado simplesmente normalizando $F_{X,Y}$ e daí expandindo como soma de flags de tamanho $m$.
+
+\subsubsection*{Como calcula $d_{kij}$?}
+Esse também é mais ou menos direto, porque o único termo que multiplica $A_{ij}$ é o $\average{F_iF_j}$, então temos que:
+\begin{itemize}
+  \item Pegar os flags $F_i$ e $F_j$ da $k$-ésima restrição semidefinida;
+  \item Multiplicar $F_i$ e $F_j$;
+  \item Normalizar;
+  \item Calcular o coeficiente do $F$ em cada uma.
+\end{itemize}
+
+Acabo de perceber que parece ser uma boa ideia fazer uma rotina que toma um flag $F^\sigma$ e um flag $F^\emptyflag$ com $|F^\emptyflag| \geq |F^\sigma|$ e calcula o coeficiente de $F^\emptyflag$ na expansão de $\average{F^\sigma}$.
+Isso provavelmente dá para otimizar um pouquinho.
 
 \begin{theorem}[\cite{baloghclemenlidicky}]\label{thm:baloghclemenlidicky}
   Seja $G$ um grafo livre de triângulos com $n$ vértices.
