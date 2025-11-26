@@ -147,8 +147,9 @@
 }
 
 \posterbox[adjusted title=Referências]{name=refbox, column=5, span=8, above=footerbox}{
+  \small
   \begin{enumerate}[label={[\arabic*]}]
-    \item\label{EFPS} Erd\H os, Faudree et. al.. \textit{How to Make a Graph Bipartite. (1988)}
+    \item\label{EFPS} Erd\H os, Faudree et. al. \textit{How to Make a Graph Bipartite. (1988)}
     \item\label{BCL} Balogh et. al. \textit{Max cuts in triangle-free graphs. (2021)}
     \item\label{CJK} Chen et. al. \textit{Triangle-free graphs with large degree. (1997)}
 \end{enumerate}
@@ -156,7 +157,7 @@
 
 \posterbox[adjusted title=Introdução e motivação]{name=introbox, column=1, span=4, below=titlebox}{
   Um grafo $G$ é um par $(V,E)$, onde $V$ são os \emph{vértices} e $E$ são as \emph{arestas} (pares não ordenados de vértices).
-  A Teoria Extremal dos Grafos estuda propriedades de grafos sob restrições estruturais. Compreender propriedades extremais tem aplicações em análise de algoritmos, modelagem de redes e otimização.
+  A Teoria Extremal dos Grafos estuda propriedades dos grafos sob restrições estruturais. Compreender propriedades extremais tem aplicações em análise de algoritmos, modelagem de redes e otimização.
   
   \begin{itemize}
     \item Grafos livres de triângulos não contêm ciclos de tamanho $3$.
@@ -187,25 +188,19 @@
 
 \posterbox[adjusted title=Metodologia]{name=methodbox, column=5, span=8, below=titlebox}{
   \begin{itemize}
-    \item Álgebras de flag\\$\rightarrow$ traduzem problemas de densidade em programas semidefinidos.
+    \item \textbf{Álgebras de flag} (ver~\ref{BCL})\\$\rightarrow$ traduzem problemas de densidade em programas semidefinidos.
     \item Blow-ups\\$\rightarrow$ expandem vértices para conjuntos independentes mantendo estrutura.
-    \item Condições de grau mínimo\\$\rightarrow$ permitem simplificar o problema para blow-ups de grafos pequenos.
+    \item \textbf{Condições de grau mínimo} (ver~\ref{CJK})\\$\rightarrow$ permitem simplificar o problema para blow-ups de grafos pequenos.
   \end{itemize}
 }
 
 
 \posterbox[adjusted title=Resultados principais]{name=resultbox, column=5, span=8, below=methodbox}{
+    Por resultados clássicos de estabilidade de Simonovits, é possível verificar a Conjectura 1 se $e(G) \geq 0.21n^2$.
+    O trabalho de~\ref{EFPS} prova que $D(G) \leq \frac{4e(G)^2}{n^2}$ e $D(G) \leq \frac{n^2}{18+\epsilon}$ (para algum $\epsilon>0$). Em particular, a Conjectura 1 vale se $e(G) \geq 0.20n^2$.
     \begin{itemize}
-      \item \textit{(Simonovits 1968)} $\rightarrow$ Se $e(G) = \frac{n^2}{4}-m$, então $D(G) \leq m$.
-        \begin{itemize}
-          \item Resolve a Conjectura 1 se $e(G) \geq 0.21n^2$.
-        \end{itemize}
-      \item \ref{EFPS} $\rightarrow$ Prova de $D(G) \leq \frac{4e(G)^2}{n^2}$ e $D(G) \leq \frac{n^2}{18+\epsilon}$ (para algum $\epsilon>0$).
-        \begin{itemize}
-          \item Cota explícita sobre $D(G)$; resolve a Conjectura 1 se $e(G) \geq \frac{n^2}{5} = 0.20n^2$.
-        \end{itemize}
-      \item \ref{BCL} $\rightarrow$ Generaliza~\ref{EFPS}: prova a Conjectura 1 se $e(G) \geq 0.159n^2$ e outros resultados parciais usando \emph{álgebras de flag}.
-      \item A Conjectura 1 também pode ser resolvida quando $\delta(G) \geq \frac{4n}{11}$ usando~\ref{CJK}.
+      \item \ref{BCL} $\rightarrow$ Generaliza~\ref{EFPS}: prova a Conjectura 1 se $e(G) \geq 0.1599n^2$ e outros resultados parciais usando \emph{álgebras de flag}.
+      \item Usando~\ref{CJK}, provamos a Conjectura 1 quando $\delta(G) > \frac{4n}{11}$.
     \end{itemize}
 
     \centering
@@ -213,14 +208,14 @@
       \begin{subfigure}[c]{.48\textwidth}
         \centering
         \include{figuras/local-cut-efps-tikz}
-        \caption*{Observe que~$\textstyle{D(G) \leq e(G-N(v))}$.
-        Na linguagem de álgebras de flag, essa figura representa o corte local gerado relacionado à restrição $\average{\labeledCherryComplement} \geq \frac{2}{25}$.}
+        \caption*{Observe que~$\textstyle{D(G) \leq e(G-N(v))}$, pois $N(v)$ é independente.
+        Na linguagem de álgebras de flag, essa figura representa o corte local relacionado à restrição $\average{\labeledCherryComplement} \geq \frac{2}{25}$.}
       \end{subfigure}
       \hfill
       \begin{subfigure}[c]{.48\textwidth}
         \centering
         \include{figuras/f4-blowup-tikz}
-        \caption*{Se~$\textstyle{\delta(G) \geq \frac{4n}{11}}$, então $G$ é da forma acima, e é possível demonstrar a Conjectura 1 usando essa informação estrutural extra.}
+        \caption*{Se~$\textstyle{\delta(G) > \frac{4n}{11}}$, então $G$ é da forma acima, e é possível demonstrar a Conjectura 1 usando essa informação estrutural extra.}
       \end{subfigure}
     \end{figure}
 }
@@ -230,7 +225,7 @@
   \begin{itemize}
     \item As cotas conhecidas funcionam melhor para grafos densos: resultados do tipo ``a Conjectura 1 vale se $e(G) \geq \alpha n^2$'';
     \item Uso de álgebras de flag fornece desigualdades assintóticas a partir de otimização (numérico);
-    \item Condições de grau mínimo permite simplificação estrutural e estudo da Conjectura 1 para certos grafos abaixo do limiar $e(G) \geq \frac{n^2}{5}$ (estrutural).
+    \item Condições de grau mínimo simplificam os grafos, mesmo abaixo do limiar $e(G) \geq \frac{n^2}{5}$ para provar a Conjectura 1(estrutural).
   \end{itemize}
 }
 
@@ -238,14 +233,6 @@
   O uso de álgebras de flag e condições de grau mínimo confirmam a Conjectura 1 em subclasses de grafos densos.
   O trabalho contribui revisando os métodos usados no problema e com uma prova alternativa para o caso $\delta(G) > \frac{4n}{11}$.
 }
-
-
-
-
-
-
-
-
 
 
 
