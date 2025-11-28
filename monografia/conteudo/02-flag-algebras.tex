@@ -149,11 +149,11 @@ Por exemplo, podemos reescrever (\ref{eq:flag-squared-expanded}) como
   \geq 0.
 \]
 
-De fato, poderíamos ter começado com uma matriz positive semidefinida genérica $A=\begin{bmatrix} a_{11} & a_{12} \\ a_{12} & a_{22} \end{bmatrix}$, encontrando os coeficientes de (\ref{eq:cH-inequality-o(1)}) e cotando em (\ref{eq:max-bound}) para provar que $d(\edge,G) \leq d^*+o(1)$, onde $d^*$ é o valor do programa semidefinido
+De fato, poderíamos ter começado com uma matriz positiva semidefinida genérica $A=\begin{bmatrix} a_{11} & a_{12} \\ a_{12} & a_{22} \end{bmatrix}$, encontrando os coeficientes de (\ref{eq:cH-inequality-o(1)}) e cotando em (\ref{eq:max-bound}) para provar que $d(\edge,G) \leq d^*+o(1)$, onde $d^*$ é o valor do programa semidefinido
 
 \begin{alignat*}{1}
   \text{Minimizar} \quad
-  & \max\left\{a_{11}, \frac13 + \frac23a_{12},\frac23+\frac23a_{12}+\frac13a_{22}\right\}\\
+  & \max\left\{\frac23+\frac13a_{11}+\frac23a_{12}, \frac13 + \frac23a_{12}+\frac13a_{22},a_{22}\right\}\\
   \text{sujeito a}
   \quad & \begin{bmatrix}
     a_{11} & a_{12} \\
