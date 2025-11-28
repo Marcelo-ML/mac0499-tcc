@@ -137,11 +137,11 @@
     Aluno: Marcelo Machado Lage\par
     \vspace{4pt}
     \large
-    Orientador: Prof.~Dr.~Guilherme Oliveira Mota\par
+    Orientador: Guilherme Oliveira Mota\par
     \vspace{4pt}
     \small
     \textcolor{imesoftblue!30!white}
-      {Departmento de Ciência da Computação --- Instituto de Matemática e Estatística --- Universidade de São Paulo}\\
+      {Departmento de Ciência da Computação --- Instituto de Matemática, Estatística e Ciência da Computação \\ Universidade de São Paulo}\\
     \small    
     \textit{Durante a realização desse projeto, o aluno recebeu apoio da FAPESP. Processos nº 2025/06707-6, 2025/14743-2.}\relax
 }
@@ -156,8 +156,8 @@
 }
 
 \posterbox[adjusted title=Introdução e motivação]{name=introbox, column=1, span=4, below=titlebox}{
-  Um grafo $G$ é um par $(V,E)$, onde $V$ são os \emph{vértices} e $E$ são as \emph{arestas} (pares não ordenados de vértices).
-  A Teoria Extremal dos Grafos estuda propriedades dos grafos sob restrições estruturais. Compreender propriedades extremais tem aplicações em análise de algoritmos, modelagem de redes e otimização.
+  Um grafo $G$ é um par $(V,E)$, em que $V$ são os \emph{vértices} e $E$ são as \emph{arestas}, que são pares não ordenados de vértices.
+  A Teoria Extremal dos Grafos é uma área que estuda propriedades dos grafos sob certas restrições e compreender propriedades extremais tem aplicações em análise de algoritmos, modelagem de redes, otimização e diversas outras áreas.
   
   \begin{itemize}
     \item Grafos livres de triângulos não contêm ciclos de tamanho $3$.
@@ -171,16 +171,23 @@
   \begin{itemize}
     \item Pergunta natural: quão ``distante'' pode estar um grafo sem triângulos de um bipartido?
     %\item Grafos pouco densos são quase bipartidos pois o grafo vazio é bipartido; grafos muito densos são quase bipartidos porque o exemplo extremal de Mantel é bipartido.
-    \item $D(G)$ mede essa distância pela remoção de um menor conjunto de arestas que torna $G$ bipartido.
-  \end{itemize}
-  \textbf{Conjectura 1 (Erd\H os, 1975).} Todo grafo livre de triângulos $G$ com $n$ vértices satisfaz $D(G) \leq \frac{n^2}{25}$.
+    \item Escrevemos $D(G)$ para descrever essa distância, que é o
+      tamanho do menor conjunto de arestas cuja remoção torna $G$
+      bipartido.
+    \end{itemize}
 
-  O caso geral da Conjectura 1 permanece em aberto.
+    Estamos interessados na seguinte conjectura, que permanece em aberto:\\
+    \textbf{Conjectura 1
+      (Erd\H os, 1975).} Todo grafo livre de triângulos $G$ com $n$
+    vértices satisfaz $D(G) \leq \frac{n^2}{25}$.
+
+
 
   \centering
   \begin{figure}[H]
     \include{figuras/c5-blowup-tikz}
-    \caption*{O blow-up de $C_5$ em que cada classe tem $\frac{n}{5}$ vértices satisfaz $e(G)=\frac{n^2}{5}$ e $D(G)=\frac{n^2}{25}$.}
+    \caption*{O blow-up balanceado de $C_5$. Temos
+      $e(G)=\frac{n^2}{5}$ e $D(G)=\frac{n^2}{25}$.}
   \end{figure}
 }
 
@@ -197,7 +204,7 @@
 
 \posterbox[adjusted title=Resultados principais]{name=resultbox, column=5, span=8, below=methodbox}{
     Por resultados clássicos de estabilidade de Simonovits, é possível verificar a Conjectura 1 se $e(G) \geq 0.21n^2$.
-    O trabalho de~\ref{EFPS} prova que $D(G) \leq \frac{4e(G)^2}{n^2}$ e $D(G) \leq \frac{n^2}{18+\epsilon}$ (para algum $\epsilon>0$). Em particular, a Conjectura 1 vale se $e(G) \geq 0.20n^2$.
+    Em~\ref{EFPS} é provado que $D(G) \leq \frac{4e(G)^2}{n^2}$ e $D(G) \leq \frac{n^2}{18+\epsilon}$ para algum $\epsilon>0$. Em particular, a Conjectura 1 vale se $e(G) \geq 0.20n^2$.
     \begin{itemize}
       \item \ref{BCL} $\rightarrow$ Generaliza~\ref{EFPS}: prova a Conjectura 1 se $e(G) \geq 0.1599n^2$ e outros resultados parciais usando \emph{álgebras de flag}.
       \item Usando~\ref{CJK}, provamos a Conjectura 1 quando $\delta(G) > \frac{4n}{11}$.
@@ -230,7 +237,7 @@
 }
 
 \posterbox[adjusted title=Conclusão]{name=conclusionbox, column*=12, span=3.5, between=resultbox and refbox}{
-  O uso de álgebras de flag e condições de grau mínimo confirmam a Conjectura 1 em subclasses de grafos densos.
+  O uso de álgebras de flag e condições de grau mínimo confirmam a Conjectura~1 em subclasses de grafos densos.
   O trabalho contribui revisando os métodos usados no problema e com uma prova alternativa para o caso $\delta(G) > \frac{4n}{11}$.
 }
 
