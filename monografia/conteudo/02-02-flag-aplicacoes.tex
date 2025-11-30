@@ -1,0 +1,182 @@
+%!TeX root=../tese.tex
+\section{Aplicações}
+
+Vamos provar o Teorema~\ref{thm:n2/5} usando álgebras de flag.
+Seja $G$ um grafo livre de triângulos com $n$ vértices.
+Primeiro, observe que, para todo vértice $v \in V(G)$, o conjunto
+\[ A_v \coloneqq E\left(G-N(v)\right) \]
+de arestas entre os não vizinhos de $v$ é tal que $G-A_v$ é bipartido considerando as classes
+$(N(v),V(G) \setminus N(v))$.
+Portanto,
+\begin{equation*}
+  D(G) \leq \min_{v \in V(G)}|A_v|,
+\end{equation*}
+ou ainda
+\begin{equation}
+  D(G) \leq \bbe_{v \in V(G)}\left[|A_v|\right],
+\end{equation}
+onde $v \in V(G)$ é escolhido aleatoriamente ao acaso.
+
+Isso nos mostra que é possível modelar certas escolhas de bipartições e, portanto, de arestas que precisamos contar/deletar a partir de um único vértice \textit{especial}.
+Na linguagem de álgebras de flag (sobre os grafos livres de triângulos):
+
+\begin{theorem}\label{thm:local-cut-1}
+  Se $\average{\labeledCherryComplement} \geq 2/25$, então $\edge \leq 2/5$.
+\end{theorem}
+\begin{proof}
+  Primeiro, vamos fixar o tipo $\sigma$ de tamanho $1$, e os inteiros $l=3$ e $m=2$ (assim como no Teorema de Mantel).
+  Da desigualdade
+  \[
+  \average{
+    \begin{bmatrix}
+      \edgeWithOneLabel & \nonEdgeWithOneLabel
+    \end{bmatrix}
+    \begin{bmatrix}
+      a_{11} & a_{12} \\
+      a_{12} & a_{22}
+    \end{bmatrix}
+    \begin{bmatrix}
+      \edgeWithOneLabel \\ \nonEdgeWithOneLabel
+    \end{bmatrix}
+  } \geq 0,
+  \]
+  segue
+  \[ \left(\frac13a_{11}+\frac23a_{12}\right)\unlabeledCherry + \left(\frac23a_{12}+\frac13a_{22}\right)\unlabeledCherryComplement + a_{22}\threePoints \geq 0. \]
+
+  Além disso, \[ \edge = \frac23 \unlabeledCherry + \frac13 \unlabeledCherryComplement, \]
+  logo
+  \begin{align*}
+    \edge + \frac{6}{25}x 
+    & \leq \left(\frac23+\frac13a_{11}+\frac23a_{12}\right)\unlabeledCherry + \left(\frac13+\frac23a_{12}+\frac13a_{22}+x\right)\unlabeledCherryComplement+a_{22}\threePoints \\
+    & \leq \max\left\{\frac23+\frac13a_{11}+\frac23a_{12},\frac13+\frac23a_{12}+\frac13a_{22}+x,a_{22}\right\}.
+  \end{align*}
+  Finalmente,
+  \[ \edge \leq \max\left\{\frac23+\frac13a_{11}+\frac23a_{12},\frac13+\frac23a_{12}+\frac13a_{22}+x,a_{22}\right\} - \frac{6}{25}x \]
+  para toda escolha de $\begin{bmatrix} a_{11} & a_{12} \\ a_{12} & a_{22} \end{bmatrix} \succeq 0$ e $x \geq 0$.
+
+  Um software específico de SDP (\texttt{cvxpy}) pode ser usado para encontrar que o mínimo da expressão acima é $2/5$ para
+  \[ A = \begin{bmatrix}
+    6/5 & -4/5 \\
+    -4/5 & 8/15
+  \end{bmatrix}, \qquad 
+  x = 5/9. \]
+\end{proof}
+
+\subsection{Cortes locais}
+\label{sub:cortes_locais}
+
+Em~\cite{taisa2021cuts}, os autores provam a seguinte conjectura de Sudakov~\cite{sudakov2007k4}:
+\begin{theorem}
+  Seja $G$ um grafo $K_6$-livre com $n$ vértices.
+  Então $G$ pode ser tornado bipartido deletando no máximo $4n^2/25$.
+\end{theorem}
+O principal ingrediente dos resultados provados em~\cite{taisa2021cuts} é a utilização de álgebras de flag para expressar os chamados~\emph{cortes locais}.
+%Posteriormente, em~\cite{baloghclemenlidicky} para provar uma série de melhoras sobre as cotas sobre a Conjectura~\ref{conj:make-bipartite}.
+
+O Teorema~\ref{thm:local-cut-1} mostra como podemos definir cortes (ou seja, subgrafos bipartidos grandes) a partir de um único vértice, e também como utilizar álgebras de flag para expressar a densidade de arestas fora de cada um desses cortes e foi utilizada em~\cite{norin2016,baloghclemenlidicky}.
+A mesma ideia pode ser usada para definir bipartições a partir de outros conjuntos pequenos de vértices.
+
+Por exemplo, se $G$ é livre de triângulos e $uv \in E(G)$, então é possível definir uma bipartição de $V(G)$ com $N(u)$ em uma das parte, $N(v)$ em outra das partes e, para cada vértice em $V(G) \setminus (N(u) \cup N(v))$, decidimos uniformemente ao acaso com probabilidade $1/2$ em qual das partes definidas por $N(u)$ e $N(v)$ ele será colocado.
+A escolha é feita de forma aleatória porque sabemos que o maior corte (determinístico) que pode ser gerado tem tamanho pelo menos o valor esperado do tamanho do corte na escolha aleatória, e é fácil calcular esse valor.
+
+Se nenhum desses cortes deixa no máximo $n^2/25$ arestas de fora, então a densidade esperada das arestas fora de qualquer um desses cortes definidos localmente é pelo menos $2/25$, o que pode ser expressado da seguinte maneira:
+
+\begin{equation}\label{eq:local-cut-2}
+  \average{\frac12 \fourVerticesOne + \frac12 \fourVerticesTwo + \frac12 \fourVerticesThree} \geq \frac{2}{25}.
+\end{equation}
+
+O seguinte resultado sugere que o método de cortes locais pode ser utilizado para obter cotas significativamente melhores para resultados parciais na direção da Conjectura~\ref{conj:make-bipartite}.
+\begin{theorem}[\cite{baloghclemenlidicky}]\label{thm:baloghclemenlidicky}
+  Seja $G$ um grafo livre de triângulos com $n$ vértices.
+  Então, vale que
+  \begin{enumerate}
+    \item $D(G) \leq \frac{n^2}{23.5}$;
+    \item $D(G) \leq \frac{n^2}{25}$ se $e(G) \geq 0.3197 \binom{n}{2}$;
+    \item $D(G) \leq \frac{n^2}{25}$ se $e(G) \leq 0.2486 \binom{n}{2}$.
+  \end{enumerate}
+\end{theorem}
+Contudo, os autores de (\cite{baloghclemenlidicky}) não detalharam o método utilizado.
+
+De forma geral, um \emph{corte local} é definido a partir de um tipo $\sigma$ de tamanho $k$ (nos exemplos que já vimos, usamos os tipos $\aSinglePoint$ e $\labeledEdge$) e uma função $p : \calp(V(\sigma)) \to [0,1]$.
+Seja $G$ um grafo livre de triângulos com $n$ vértices e $n$ indo ao infinito, e $S \subseteq V(G)$ tal que $G[S]$ é isomorfo a $\sigma$.
+Seja também $p_S : \calp(S) \to [0,1]$ o análogo de $p$ em $S$.
+Defina uma bipartição aleatória $(A, B)$ de $G \setminus S$ em que cada elemento $v \in V(G) \setminus S$ é adicionado à parte $A$ com probabilidade $p_S(N_G(v) \cap S)$ ou à parte $B$ com probabilidade com probabilidade $1-p_S(N_G(v))$.
+Se $\sigma = \aSinglePoint$ e $p_{\varnothing}=1.0, p_{\{v\}}=0.0$, essa é a bipartição determinística de~\ref{thm:EFPS-bounds}.
+
+Não é importante decidir em que lado da partição os vértices de $S$ ficam porque $k$ é constante com relação a $n$, então as arestas adjacentes a $S$ são $O(n)$.
+Dessa forma, o número esperado de arestas fora do corte gerado pela bipartição $(A,B)$ é
+\[ O(n) + \sum_{X,Y \subseteq V(S))} (p_Xp_Y+(1-p_X)(1-p_Y))m_{XY}, \]
+onde $m_{XY}$ é o número de arestas de $G \setminus S$ com um dos extremos ligado exatamente a $X$ e o outro extremo ligado exatamente a $Y$.
+
+Para $X,Y \subseteq V(\sigma)$, seja $F^\sigma_{X,Y} \in \fsigma_{k+2}$ o flag que tem dois vértices não rotulados conectados por uma aresta, um deles ligados a $X$ em $\sigma$, e o outro ligado a $Y$ em $\sigma$.
+Assim, podemos assumir que, para qualquer escolha de $S$, vale que
+
+\begin{align*}
+  &O(n) + \sum_{X,Y \subseteq V(\sigma)} (p_Xp_Y+(1-p_X)(1-p_Y)) \binom{n-k}{2} d(F^\sigma_{X,Y},G^\sigma) \geq \frac{n^2}{25} \\
+  \iff&\sum_{X,Y \subseteq V(\sigma)} (p_Xp_Y+(1-p_X)(1-p_Y)) d(F^\sigma_{X,Y},G^\sigma) \geq \frac{2}{25} + O\left(\frac{1}{n}\right),
+\end{align*}
+onde $G^\sigma$ é o grafo em que rotulamos $S$ como sendo $\sigma$.
+Escolhendo $S$ aleatoriamente, obtemos
+\[ \sum_{X,Y \subseteq V(\sigma)} (p_Xp_Y+(1-p_X)(1-p_Y)) q(F^\sigma_{X,Y}) d(\downward F^\sigma_{X,Y},G) \geq \frac{2}{25} + o(1). \]
+Omitindo $G$ e o termo $o(1)$, que já sabemos que podemos omitir, obtemos finalmente
+\begin{equation}\label{eq:sigma-p-restricao}
+  \sum_{X,Y \subseteq V(\sigma)} (p_Xp_Y+(1-p_X)(1-p_Y))\average{F^\sigma_{X,Y}} \geq 0.08.
+\end{equation}
+Chamamos essa desigualdade de uma \emph{$(\sigma,p)$-restrição}.
+
+Também sabemos que podemos gerar restrições escolhendo um tipo $\pi$, um inteiro $m \geq |\pi|$ e, listando $\calf^\pi_m = \{F_1,F_2,\dots,F_{\ell}\}$, para qualquer $A \in \bbs^{\ell}_+$ vale que
+\begin{equation}
+ \label{eq:pi-m-restricao}
+  \sum_{i,j=1}^{\ell} A_{ij}\average{F_iF_j} \geq 0.
+\end{equation}
+Chamamos essa desigualdade de uma \emph{$(\pi,m)$-restrição}.
+
+\subsection{Construindo o programa}
+
+Note que uma $(\sigma,p)$-restrição é escrita em termos de elementos de $\calf^\emptyflag_{|\sigma|+2}$, e uma $(\pi,m)$-restrição é escrita em termos de elementos de $\calf^\emptyflag_{2m-|\pi|}$.
+Fixe uma coleção $\{(\sigma_1,p_1),(\sigma_2,p_2),\dots,(\sigma_r,p_r)\}$ de $(\sigma,p)$-restrições e uma coleção $\{(\pi_1,m_1),(\pi_2,m_2),\dots,(\pi_s,m_s)\}$ de $(\pi,m)$-restrições.
+Tome $m \geq \max_i(|\sigma_i|+2), \max_j(2m_j-|\pi_j|)$.
+Usando~\ref{eq:guys-in-kernel}, podemos escrever as $r+s$ restrições como desigualdades em $\calf^\emptyflag_m$.
+
+De forma mais explícita, uma $(\sigma,p)$-restrição pode ser reescrita em $\calf^\emptyflag_m$ como
+\[ \sum_{F \in \calf^{\emptyflag}_m} \left(\sum_{X,Y \subseteq V(\sigma)} (p_Xp_Y+(1-p_X)(1-p_Y))\left([F]\average{F^\sigma_{X,Y}}\right)\right)F \geq 0.08, \]
+onde $[F]F'$ é o coeficiente de $F$ quando $F'$ é expandido em termos de flags de ordem $|F|$.
+Escreva cada uma das $(\sigma,p)$-restrições como
+\begin{equation}\label{eq:c-coeff}
+  \sum_{F \in \calf^{\emptyflag}_m} c(F)F \geq 0.08,
+\end{equation}
+onde os $c(F)$'s são coeficientes não negativos.
+
+Analogamente, uma $(\pi,m)$-restrição pode ser reescrita como
+\begin{equation}\label{ef:d-coeff}
+  \sum_{i,j=1}^{\ell} A_{ij}[F]\average{F_iF_j}F \geq 0 \iff \sum_{F \in \calf^{\emptyflag}_m} \left(\sum_{i,j=1}^{\ell}d_{ij}(F)A_{ij}\right)F \geq 0.
+\end{equation}
+
+Finalmente, escreva
+\begin{equation}\label{eq:b-coeff}
+  \edge = \sum_{F \in \calf^{\emptyflag}_m} b(F)F.
+\end{equation}
+
+Combinando as equações (\ref{eq:c-coeff}), (\ref{ef:d-coeff}) e (\ref{eq:b-coeff}), obtemos que
+\begin{align*}
+  \edge &\leq \sum_{F \in \calf^{\emptyflag}_m} \left(b(F) + \sum_{i=1}^r c_i(F) \cdot \alpha_i + \sum_{k=1}^s \sum_{i,j=1}^{\ell_k} d_{kij}(F) \cdot (A_k)_{ij}\right)F-\sum_{i=1}^r 0.08\alpha_i \\
+  &= \sum_{F \in \calf^{\emptyflag}_m} \left(b(F) + \sum_{i=1}^r (c_i(F)-0.08) \cdot \alpha_i + \sum_{k=1}^s \sum_{i,j=1}^{\ell_k} d_{kij}(F) \cdot (A_k)_{ij}\right)F \\
+  &\leq \max_{F \in \calf^{\emptyflag}_m} \left(b(F) + \sum_{i=1}^r (c_i(F)-0.08) \cdot \alpha_i + \sum_{k=1}^s \sum_{i,j=1}^{\ell_k} d_{kij}(F) \cdot (A_k)_{ij}\right),
+\end{align*}
+onde $\alpha_1,\alpha_2,\dots,\alpha_r \geq 0$ são escalares.
+
+Finalmente, podemos montar o seguinte programa semidefinido para encontrar o valor ótimo da expressão acima:
+\begin{alignat*}{2}
+  \text{Minimizar} \quad & M \\
+  \text{sujeito a}
+  \quad & M-\sum_{i=1}^r(c_i(F)-0.08) \; \alpha_i \\
+  \quad & \hspace{1em}-\sum_{k=1}^s\sum_{i,j=1}^{\ell_k} d_{kij}(F) \; (A_k)_{ij} \geq b(F), &\quad \text{ para cada } F \in \calf^{\emptyflag}_m, \\
+  \quad & M \geq 0,\\
+  \quad & \alpha_i \geq 0, &\quad \text{ para cada } i \in [r], \\
+  \quad & A_k \in \bbs^{\ell_k}_+, &\quad \text{ para cada } k \in [s].
+\end{alignat*}
+
+Se $d^*$ é o valor ótimo desse programa, então a Conjectura~\ref{conj:make-bipartite} está provada para grafos com pelo menos $\frac{d^*}{2}n^2$ arestas.
+O nosso objetivo, é combinar $(\sigma,p)$-restrições e $(\pi,m)$-restrições que deem a valores menores de $d^*$.
+
+Usando algumas boas escolhas de restrições, conseguimos baixar o resultado de~\ref{thm:n2/5} (que equivaleria a $d^*=0.40$) para $d^*=0.362867$.

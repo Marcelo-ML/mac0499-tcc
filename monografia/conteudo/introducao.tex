@@ -1,17 +1,29 @@
 %!TeX root=../tese.tex
 \chapter{Introdução}
 
-Fala, galera!
-Bem-vindos ao meu TCC!
-Vamos ver o que tem dentro dele?
+Uma das perguntas mais fundamentais em Teoria Extremal dos Grafos é ``qual o maior número possível de arestas em um grafo de $n$ vértices sem cópias de $H$ como subgrafo?''
+Os celebrados teoremas de Turán e Erd\H os-Stone, e Erd\H os-Kovari-S\'os dão respostas complementares para essa pergunta quantitativa, e muitas vezes (como no caso dos dois primeiros) fornecem tanto respostas qualitativas.
+De fato, se $H$ não é bipartido, o Teorema de Erd\H os-Stone diz que um grafo que atinja a cota superior deve se aproximar de um grafo $(\chi(H)-1)$-partido, onde $\chi(H)$ é o número cromático de $H$.
+Para mais detalhes, recomendamos o excelente livro~\cite{livrocombinatoria}.
+
+A resposta (numérica e estrutural) para essa pergunta no caso em que $H$ é um \textit{triângulo} é um dos resultados mais antigos em Teoria Extremal dos Grafos, tendo sido provado por Mantel em 1907: um grafo em $n$ vértices sem triângulos possui no máximo $n^2/4$ arestas, e se a cota é atingida com igualdade, então $H$ é bipartido.
+A partir das décadas de 1960 e 1970, com o trabalho de Erd\H os, Simonovits, Andrásfai e outros, a interação entre restrições numéricas e restrições estruturais em grafos introduz perguntas diversas, entre elas o estudo da \emph{estabilidade}.
+
+A estabilidade se refere justamente ao comportamento de grafos que, próximos ao limiar para o qual uma propriedade acontece, se aproximam de um exemplo extremal.
+Para o Teorema de Mantel, uma pergunta que se pode fazer é ``quão próximo está um grafo livre de triângulos com muitas arestas de ser bipartido''?
+Em 1975, Erd\H os conjecturou uma forte resposta para essa pergunta, que todo grafo livre de triângulos com $n$ vértices de fato pode ser tornado bipartido deletando no máximo $n^2/25$ das suas arestas.
+
+O caso geral dessa conjectura permanece em aberto até a data da conclusão desse trabalho.
+Nesse trabalho, realizamos um estudo da conjectura, dos resultados clássicos provados em direção a estabilidade em grafos livres de triângulos e posteriormente apresentamos e empregamos duas ferramentas modernas (álgebras de flag e teoremas de homomorfismos relacionados a condições de grau mínimo) para obter avanços parciais na direção do caso geral da Conjectura.
 
 \section{Estrutura do trabalho}
 
-\begin{itemize}
-	\item No Capítulo~\ref{cap:classicos}, nós falamos de coisas velhas, mas que são úteis e legais.
-	\item No Capítulo~\ref{cap:flag-algebras}, nós falamos de maluquice de gente doida.
-	Fazemos conta e pretendo fazer uns experimentos.
-	\item No Capítulo~\ref{cap:grau-limitado}, nós tentamos umas coisas meio estruturais que não dão muito certo.
-\end{itemize}
+Organizamos os capítulos subsequentes como segue.
 
-\section{Notação}
+\begin{itemize}
+	\item No Capítulo~\ref{cap:preliminares}, introduzimos alguns conceitos e fixamos a notação que será utilizada ao longo deste trabalho.
+	\item No Capítulo~\ref{cap:classicos}, discutimos uma breve história do problema e resultados parciais clássicos.
+	\item No Capítulo~\ref{cap:flag-algebras}, apresentamos as álgebras de flag e a técnica de cortes locais para obter resultados numéricos na direção da Conjectura~\ref{conj:make-bipartite}.
+	\item No Capítulo~\ref{cap:grau-limitado}, discutimos teoremas de homomorfismo e a Conjectura~\ref{conj:make-bipartite} para grafos de grau mínimo alto.
+	\item No Capítulo~\ref{cap:conclusao}, discutimos brevemente os resultados obtidos e direções futuras de pesquisa.
+\end{itemize}

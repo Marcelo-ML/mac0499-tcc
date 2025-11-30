@@ -1,0 +1,37 @@
+%!TeX root=../tese.tex
+\chapter{Preliminares}
+\label{cap:preliminares}
+
+Um grafo $G$ é um par de conjuntos finitos $(V,E)$, onde $V$ é o conjunto de \emph{vértices} de $G$, e $E$ é o conjuntos de \emph{arestas} (pares não ordenados de vértices).
+Escrevemos $v(G)$ (ou $|G|$) e $e(G)$ para representar a cardinalidade de $V$ e $E$, respectivamente.
+Dado um grafo $G$, usamos $V(G)$ e $E(G)$ para representar seu conjunto de vértices e arestas, respectivamente.
+Escrevemos, por simplicidade, $uv$ (ou $vu$) para denotar a aresta $\{u,v\} \in E(G)$.
+Se a aresta $uv$ é um elemento de $E(G)$, então dizemos que $u$ e $v$ são \emph{vizinhos} (em $G$).
+A \emph{vizinhança} de $v$ (em $G$) é definida como $N_G(v) \coloneqq \{u \in V(G) : uv \in E(G)\}$, e o \emph{grau} de $v$ (em $G$) é definido como $d_G(v) \coloneqq |N_G(v)|$.
+Quando estiver claro a que grafo $G$ estamos nos referindo, escrevemos simplesmente $N(v)$ e $d(v)$.
+Por fim, definimos o grau mínimo de $G$ como $\min_{v \in V(G)} d_G(v)$.
+
+Um grafo $H$ é dito \emph{subgrafo} de um grafo $G$ e escrevemos $H \subseteq G$ se $V(H) \subseteq V(G)$ e $E(H) \subseteq E(G) \cap \binom{V(H)}{2}$.
+Ademais, se $V(G)=V(H)$, dizemos que $H$ é um subgrafo \emph{gerador} de $G$.
+Se um grafo $G$ não contém nenhum subgrafo isomorfo a $H$, dizemos que $G$ é \emph{livre de $H$}.
+Dado um subconjunto $S \subseteq V(G)$, denotamos por $G[S]$ o grafo $\left(S,E(G) \cap \binom{S}{2}\right)$.
+Para cada $S \subseteq V(G)$, definimos $G-S \coloneqq G[V(G) \setminus S]$, e para cada $F \subseteq E(G)$, definimos $G-F \coloneqq (V(G), E(G) \setminus F)$.
+
+Dizemos que um subconjunto $S \subseteq V(G)$ é \emph{independente} (em $G$) se $G[S]$ não possui nenhuma aresta.
+Um grafo com $n$ vértices e $\binom{n}{2}$ arestas é chamado de \emph{completo}.
+Definimos o \emph{k-ciclo} $C_k$ como o grafo com conjunto de vértices $[n] \coloneqq \{1,2,\dots,n\}$ e conjunto de arestas $\{\{1,2\},\{2,3\},\dots,\{k-1,k\},\{k,1\}\}$.
+
+Se $G$ é um grafo tal que $V(G)$ admite uma partição $\{A_1,A_2,\dots,A_r\}$ em que cada $A_i$ é um conjunto independente em $G$, então dizemos que $G$ é \emph{$r$-partido}, e $(A_1,A_2,\dots,A_r)$ é uma \emph{$r$-partição} de $G$.
+Cada $A_i$ é chamado de uma \emph{classe} da $r$-partição.
+Dizemos que $G$ é \emph{$r$-partido completo} se $E(G) = \cup_{1 \leq i < j \leq r} G\left[A_i \cup A_j\right]$.
+Um grafo $2$-partido é chamado de \emph{bipartido}, e uma $2$-partição de \emph{bipartição}.
+O menor $r$ tal que $G$ é $r$-partido é chamado de \emph{número cromático} de $G$ e denotado $\chi(G)$.
+
+Sejam $G$ e $H$ grafos.
+Dizemos que $G$ é um \emph{blow-up} de $H$ se, para cada $v \in V(H)$, existe $S_v \subseteq V(G)$ tal que
+\begin{itemize}
+	\item $\{S_v : v \in V(H)\}$ é uma partição de $V(H)$, e
+	\item Para cada $xy \in E(G)$ e $u,v \in V(H)$, vale que $(x,y) \in S_u \times S_v \iff uv \in E(H)$.
+\end{itemize}
+Um blow-up é chamado balanceado se todos os conjuntos $S_v$ têm a mesma cardinalidade.
+Se um grafo $G$ é subgrafo de um blow-up de um grafo $H$, dizemos que $G$ é \emph{homomórfico} a $H$, e escrevemos $G \hookrightarrow H$.

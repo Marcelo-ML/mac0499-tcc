@@ -1,0 +1,268 @@
+%!TeX root=../tese.tex
+\section{Preliminares}
+
+\subsection{Densidades}\label{sub:densidades}
+Sejam $F$ e $G$ grafos quaisquer.
+A \emph{densidade de $F$ em $G$} (denotada $d(F,G)$) como o número de subgrafos induzidos de $G$ com $|F|$ vértices que são isomorfos a $F$.
+Analogamente, a densidade de $F$ em $G$ é a probabilidade que um conjunto de $F$ vértices de $G$, escolhido uniformemente ao acaso, induza um subgrafo isomorfo a $F$.
+
+Fixe um grafo grande $G$ e fixe um grafo $F$ com $|F| \leq |G|$.
+Para calcular $d(F,G)$, podemos fixar um inteiro $l$ com $|F| \leq l \leq |G|$ e escrever
+\begin{equation}\label{eq:chain-rule}
+  d(F,G) = \sum_{|V(H)|=l} d(F,H)d(H,G).
+\end{equation}
+A igualdade é válida porque sortear um subconjunto $S \subseteq \binom{V(G)}{l}$ uniformemente ao acaso e depois sortear um subconjunto $T \subseteq \binom{S}{|F|}$ segue a distribuição uniforme em $\binom{V(G)}{|F|}$.
+
+Agora, denote por $\calf_l^\emptyflag$ a família dos grafos livres de triângulos com $l$ vértices (a menos de isomorfismo).
+Para a configuração geral de flag algebras, a família ``proibida'' pode ser qualquer conjunto finito de grafos que não $\{K_3\}$.
+Se $G$ é um grafo livre de triângulos, então por (\ref{eq:chain-rule}) vale que
+\begin{equation}\label{eq:chain-rule-2}
+  d(F,G) = \sum_{H \in \calf_l^\emptyflag} d(F,H)d(H,G).
+\end{equation}
+
+Para problemas de minimização de uma expressão do tipo $d(F,G)$ (como no caso do Teorema de Mantel), desejamos utilizar a igualdade (\ref{eq:chain-rule-2}) para
+Em particular, usando $\sum_{H \in \calf_l^\emptyflag} d(H,G)= 1$ temos $d(F,G) \leq \max_{H \in \calf_l^\emptyflag} d(F,H)$.
+Por um lado, essa cota é um resultado ``finito'', pois enquanto $G$ é um grafo grande e $F$ é um dado do problema, $l$ é um parâmetro que podemos controlar para tentar obter resultados mais refinados.
+
+Contudo, essa cota em geral é bastante fraca.
+A ideia do método semidefinido nas álgebras de flag é de gerar inequações lineares da forma
+\begin{equation}\label{eq:cH-inequality}
+  \sum_{H \in \calf_l^\emptyflag} c_H d(H,G) \geq 0,
+\end{equation}
+onde os $c_H$'s' são constantes reais.
+Logo, poderemos obter de (\ref{eq:chain-rule-2}) a desigualdade
+\[ d(F,G) \leq \sum_{H \in \calf_l^\emptyflag} (c_H+d(F,H))d(H,G) \leq \max_{H \in \calf_l^\emptyflag} \left(c_H+d(F,H)\right). \]
+Novamente, esse tipo de desigualdade permitirá cotar superiormente o valor de $d(F,G)$ para grafos ``grandes'' $G$ usando apenas informações ``finitas'', vindas de $F$, de $l$ e da desigualdade na forma de (\ref{eq:cH-inequality}).
+
+Na verdade, o método semidefinido permitirá obter desigualdades na forma
+\begin{equation}\label{eq:cH-inequality-o(1)}
+  \sum_{H \in \calf_l^\emptyflag} c_H d(H,G) + o(1) \geq 0,
+\end{equation}
+onde o termo $o(1)$ vai para zero quando $|G|$ cresce, e portanto a cota superior obtida para $d(F,G)$ será
+\begin{equation}\label{eq:max-bound}
+  d(F,G) \leq \max_{H \in \calf_l^\emptyflag} \left(c_H + d(F,H)\right) + o(1).
+\end{equation}
+Em geral, esse tipo de resultado é suficiente quando a compreensão assintótica é suficiente.
+Veremos no caso do Teorema~\ref{thm:mantel} e posteriormente no caso da Conjectur~\ref{conj:make-bipartite} que argumentos com blow-ups podem ser usadas para transferir os resultados assintóticos para grafos concretos.
+Ou seja, o termo $o(1)$ em (\ref{eq:cH-inequality-o(1)}) não será um problema para as aplicações visadas nesse trabalho.
+
+\subsection{O Teorema de Mantel}
+
+Vamos provar o Teorema~\ref{thm:mantel} usando a estratégia descrita na Seção~\ref{sub:densidades}.
+Iremos provar que $d\left(\edge,G\right) \leq 1/2 + o(1)$.
+Iremos usar $l=3$, que em~\ref{eq:chain-rule-2} nos dá a igualdade
+\[ d\left(\edge,G\right) = d\left(\edge;\threePoints\right)d\left(\threePoints,G\right) + d\left(\edge;\unlabeledCherryComplement\right)d\left(\unlabeledCherryComplement,G\right) + d\left(\edge;\unlabeledCherry\right)d\left(\unlabeledCherry,G\right), \]
+ou simplesmente
+\[ d\left(\edge,G\right) = \frac13d\left(\unlabeledCherryComplement,G\right)+\frac23d\left(\unlabeledCherry,G\right). \]
+
+Isso nos dá a igualdade na forma de (\ref{eq:chain-rule-2}).
+Agora, temos que uma desigualdade na forma de (\ref{eq:cH-inequality-o(1)}) que nos permita concluir $d\left(\edge,G\right) \leq 1/2+o(1)$.
+
+A desigualdade em questão será
+\begin{equation}\label{eq:mantel-carteada}
+  \frac12d\left(\threePoints,G\right)-\frac16d\left(\unlabeledCherryComplement,G\right)-\frac16d\left(\unlabeledCherry,G\right)+o(1) \geq 0.
+\end{equation}
+Assumindo (\ref{eq:mantel-carteada}), temos \[ d\left(\edge,G\right) \leq \frac12d\left(\threePoints,G\right)+\frac16d\left(\unlabeledCherryComplement,G\right)+\frac12d\left(\unlabeledCherry,G\right)+o(1) \leq \frac12+o(1), \]
+como desejado.
+Então nos resta descobrir como gerar desigualdades à maneira de (\ref{eq:mantel-carteada}).
+
+Fixe um vértice ``especial'' $v \in V(G)$ (que representaremos como $\aSinglePoint$).
+Nós podemos definir a densidade em $G^{\aSinglePoint}$ com um vértice especial da mesma forma, calculando a densidade de estruturas que também tenham um vértice especial.
+Por exemplo, $d\left(\edgeWithOneLabel,G^{\aSinglePoint}\right)$ é a probabilidade de que um vértice $u \in V(G)\setminus\{v\}$, escolhido uniformemente ao acaso, seja vizinho de $G$.
+
+Observe que
+\begin{equation}\label{eq:quadratic-ineq}
+  \left(d\left(\edgeWithOneLabel,G^{\aSinglePoint}\right)-d\left(\nonEdgeWithOneLabel,G^{\aSinglePoint}\right)\right)^2 \geq 0,
+\end{equation}
+e portanto
+\begin{equation}\label{eq:flag-squared-expanded}
+  d\left(\edgeWithOneLabel,G^{\aSinglePoint}\right)^2 - 2d\left(\edgeWithOneLabel,G^{\aSinglePoint}\right)d\left(\nonEdgeWithOneLabel,G^{\aSinglePoint}\right) + d\left(\nonEdgeWithOneLabel,G^{\aSinglePoint}\right)^2 \geq 0.
+\end{equation}
+O produto $d\left(\edgeWithOneLabel\right)^2$ é a probabilidade que dois vértices escolhidos aleatoriamente ao acaso (com reposição) em $V(G) \setminus \{v\}$ sejam ambos vizinhos de $G$.
+A probabilidade que esses dois vértices sejam iguais é $o(1)$, e se eles são distintos, então os dois (e $v$) induzem um subgrafo isomorfo a $\labeledCherry$ (pois $G$ é livre de triângulos).
+Ou seja, \[d\left(\edgeWithOneLabel,G^{\aSinglePoint}\right)^2 = d\left(\labeledCherry,G^{\aSinglePoint}\right)+o(1).\]
+
+De forma análoga, é possível provar
+\begin{align}
+  d\left(\edgeWithOneLabel,G^{\aSinglePoint}\right) d\left(\nonEdgeWithOneLabel,G^{\aSinglePoint}\right) &= \frac12d\left(\asymmetricLabeledCherry,G^{\aSinglePoint}\right)+\frac12d\left(\asymmetricLabeledCherryComplement,G^{\aSinglePoint}\right)+o(1), \label{eq:linearize-1} \\
+  d\left(\nonEdgeWithOneLabel,G^{\aSinglePoint}\right)^2 &= d\left(\labeledCherryComplement,G^{\aSinglePoint}\right)+d\left(\threePointsWithOneLabel,G^{\aSinglePoint}\right)+o(1). \label{eq:linearize-2}
+\end{align}
+
+Substituindo (\ref{eq:linearize-1}) e (\ref{eq:linearize-2}) em
+(\ref{eq:flag-squared-expanded}), obtemos
+\begin{equation}\label{eq:ineq-in-Gsigma}
+   d\left(\labeledCherry,G^{\aSinglePoint}\right)-d\left(\asymmetricLabeledCherry,G^{\aSinglePoint}\right)-d\left(\asymmetricLabeledCherryComplement,G^{\aSinglePoint}\right)+d\left(\labeledCherryComplement,G^{\aSinglePoint}\right)+d\left(\threePointsWithOneLabel,G^{\aSinglePoint}\right) + o(1) \geq 0.
+\end{equation}
+Obtivemos assim uma igualdade que se assemelha à igualdade (\ref{eq:mantel-carteada}), mas com densidades de conjuntos de $3$ vértices contendo um vértice especial $v$ em $G^{\aSinglePoint}$ em vez de densidades em $G$ para subconjuntos de tamanho $3$ escolhidos ao acaso.
+
+Para obter densidades em $G$ a partir de (\ref{eq:ineq-in-Gsigma}), iremos fazer a média dessa desigualdade por todas as escolhas possíveis de $v$.
+De forma análoga, podemos pensar em escolher $v$ uniformemente ao acaso.
+Por exemplo, escolhendo $v$ aleatoriamente temos que
+\[ \bbe\left[d\left(\labeledCherry,G^{\aSinglePoint}\right)\right] = \frac13d\left(\unlabeledCherry,G\right), \]
+pois para cada subgrafo induzido de $G$ que é isomorfo a $\unlabeledCherry$ existe apenas uma dentre as três escolhas possíveis para o vértice especial $v$ tal que o grafo ``rotulado'' resultante é isomorfo a $\labeledCherry$.
+
+Portanto, segue de (\ref{eq:ineq-in-Gsigma}) que
+\[ \frac13d\left(\unlabeledCherry,G\right)-\frac23d\left(\unlabeledCherry,G\right)-\frac23d\left(\unlabeledCherryComplement,G\right)+\frac13d\left(\unlabeledCherryComplement,G\right)+d\left(\threePoints,G\right)+o(1) \geq 0, \]
+que é o mesmo que
+\[ d\left(\threePoints,G\right)-\frac13d\left(\unlabeledCherryComplement,G\right)-\frac13d\left(\unlabeledCherry,G\right)+o(1) \geq 0, \]
+que é um múltiplo de (\ref{eq:mantel-carteada}).
+
+Assim, provamos que se $G$ é um grafo livre de triângulos, então $d\left(\edge,G\right) \leq 1/2+o(1)$.
+Para provar a versão sem $o(1)$, tome um grafo livre de triângulos $G$ qualquer e considere um blow-up balanceado $G_N$ de $G$ em que cada vértice de $G$ é substituído por um conjunto independente de tamanho $N$.
+Então, pela versão assintótica do Teorema de Mantel que provamos, $e(G_N) \leq \frac12\binom{N|G|}{2} + o(1) \leq \frac{N^2|G|^2}{4}+o(N^2)$.
+Além disso, $e(G) = N^2e(G)$, portanto $e(G) \leq \frac{|G|^2}{4}+\frac{o(N^2)}{N^2}$.
+Fazendo $N \to \infty$, obtemos $e(G) \leq \frac{|G|^2}{4}$, o que conclui a prova da versão finitística (existe essa palavra?) do Teorema~\ref{thm:mantel}.
+
+A estratégia apresentada nesse caso simples reflete bem a estratégia geral que utilizaremos quando formos provar algum resultado mais sofisticado com álgebras de flag.
+Começamos fixando um subgrafo especial $\sigma$ (no caso de Mantel, $\sigma = \aSinglePoint$ tem apenas um vértice) para uma desigualdade quadrática (\ref{eq:quadratic-ineq}) envolvendo as densidades relativas a uma cópia fixa de $\sigma$ em $G$; multiplicamos tais densidades relativas a $\sigma$ adicionando termos de erro para obter desigualdades lineares com as densidades relativas a $\sigma$ (\ref{eq:linearize-1}); escolhemos aleatoriamente um subgrafo induzido de $G$ isomórfico a $\sigma$ para associar as densidades de subgrafos com $\sigma$ fixado a densidades de subgrafos sem essa restrição.
+Todos os passos acima podem ser tornados mecânicos, exceto a obtenção da desigualdade quadrática inicial.
+
+A desigualdade em questão deve satisfazer a hipótese de ser não negativa para toda escolha de densidade envolvida.
+Para isso, iremos escolher uma desigualdade da forma $v^\top A v \geq 0$, onde $v$ é um vetor com todas as densidades de certos subgrafos bem escolhidos e $A$ é uma matriz positiva semidefinida.
+Por exemplo, podemos reescrever (\ref{eq:flag-squared-expanded}) como
+\[
+  \begin{bmatrix}
+  d\left(\edgeWithOneLabel,G^{\aSinglePoint}\right) & d\left(\nonEdgeWithOneLabel,G^{\aSinglePoint}\right)
+  \end{bmatrix}
+  \begin{bmatrix}
+    1 & -1 \\
+    -1 & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+  d\left(\edgeWithOneLabel,G^{\aSinglePoint}\right) \\
+  d\left(\nonEdgeWithOneLabel,G^{\aSinglePoint}\right)
+  \end{bmatrix}
+  \geq 0.
+\]
+
+De fato, poderíamos ter começado com uma matriz positiva semidefinida genérica $A=\begin{bmatrix} a_{11} & a_{12} \\ a_{12} & a_{22} \end{bmatrix}$, encontrando os coeficientes de (\ref{eq:cH-inequality-o(1)}) e cotando em (\ref{eq:max-bound}) para provar que $d(\edge,G) \leq d^*+o(1)$, onde $d^*$ é o valor do programa semidefinido
+
+\begin{alignat*}{1}
+  \text{Minimizar} \quad
+  & \max\left\{\frac23+\frac13a_{11}+\frac23a_{12}, \frac13 + \frac23a_{12}+\frac13a_{22},a_{22}\right\}\\
+  \text{sujeito a}
+  \quad & \begin{bmatrix}
+    a_{11} & a_{12} \\
+    a_{12} & a_{22}
+  \end{bmatrix} \in \bbs_+^2.
+\end{alignat*}
+
+\subsection{O método semidefinido}
+
+Seja $\calf$ uma família de grafos ``proibidos''.
+Um \emph{tipo} $\sigma$ é um grafo $\calf$-livre junto a um homorfismo $\theta \colon [s] \to V(\sigma)$ para algum $s \geq 0$.
+Frequentemente iremos omitir o homorfismo quando esse for claro do contexto.
+Então, definimos um \emph{$\sigma$-flag} como um grafo $\calf$-livre $F$ que contém como subgrafo induzido uma cópia induzida de $\sigma$ rotulada por $\theta$.
+Em outras palavras, um tipo é um grafo (pequeno) com todos os seus vértices rotulados/especiais, enquanto um flag é um grafo parcialmente rotulado de acordo com um tipo.
+
+Dado um grafo $G$ e um tipo $\sigma$ de tamanho $s$, vamos fixar inteiros $l>s$ e $m \leq (l+s)/2$.
+Seja $\calf_m^\sigma$ o conjunto de todos os $\sigma$-flags de tamanho $m$, a menos de isomorfismo (no caso de flags, o isomorfismo restrito aos vértices de $\sigma$ deve ser a identidade).
+Seja também $\Theta$ o conjunto de todos os homorfismos injetivos de $[s]$ para $V(G)$.
+Dado $F \in \calf_m^\sigma$ e $\theta \in \Theta$, definimos a \emph{densidade induzida} $d(F,G;\theta)$ como a probabilidade de um conjunto $V' \subseteq$ de tamanho $m$ que contém $\sigma$, escolhido uniformemente ao acaso, induza um $\sigma$-flag isomórifico a $F$.
+Observe que para $s=0$ (isto é, não estamos efetivamente rotulando nenhuma parte do grafo), então $d(F,G;\theta)=d(F,G)$ é a definição usual de densidade induzida.
+
+Se $F_a,F_b \in \calf_m^\sigma$ e $\theta \in \Theta$, definimos $d(F_a,F_b,G;\theta)$ como a probabilidade de, ao escolhermos dois conjuntos $V_a,V_b \subseteq V(G)$ com $V_a \cap V_b = \mathrm{im}(\theta)$, uniformemente ao acaso, então os $\sigma$-flags induzidos por $V_a$ e $V_b$ são isomórficos a $F_a$ e $F_b$ respectivamente.
+Essa definição é importante para lidar com produtos de densidades, como diz o próximo teorema:
+\begin{theorem}[~\cite{razborov2007flag}]\label{thm:multiplying-densities}
+  Para $F_a,F_b \in \calf_m^\sigma$ e $\theta \in \Theta$, vale
+  \[ d(F_a,G;\theta)d(F_b,G;\theta) = d(F_a,F_b,G;\theta) + o(1), \]
+  onde o termo $o(1)$ vai para zero quando $|G|$ vai para infinito.
+\end{theorem}
+
+Seja $\calf_m^\sigma=\{F_1,F_2,\dots,F_{|\calf_m^\sigma|}\}$ e sejam $v \in \bbr^{|\calf_m^\sigma|}$ um vetor e $Q \in \bbr^{|\calf_m^\sigma| \times |\calf_m^\sigma|}$ uma matriz positiva semidefinida.
+Então de $v^\top Q v \geq 0$, podemos escrever
+\[ \sum_{F_a,F_b \in \calf_m^\sigma} Q_{ab} v_a v_b \geq 0. \]
+Fazendo $v_F = d(F,G;\theta)$ e usando o Teorema~\ref{thm:multiplying-densities}, obtemos
+\begin{equation}\label{eq:1}
+  \sum_{F_i,F_j \in \calf_m^\sigma} Q_{ij} d(F_i,F_j,G;\theta) + o(1) \geq 0.
+\end{equation}
+
+Agora, seja $H \in \calf_l^\emptyset$ um flag sem vértices rotulados e seja $\Theta_H$ o conjunto de homorfismos injetivos de $[s]$ para $V(H)$.
+Da mesma forma que em (\ref{eq:chain-rule-2}), é fácil ver que
+\begin{equation}\label{eq:2}
+  \bbe_{\theta \in \Theta}\left[d(F_a,F_b,G;\theta)\right] = \sum_{H \in \calf_l^\emptyflag} \bbe_{\theta \in \Theta_H}\left[d(F_a,F_b,H;\theta)\right]d(H,G).
+\end{equation}
+
+De (\ref{eq:1}) e (\ref{eq:2}), temos então
+\[ \sum_{H \in \calf_l^\emptyflag} \sum_{F_i,F_j \in \calf_m^\sigma} Q_{ij} \bbe_{\theta \in \Theta_H} \left[d(F_a,F_b,H;\theta)\right] d(H,G) + o(1) \geq 0. \]
+Definindo $c_H(\sigma,m,Q) \coloneqq \sum_{F_i,F_j \in \calf_m^\sigma} Q_{ij} \bbe_{\theta \in \Theta_H} \left[d(F_a,F_b,H;\theta)\right]$, a desigualdade obtida é exatamente da forma
+\begin{equation}\label{eq:general-density-ineq}
+  \sum_{H \in \calf_l^\emptyflag} c_H(\sigma,m,Q)d(H,G) + o(1) \geq 0.
+\end{equation}
+
+Combinando (\ref{eq:chain-rule-2}) e (\ref{eq:general-density-ineq}), é possível obter cotas para problemas de Turán ao variar os hiperparâmetros $m,l,\sigma$ do modelo e utilizar a cota de (\ref{eq:max-bound}).
+Uma lista de resultados desse estilo, utilizando o software \texttt{flagmatic}, pode ser encontrada~\href{https://lidicky.name/flagmatic/}{aqui}.
+Também é possível combinar escolhas de hiperparâmetros $c_H(\sigma_i,m_i,Q_i)$ para obter cotas mais refinadas (ver~\cite{grzesik2012pentagon}).
+
+\subsection{A álgebra}
+
+Vamos agora entender a formalização das álgebras de flag.
+O objetivo geral do método aplicado a problemas de densidade e homomorfismos é obter desigualdades não triviais da forma
+\begin{equation}\label{eq:3}
+  \sum_{F_i \in \calf_l^\emptyflag} a_i d(F_i,G) + o(1) \geq 0,
+\end{equation}
+onde $l$ é fixo e $G in \calf^\emptyflag$ é um grafo (não rotulado) arbitrário.
+Para isso, vimos que é interessante considerar desigualdades na forma $\sum_{F_i \in \calf_l^\sigma} a_i d(F_i,G) + o(1) \geq 0$, onde $G \in \calf^\sigma$ e aplicar um operador linear (associado a uma distribuição de probabilidade) que gere uma desigualdade da forma de (\ref{eq:3}).
+
+Como $G$ é arbitrário (em geral, grande), podemos lidar com as somas $\sum_{F_i \in \calf_l^\emptyflag} a_i d(F_i,G)$ considerando essas somas como ações de $\calf^\sigma$ sobre $\bbr\calf^\sigma$.
+Ou seja, vamos considerar as somas formais de $\sigma$-flags e deixar um grafo $G$ agir sobre elas através de $\sum a_iF_i \mapsto a_id(F_i,G_i)$.
+Note que, de (\ref{eq:chain-rule-2}), todo elemento da forma
+\begin{equation}\label{eq:guys-in-kernel}
+  \tilde F-\sum_{F \in \calf_l^\sigma} d(\tilde F, F)F
+\end{equation}
+é levado a $0$ por qualquer por $G$.
+Dessa forma, iremos definir o espaço vetorial $\cala^\sigma \coloneqq \bbr\calf^\sigma/\calk^\sigma$, onde $\calk^\sigma$ é o subespaço gerado pelos elementos da forma (\ref{eq:guys-in-kernel}).
+
+Finalmente, é importante definir uma noção adequada de multiplicação nesse espaço vetorial para manipular a multiplicação de densidades.
+Assim, também transformaremos $\cala^\sigma$ numa álgebra.
+Para $F_1 \in \calf_{l_1}^\sigma$ e $F_2 \in \calf_{l_2}^\sigma$ e $l \geq l_1+l_2-|\sigma|$, definimos
+\[ F_1 \cdot F_2 = \sum_{F \in \calf_l^\sigma} d(F_1,F_2,F)F, \]
+e definimos a multiplicação sobre $\cala^\sigma$ expandindo essa definição bilinearmente.
+É possível provar~\cite{razborov2007flag} que essa operação de multiplicação está bem definida em $\cala^\sigma$, ou seja, que não depende da escolha de $l$.
+Pelo Teorema~\ref{thm:multiplying-densities}, temos que o mapa
+\[ \phi_G \colon \sum a_iF_i \in \cala^\sigma \mapsto \sum a_id(F_i,G) \in \bbr \]
+pode ser visto como um ``homomorfismo aproximado'' de $\cala^\sigma$ para $\bbr$.
+
+Apresentamos alguns exemplos em que~$\aSinglePoint$~é um tipo de tamanho $1$:
+\begin{align*}
+  \edge &= \frac13\unlabeledCherryComplement + \frac23\unlabeledCherry + \kThree, \\
+  \edgeWithOneLabel \cdot \edgeWithOneLabel &= \labeledCherry + \kThreeWithOneLabel, \\
+  \edgeWithOneLabel \cdot \nonEdgeWithOneLabel &= \frac12 \asymmetricLabeledCherryComplement + \frac12 \asymmetricLabeledCherry.  
+\end{align*}
+
+Muitas vezes, quando estamos querendo provar algum resultado de densidade, começamos com desigualdades de densidades com vértices especiais rotulados de acordo com um tipo $\sigma$.
+Para transferir esse resultado para grafos não rotulados (i.e., $\emptyflag$-flags), escolhemos aleatoriamente onde alocar $\sigma$ em $G$.
+Em álgebras de flag, esse formalismo será realizado por operadores lineares
+\[ \average{\cdot} \colon \cala^\sigma \to \cala^\emptyflag. \]
+Para $F \in \calf^\sigma$, definimos $\average{F}=q(F)\downward F$, onde $\downward F \in \calf^\emptyflag$ é uma cópia de $F$ em que os rótulos especiais são esquecidos e $q(F)$ é a probabilidade que a imagem de um homorfismo injetivo $\theta \colon [|\sigma|] \to V(\downward F)$ escolhido uniformemente ao acaso defina um flag isomórfico a $F$.
+Em seguida, estendemos $\average{\cdots}$ linearmente para $\cala^\sigma$.
+Por exemplo, temos
+\[
+  \average{\edgeWithOneLabel} = \edge, \qquad
+  \average{\labeledCherry} = \frac13 \unlabeledCherry, \qquad
+  \average{\cherryWithLabeledEdge} = \frac13 \unlabeledCherry.
+\]
+Note que os $\left(\labeledEdge\right)$-flags $\cherryWithLabeledEdge$ e $\anotherCherryWithLabeledEdge$ não são isomórficos.
+Como esse tipo tem mais de um vértice, é importante rotulá-los, ao contrário de tipos de tamanho $1$.
+
+Finalmente, iremos lidar com a noção de ``homomorfismos aproximados'' de $\cala^\sigma$ a $\bbr$ e como recuperar informação sobre densidades em grafos.
+Para cada $\sigma$-flag $G$, podemos associar um vetor (de dimensão infinita) $\left(d(F,G)\right)_{F \in \calf^\sigma} \in [0,1]^{\calf^\sigma}$.
+Se $(G_k)_{k \geq 0}$ é uma sequência de $\sigma$-flags tal que tal que $d(F,G_k)$ converge para todo $F \in calf^\sigma$, então dizemos que $(G_k)_{k \geq 0}$ é \emph{convergente}.
+Pelo Teorema de Tychonoff (REFERÊNCIA?), o espaço $[0,1]^{\calf^\sigma}$ com a topologia produto é compacto e portanto para toda sequência infinita $(G_k)_{k \geq 0}$ de $\sigma$-flags, possui uma subsequência infinita que é convergente.
+Para cada sequência convergente, existe um homomorfismo (entre espaços vetoriais) $\phi \colon F \in \calf^\sigma \mapsto \lim_{k \to \infty} d(F,G_{i_k}) \in \bbr$, que pode ser estendido para um homomorfismo (entre álgebras) $\phi \colon \cala^\sigma \to \bbr$.
+Esses homomorfismos serão chamados de \emph{homomorfismos funcionais}.
+Dessa forma, se vale uma desigualdade $\sum a_iF_i \geq 0$ em $\cala^\sigma$, então também vale $\phi\left(\sum a_iF_i\right) \geq 0$ para todo homomorfismo funcional $\phi$, e logo $\sum a_id(F_i,G_k) + o(1) \geq 0$ para toda sequência convergente $(G_k)_{k \geq 0}$, onde o termo $o(1)$ vai para zero quando $|G_k|$ vai para infinito.
+
+Vamos mostrar mais uma vez o Teorema de Mantel usando a linguagem da álgebra.
+Começamos com \[\left(\edgeWithOneLabel - \nonEdgeWithOneLabel\right)^2 \geq 0.\]
+Daí, temos \[ \edgeWithOneLabel\cdot\edgeWithOneLabel-2\ \edgeWithOneLabel\cdot\nonEdgeWithOneLabel+\nonEdgeWithOneLabel\cdot\nonEdgeWithOneLabel \geq 0, \]
+e multiplicando obtemos \[ \labeledCherry - \asymmetricLabeledCherry - \asymmetricLabeledCherryComplement + \labeledCherryComplement + \threePointsWithOneLabel \geq 0. \]
+Aplicando $\average{\cdot}$, segue que \[ \frac13\unlabeledCherry -\frac23\unlabeledCherry - \frac23\unlabeledCherryComplement + \frac13\unlabeledCherryComplement + \threePoints \geq 0 \implies \threePoints - \frac13 \unlabeledCherryComplement - \frac13\unlabeledCherry \geq 0. \]
+Dividindo por $2$ e somando a igualdade \[ \edge = \frac13\unlabeledCherryComplement + \frac23\unlabeledCherry, \]
+obtemos \[ \edge \leq \frac12\threePoints + \frac16\unlabeledCherryComplement + \frac12\unlabeledCherry \leq \frac12. \]
+
+Logo, toda sequência infinita de grafos livres de triângulos $(G_k)_{k \geq 0}$ possui uma subsequência $(G_{i_k})_{k \geq 0}$com $d\left(\edge,G_{i_k}\right) \leq 1/2 + o(1)$.
+Tome $G_0$ e $G_N$ como um blow-up completo balanceado de $G_0$ em que cada vértice de $G_0$ é substituído por um conjunto independente de tamanho $N$.
+Então para alguma sequência $N_0<N_1<\dots$ vale $d\left(\edge,G_{N_k}\right) \leq 1/2+o(1)$.
+Mas \[ d\left(\edge,G_{N_k}\right) = \frac{e(G_{N_k})}{v(G_{N_k})^2/2}+o(1) = \frac{N_k^2e(G_0)}{N_k^2v(G_0)^2/2}+o(1) = \frac{e(G_0)}{v(G_0)^2/2}+o(1), \]
+logo $e(G_0) \leq (1/4+o(1))v(G_0)^2$, e como o termo $o(1)$ pode ser tornado arbitrariamente pequeno, obtemos $e(G_0) \leq v(G_0)^2/4$ para qualquer escolha de $G_0$.
