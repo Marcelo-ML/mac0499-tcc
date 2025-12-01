@@ -9,16 +9,18 @@ Escrevemos, por simplicidade, $uv$ (ou $vu$) para denotar a aresta $\{u,v\} \in 
 Se a aresta $uv$ é um elemento de $E(G)$, então dizemos que $u$ e $v$ são \emph{vizinhos} (em $G$).
 A \emph{vizinhança} de $v$ (em $G$) é definida como $N_G(v) \coloneqq \{u \in V(G) : uv \in E(G)\}$, e o \emph{grau} de $v$ (em $G$) é definido como $d_G(v) \coloneqq |N_G(v)|$.
 Quando estiver claro a que grafo $G$ estamos nos referindo, escrevemos simplesmente $N(v)$ e $d(v)$.
-Por fim, definimos o grau mínimo de $G$ como $\min_{v \in V(G)} d_G(v)$.
+Definimos o grau mínimo de $G$ como $\min_{v \in V(G)} d_G(v)$.
+Dizemos que $G$ é \emph{$d$-regular} se $d_G(v)=d$ para todo $v \in V(G)$.
 
 Um grafo $H$ é dito \emph{subgrafo} de um grafo $G$ e escrevemos $H \subseteq G$ se $V(H) \subseteq V(G)$ e $E(H) \subseteq E(G) \cap \binom{V(H)}{2}$.
 Ademais, se $V(G)=V(H)$, dizemos que $H$ é um subgrafo \emph{gerador} de $G$.
-Se um grafo $G$ não contém nenhum subgrafo isomorfo a $H$, dizemos que $G$ é \emph{livre de $H$}.
+Se um grafo $G$ não contém nenhum subgrafo isomorfo a $H$, dizemos que $G$ é \emph{livre de $H$} ou \emph{$H$-livre}.
 Dado um subconjunto $S \subseteq V(G)$, denotamos por $G[S]$ o grafo $\left(S,E(G) \cap \binom{S}{2}\right)$.
 Para cada $S \subseteq V(G)$, definimos $G-S \coloneqq G[V(G) \setminus S]$, e para cada $F \subseteq E(G)$, definimos $G-F \coloneqq (V(G), E(G) \setminus F)$.
 
 Dizemos que um subconjunto $S \subseteq V(G)$ é \emph{independente} (em $G$) se $G[S]$ não possui nenhuma aresta.
 Um grafo com $n$ vértices e $\binom{n}{2}$ arestas é chamado de \emph{completo}.
+O grafo completo com conjunto de vértices $\{1,2,\dots,n\}$ é denotado $K_n$.
 Definimos o \emph{k-ciclo} $C_k$ como o grafo com conjunto de vértices $[n] \coloneqq \{1,2,\dots,n\}$ e conjunto de arestas $\{\{1,2\},\{2,3\},\dots,\{k-1,k\},\{k,1\}\}$.
 
 Se $G$ é um grafo tal que $V(G)$ admite uma partição $\{A_1,A_2,\dots,A_r\}$ em que cada $A_i$ é um conjunto independente em $G$, então dizemos que $G$ é \emph{$r$-partido}, e $(A_1,A_2,\dots,A_r)$ é uma \emph{$r$-partição} de $G$.
