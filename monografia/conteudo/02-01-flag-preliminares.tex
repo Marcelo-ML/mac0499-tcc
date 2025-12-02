@@ -168,56 +168,30 @@ Encontrando os coeficientes de~(\ref{eq:cH-inequality-o(1)}) e cotando em~(\ref{
   \end{bmatrix} \in \bbs_+^2.
 \end{alignat*}
 
-\subsection{Tipos e o método semidefinido geral}
+%\subsection{Tipos e o método semidefinido geral}
+\subsection{A álgebra}
 
-Seja $\calf$ uma família de grafos ``proibidos''.
-Um \emph{tipo} $\sigma$ é um grafo $\calf$-livre associado a uma bijeção $\theta \colon [s] \to V(\sigma)$ para algum $s \geq 0$.
-Frequentemente iremos omitir a bijeção quando essa for clara do contexto.
-Um \emph{$\sigma$-flag} é um grafo $\calf$-livre $F$ que contém como subgrafo induzido uma cópia de $\sigma$ rotulada por $\theta$.
+Fixe $\calh$ uma família de subgrafos proibidos.
+Um \emph{tipo} de \emph{tamanho $k$} é um grafo $\calh$-livre $\sigma$ com $V(\sigma)=[k]$.
+Denotamos o tipo vazio como $\emptyflag$.
+Um \emph{$\sigma$-flag} é um par $(F,\theta)$, em que $F$ é um grafo $\calh$-livre tal que $\theta \colon [k] \to V(G)$ é injetora e define um isomorfismo entre $\sigma$ e $G[{\rm Im}(\theta)]$.
 Em outras palavras, um tipo é um grafo (pequeno) com todos os seus vértices rotulados/especiais, enquanto um flag é um grafo parcialmente rotulado de acordo com um tipo.
+Note que todo grafo $G$ está naturalmente identificado com o $\emptyflag$-flag $(G,\varnothing)$.
 
-Dado um grafo $G$ e um tipo $\sigma$ de tamanho $s$, vamos fixar inteiros $l \geq s$ e $m \leq (l+s)/2$.
-Seja $\calf_m^\sigma$ o conjunto de todos os $\sigma$-flags de tamanho $m$, a menos de isomorfismo (no caso de flags, o isomorfismo deve preservar os rótulos da bijeção $\theta$ na parte rotulada dos grafos).
-Seja também $\Theta$ o conjunto de todos os homorfismos injetivos de $[s]$ para $V(G)$.
-Dado $F \in \calf_m^\sigma$ e $\theta \in \Theta$, definimos a \emph{densidade induzida} $d(F,G;\theta)$ como a probabilidade de um conjunto $V' \subseteq V(G)$ de tamanho $m$ que contém $\sigma$, escolhido uniformemente ao acaso, induza um $\sigma$-flag isomórifico a $F$.
-Observe que para $s=0$ (isto é, quando o grafo não possui vértices rotulados), então $d(F,G;\theta)=d(F,G)$ é a definição usual de densidade induzida.
+Definimos isomorfismos entre flags da mesma forma que entre grafos, mas também preservando o isomorfismo nos vértices rotulados: dois $\sigma$-flags $(G_1,\theta_1)$ e $(G_2,\theta_2)$ são isomorfos se existe um isomorfismo $\rho \colon V(G_1) \to V(G_2)$ tal que $\rho(\theta_1(i))=\theta_2(i)$ para cada $i \in [|\sigma|]$.
+Finalmente, definimos $\calf_m^\sigma$ como o conjunto de todos os $\sigma$-flags de tamanho $m$, a menos de isomorfismo e $\calf^\sigma \coloneqq \cup_{m \geq |\sigma|} \calf_m^\sigma$.
 
-Se $F_a,F_b \in \calf_m^\sigma$ e $\theta \in \Theta$, definimos $d(F_a,F_b,G;\theta)$ como a probabilidade de, ao escolhermos dois conjuntos $V_a,V_b \subseteq V(G)$ com $V_a \cap V_b = \mathrm{im}(\theta)$, uniformemente ao acaso, então os $\sigma$-flags induzidos por $V_a$ e $V_b$ são isomórficos a $F_a$ e $F_b$ respectivamente.
-Essa definição é importante para lidar com produtos de densidades, como diz o próximo teorema:
-\begin{theorem}[\cite{razborov2007flag}]\label{thm:multiplying-densities}
-  Para $F_a,F_b \in \calf_m^\sigma$ e $\theta \in \Theta$, vale
-  \[ d(F_a,G;\theta)d(F_b,G;\theta) = d(F_a,F_b,G;\theta) + o(1), \]
-  onde o termo $o(1)$ vai para zero quando $|G|$ vai para infinito.
+Para definir densidades, sejam $(G,\theta),F_1,F_2,\dots,F_t$ flags com
+\[ |G|-|\sigma| \geq  \sum_{i=1}^t (|F_i|-|\sigma|).\]
+Então definimos a densidade $d(F_1,F_2,\dots,F_t,G)$ como a probabilidade de que, ao escolher conjuntos dois a dois disjuntos $U_1,U_2,\dots,U_t \subseteq V(G) \setminus {\rm Im}(\theta)$ com $|U_i|=|F_i|-|\sigma|$, vale que o $\sigma$-flag $(G[U_i \cup {\rm Im}(\theta)],\theta)$ é isomórfico a $F_i$ para cada $i \in [t]$.
+Quase sempre usamos apenas $t=1$ e $t=2$. 
+
+O seguinte teorema permite a manipulação de densidades multiplicativas.
+\begin{theorem}\label{thm:multiplying-densities}
+  Para $F_1,F_2 \in \calf_m^\sigma$ e $G \in \calf^\sigma$ com $|G| \geq |F_1|+|F_2|-|\sigma|$, vale que
+  \[ d(F_1,G)d(F_2,G) = d(F_1,F_2,G) + O(|G|^{-1}). \]
 \end{theorem}
 
-Seja $\calf_m^\sigma=\{F_1,F_2,\dots,F_\ell\}$ e sejam $v \in \bbr^{\ell}$ um vetor e uma matriz positiva semidefinida $Q \in \mathcal{S}^\ell_+$.
-Então de $v^\top Q v \geq 0$, podemos escrever
-%\[ \sum_{F_a,F_b \in \calf_m^\sigma} Q_{ab} v_a v_b \geq 0. \]
-\[ \sum_{i,j=1}^{\ell} Q_{ij}v_iv_j \geq 0. \]
-Fazendo $v_i = d(F_i,G;\theta)$ e usando o Teorema~\ref{thm:multiplying-densities}, obtemos
-\begin{equation}\label{eq:1}
-  %\sum_{F_i,F_j \in \calf_m^\sigma} Q_{ij} d(F_i,F_j,G;\theta) + o(1) \geq 0.
-  \sum_{i,j=1}^{\ell}Q_{ij}d(F_i,F_j,G;\theta) + o(1) \geq 0.
-\end{equation}
-
-Agora, seja $H \in \calf_l^\emptyset$ um flag sem vértices rotulados e seja $\Theta_H$ o conjunto de homorfismos injetivos de $[s]$ para $V(H)$.
-Da mesma forma que em (\ref{eq:chain-rule-2}), é fácil ver que
-\begin{equation}\label{eq:2}
-  \bbe_{\theta \in \Theta}\left[d(F_i,F_j,G;\theta)\right] = \sum_{H \in \calf_l^\emptyflag} \bbe_{\theta \in \Theta_H}\left[d(F_i,F_j,H;\theta)\right]d(H,G).
-\end{equation}
-
-De (\ref{eq:1}) e (\ref{eq:2}), temos então
-\[ \sum_{H \in \calf_l^{\emptyflag}} \sum_{i,j=1}^{\ell} Q_{ij} \bbe_{\theta \in \Theta_H} \left[d(F_i,F_j,H;\theta)\right] d(H,G) + o(1) \geq 0. \]
-Definindo $c_H(\sigma,m,Q) \coloneqq \sum_{i,j=1}^{\ell} Q_{ij} \bbe_{\theta \in \Theta_H} \left[d(F_i,F_j,H;\theta)\right]$, a desigualdade obtida é exatamente da forma
-\begin{equation}\label{eq:general-density-ineq}
-  \sum_{H \in \calf_l^\emptyflag} c_H(\sigma,m,Q)d(H,G) + o(1) \geq 0.
-\end{equation}
-
-Combinando (\ref{eq:chain-rule-2}) e (\ref{eq:general-density-ineq}) para montar um programa semidefinido adequado, é possível obter cotas para os chamados ``problemas do tipo Turán'' ao variar os hiperparâmetros $m,l,\sigma$ do modelo e utilizar a cota de (\ref{eq:max-bound}).
-Também é possível combinar escolhas de hiperparâmetros $c_H(\sigma_i,m_i,Q_i)$ para obter cotas mais refinadas (ver~\cite{grzesik2012pentagon}).
-Essas ideias renderam vários resultados importantes desde a introdução do método de álgebras de flag, em particular com o prolífico software \texttt{flagmatic} (\href{https://lidicky.name/flagmatic/}), que implementa a abordagem descrita nessa seção.
-
-\subsection{A álgebra}
 
 Agora que introduzimos os conceitos e objetivos gerais quando estamos resolvendo um problema usando álgebras de flag, vamos formalizar alguns dos conceitos que apresentamos para simplificar as aplicações posteriores.
 Como visto, o objetivo geral do método aplicado a problemas de densidade e homomorfismos é obter desigualdades não triviais da forma
@@ -259,8 +233,8 @@ Em álgebras de flag, esse formalismo será realizado por operadores lineares
 \[ \average{\cdot} \colon \cala^\sigma \to \cala^\emptyflag \]
 que representam essa ``média''.
 
-Para $F \in \calf^\sigma$, definimos $\average{F} \coloneqq q(F)\downward F$, onde $\downward F \in \calf^\emptyflag$ é uma cópia de $F$ em que os rótulos especiais são esquecidos, e $q(F)$ é a probabilidade que a imagem de um homorfismo injetivo $\theta \colon [|\sigma|] \to V(\downward F)$ escolhido uniformemente ao acaso defina um flag isomórfico a $F$.
-Em seguida, estendemos $\average{\cdots}$ linearmente para $\cala^\sigma$.
+Para $F \in \calf^\sigma$, definimos $\average{F} \coloneqq q(F)\downward F$, onde $\downward F \in \calf^\emptyflag$ é uma cópia de $F$ em que os rótulos especiais são esquecidos, e $q(F)$ é a probabilidade que um homomorfismo injetor $\theta \colon [|\sigma|] \to V(\downward F)$, escolhido uniformemente ao acaso, satisfaça que $(\downward F, \theta)$ é isomórfico a $F$.
+Em seguida, estendemos $\average{\cdot}$ linearmente para $\cala^\sigma$.
 Por exemplo, temos
 \[
   \average{\edgeWithOneLabel} = \edge, \qquad
@@ -270,6 +244,13 @@ Por exemplo, temos
 Note que os $\left(\labeledEdge\right)$-flags $\cherryWithLabeledEdge$ e $\anotherCherryWithLabeledEdge$ não são isomórficos.
 Como esse tipo tem mais de um vértice, é importante rotulá-los.
 Ao contrário, no tipo de tamanho $1$ o rótulo não é relevante.
+
+O seguinte teorema será essencial para as aplicações futuras de álgebras de flag.
+\begin{theorem}\label{thm:averaging-flag}
+  Seja $F$ um $\sigma$-flag e $G$ um $\emptyflag$-flag com $|G| \geq |F|$ e $d(\downward \sigma,G) > 0$.
+  Então, se $\theta$ é escolhido uniformemente ao acaso entre todas as injeções $\theta \colon [|\sigma|] \to V(G)$ com $G[{\rm Im}(\theta)]$ isomórfico a $\sigma$, vale que
+  \[ \bbe_{\theta} \left[ d(F,(G,\theta)) \right] = \frac{q(F)d(\downward F, G)}{q(\sigma)d(\downward \sigma,G)}. \]
+\end{theorem}
 
 Finalmente, iremos lidar com a noção de ``homomorfismos aproximados'' de $\cala^\sigma$ a $\bbr$ e como recuperar de toda a linguagem algébrica introduzida a informação sobre densidades em grafos para o problema original.
 Para cada $\sigma$-flag $G$, podemos associar um vetor (de dimensão infinita) $\left(d(F,G)\right)_{F \in \calf^\sigma} \in [0,1]^{\calf^\sigma}$.
@@ -283,7 +264,7 @@ Esses homomorfismos serão chamados de \emph{homomorfismos funcionais}.
 Dessa forma, se vale uma desigualdade $\sum a_iF_i \geq 0$ em $\cala^\sigma$, então também vale $\phi\left(\sum a_iF_i\right) \geq 0$ para todo homomorfismo funcional $\phi$, e logo $\sum a_id(F_i,G_k) + o(1) \geq 0$ para toda sequência convergente $(G_k)_{k \geq 0}$, onde o termo $o(1)$ vai para zero quando $|G_k|$ vai para infinito.
 Escolher $(G_k)_{k \geq 0}$ como uma sequência de blow-ups balanceados de um grafo base será suficiente para as aplicações desse trabalho.
 
-Vamos mostrar mais uma vez o Teorema de Mantel usando a expressiva da álgebra que acabamos de desenvolver.
+Vamos mostrar mais uma vez o Teorema de Mantel usando a expressividade da álgebra que acabamos de desenvolver.
 Começamos com \[\left(\edgeWithOneLabel - \nonEdgeWithOneLabel\right)^2 \geq 0.\]
 Daí, temos \[ \edgeWithOneLabel\cdot\edgeWithOneLabel-2\ \edgeWithOneLabel\cdot\nonEdgeWithOneLabel+\nonEdgeWithOneLabel\cdot\nonEdgeWithOneLabel \geq 0, \]
 e multiplicando obtemos \[ \labeledCherry - \asymmetricLabeledCherry - \asymmetricLabeledCherryComplement + \labeledCherryComplement + \threePointsWithOneLabel \geq 0. \]
@@ -297,3 +278,44 @@ Tome $G_1$ qualquer e para cada $N \geq 2$ defina $G_N$ como um blow-up completo
 Então para alguma sequência $N_0<N_1<\dots$ vale $d\left(\edge,G_{N_k}\right) \leq 1/2+o(1)$.
 Mas \[ d\left(\edge,G_{N_k}\right) = \frac{2e(G_{N_k})}{v(G_{N_k})^2}+o(1) = \frac{2N_k^2e(G_1)}{N_k^2v(G_1)^2}+o(1) = \frac{2e(G_1)}{v(G_1)^2}+o(1), \]
 logo $e(G_1) \leq (1/4+o(1))v(G_1)^2$, e como o termo $o(1)$ pode ser tornado arbitrariamente pequeno, obtemos $e(G_1) \leq v(G_1)^2/4$ para qualquer escolha de $G_1$.
+
+% \subsection{O método semidefinido}
+
+% Para descrever o método semidefinido, precisamos listar $\calf_m^\sigma=\{F_1,F_2,\dots,F_\ell\}$.
+% Para $|\sigma|$ e $m$ grandes, $\ell$ se torna maior ainda, e por isso em geral procuramos valore de $|\sigma|$ e $m$ razoáveis.
+% Isso ficará mais claro a seguir.
+
+% Tomamos $v \in \bbr^{\ell}$ um vetor e $Q \in \bbs^\ell_+$ uma matriz positiva semidefinida (ou seja, uma matriz tal que $x^\top Q x \geq 0$ para todo $x \in \bbr^{\ell}$).
+% Então expandindo $v^\top Q v \geq 0$, temos
+% %\[ \sum_{F_a,F_b \in \calf_m^\sigma} Q_{ab} v_a v_b \geq 0. \]
+% \[ \sum_{i,j=1}^{\ell} Q_{ij}v_iv_j \geq 0. \]
+
+% Fixe dois grafos $G$ e $H$.
+% Aqui, pensamos em $G$ como o grafo ``grande'' que controla o comportamento assintótico da expressão (em particular, que controla o termo de erro) e em $H$ tem tamanho $l$ (constante) e usaremos $H$ para simplificar densidades em $G$ usando a regra da cadeia.
+% Seja $\Theta_G$ o conjunto de injeções $\theta \colon [|\sigma|] \to V(G)$ tais que $(G,\theta)$ é um $\sigma$-flag.
+% Defina $\Theta_H$ analogamente e fixe $\theta_G \in \Theta_G$ e $\theta_H  \in \Theta_H$.
+
+% Fazendo $v_i = d(F_i,(G,\theta_G))$ e usando o Teorema~\ref{thm:multiplying-densities}, obtemos
+% \begin{equation}\label{eq:1}
+%   %\sum_{F_i,F_j \in \calf_m^\sigma} Q_{ij} d(F_i,F_j,G;\theta) + o(1) \geq 0.
+%   \sum_{i,j=1}^{\ell}Q_{ij}d(F_i,F_j,(G,\theta_G)) + o(1) \geq 0.
+% \end{equation}
+
+% %Tome $H \in \calf_l^\emptyflag$, com $l$ pequeno de forma a obter uma aproximação razoável para as densidades de~(\ref{eq:1}).
+% %Seja $\Theta_H$ o conjunto de injeções $\theta \colon [|\sigma|] \to V(H)$ satisfazendo que $(H,\theta)$ é um $\sigma$-flag.
+% Da mesma forma que em~(\ref{eq:chain-rule-2}), temos que
+% \begin{equation}\label{eq:2}
+%   d(F_i,F_j,(G,\theta_G)) = \sum_{H \in \calf_l^{\emptyflag}} d(F_i,F_j,(H,\theta_H))d((H,\theta_H),(G,\theta_G)),
+% \end{equation}
+% e podemos calcular os coeficientes esperados $d(F_i,F_j,(H,\theta))$ quando escolhemos, de forma aleatória, o a injeção $\theta \in \Theta_H$ tal que $(H,\theta)$ é um $\sigma$-flag.
+
+% De (\ref{eq:1}) e (\ref{eq:2}), temos então
+% \[ \sum_{H \in \calf_l^{\emptyflag}} \sum_{i,j=1}^{\ell} Q_{ij} \bbe_{\theta_H \in \Theta_H} \left[d(F_i,F_j,(H,\theta_H))\right] d((H,\theta_H),(G,\theta_G)) + o(1) \geq 0. \]
+% Definindo $c_H(\sigma,m,Q) \coloneqq \sum_{i,j=1}^{\ell} Q_{ij} \bbe_{\theta \in \Theta_H} \left[d(F_i,F_j,(H,\theta))\right]$, a desigualdade obtida é exatamente da forma
+% \begin{equation}\label{eq:general-density-ineq}
+%   \sum_{H \in \calf_l^\emptyflag} c_H(\sigma,m,Q)d(H,G) + o(1) \geq 0.
+% \end{equation}
+
+% Combinando (\ref{eq:chain-rule-2}) e (\ref{eq:general-density-ineq}) para montar um programa semidefinido adequado, é possível obter cotas para os chamados ``problemas do tipo Turán'' ao variar os hiperparâmetros $m,l,\sigma$ do modelo e utilizar a cota de (\ref{eq:max-bound}).
+% Também é possível combinar escolhas de hiperparâmetros $c_H(\sigma_i,m_i,Q_i)$ para obter cotas mais refinadas (ver~\cite{grzesik2012pentagon}).
+% Essas ideias renderam vários resultados importantes desde a introdução do método de álgebras de flag, em particular com o prolífico software \texttt{flagmatic} (\href{https://lidicky.name/flagmatic/}), que implementa a abordagem descrita nessa seção.

@@ -12,7 +12,7 @@ Portanto $D(G) \leq \min_{v \in V(G)}|A_v|$, ou ainda $D(G) \leq \bbe_{v \in V(G
 Isso nos mostra que é possível modelar certas escolhas de bipartições e, portanto, de arestas que precisamos contar/deletar a partir de um único vértice \textit{especial} e de uma \emph{estratégia} de bipartição.
 Na linguagem de álgebras de flag (sobre os grafos livres de triângulos), a primeira parte do Teorema~\ref{thm:EFPS-bounds} pode ser escrita da seguinte forma:
 \begin{theorem}\label{thm:local-cut-1}
-  Se $\average{\labeledCherryComplement} \geq 2/25$, então $\edge \leq 2/5$.
+  Se $\labeledCherryComplement \geq 2/25$ para todo flag $G^{\aSinglePoint}$ obtido de $G$ rotulando um vértice especial, então $\edge \leq 2/5$.
 \end{theorem}
 \begin{proof}
   Primeiro, vamos fixar o tipo $\sigma$ de tamanho $1$, e os inteiros $l=3$ e $m=2$ (assim como no Teorema de Mantel).
@@ -35,7 +35,7 @@ Na linguagem de álgebras de flag (sobre os grafos livres de triângulos), a pri
   \[ \left(\frac13a_{11}+\frac23a_{12}\right)\unlabeledCherry + \left(\frac23a_{12}+\frac13a_{22}\right)\unlabeledCherryComplement + a_{22}\threePoints \geq 0. \]
 
   Além disso, $\edge = \frac23 \unlabeledCherry + \frac13 \unlabeledCherryComplement$,
-  logo de $\average{\labeledCherryComplement} \geq 2/25 \iff \unlabeledCherry \geq \frac{6}{25}$ temos
+  logo da média sobre todas as escolhas de $G^{\sigma}$ vale que $\average{\labeledCherryComplement} \geq 2/25 \iff \unlabeledCherry \geq \frac{6}{25}$, e assim temos
   \begin{align*}
     \edge + \frac{6}{25}x 
     & \leq \left(\frac23+\frac13a_{11}+\frac23a_{12}\right)\unlabeledCherry + \left(\frac13+\frac23a_{12}+\frac13a_{22}+x\right)\unlabeledCherryComplement+a_{22}\threePoints \\
@@ -69,10 +69,10 @@ Essa técnica também foi utilizada em~\cite{baloghclemenlidicky,norin2016} para
 Por exemplo, se $G$ é livre de triângulos e $uv \in E(G)$, então é possível definir uma bipartição de $V(G)$ com $N(u)$ em uma das parte, $N(v)$ em outra das partes e, para cada vértice em $V(G) \setminus (N(u) \cup N(v))$, decidimos uniformemente ao acaso com probabilidade $1/2$ em qual das partes definidas por $N(u)$ e $N(v)$ ele será colocado.
 A escolha é feita de forma aleatória porque sabemos que o maior corte (determinístico) que pode ser gerado tem tamanho pelo menos o valor esperado do tamanho do corte na escolha aleatória, e é fácil calcular o valor esperado.
 
-Se nenhum desses cortes deixa no máximo $n^2/25$ arestas de fora, então a densidade esperada das arestas fora de qualquer um desses cortes definidos localmente é pelo menos $2/25$, o que pode ser expressado da seguinte maneira:
+Se nenhum desses cortes deixa no máximo $n^2/25$ arestas de fora, então a densidade esperada das arestas fora de qualquer um desses cortes definidos localmente é pelo menos $2/25$, o que pode ser expressado da seguinte maneira, onde as densidades são tomadas sobre um flag $G^{\sigma}$ com uma não-aresta $uv$ rotulada:
 
 \begin{equation}\label{eq:local-cut-2}
-  \average{\frac12 \fourVerticesOne + \frac12 \fourVerticesTwo + \frac12 \fourVerticesThree} \geq \frac{2}{25}.
+  \frac12 \fourVerticesOne + \frac12 \fourVerticesTwo + \frac12 \fourVerticesThree \geq \frac{2}{25}.
 \end{equation}
 
 O seguinte resultado demonstra o poder do método de cortes locais para obter cotas significativamente melhores para resultados parciais na direção da Conjectura~\ref{conj:make-bipartite}.
@@ -106,12 +106,13 @@ Assim, podemos assumir que, para qualquer escolha de $S$, vale que
   \iff&\sum_{X,Y \subseteq V(\sigma)} (p_Xp_Y+(1-p_X)(1-p_Y)) d(F^\sigma_{X,Y},G^\sigma) \geq \frac{2}{25} + O\left(\frac{1}{n}\right),
 \end{align*}
 onde $G^\sigma$ é o grafo em que rotulamos $S$ como sendo $\sigma$.
-Escolhendo $S$ aleatoriamente, obtemos
-\[ \sum_{X,Y \subseteq V(\sigma)} (p_Xp_Y+(1-p_X)(1-p_Y)) q(F^\sigma_{X,Y}) d(\downward F^\sigma_{X,Y},G) \geq \frac{2}{25} + o(1). \]
+Escolhendo $S$ aleatoriamente e usando o Teorema~\ref{thm:averaging-flag} (supondo que $d(\downward \sigma, G) > 0$), vale que
+\[ \sum_{X,Y \subseteq V(\sigma)} (p_Xp_Y+(1-p_X)(1-p_Y)) \frac{q(F^\sigma_{X,Y}) d(\downward F^\sigma_{X,Y},G)}{q(\sigma)d(\downward \sigma, G)} \geq \frac{2}{25} + o(1). \]
 Omitindo $G$ e o termo $o(1)$, que já sabemos que podemos omitir, obtemos finalmente
 \begin{equation}\label{eq:sigma-p-restricao}
-  \sum_{X,Y \subseteq V(\sigma)} (p_Xp_Y+(1-p_X)(1-p_Y))\average{F^\sigma_{X,Y}} \geq 0.08.
+  \sum_{X,Y \subseteq V(\sigma)} (p_Xp_Y+(1-p_X)(1-p_Y))\average{F^\sigma_{X,Y}} \geq \frac{2}{25} \average{\sigma}.
 \end{equation}
+Observe que essa última desigualdade vale mesmo no caso $\average{\sigma} = 0$, pois aí também teríamos $\average{F^\sigma_{X,Y}} = 0$ para cada escolha de $X$ e $Y$.
 Chamamos essa desigualdade de uma \emph{$(\sigma,p)$-restrição}.
 
 Também sabemos que podemos gerar restrições escolhendo um tipo $\pi$, um inteiro $m \geq |\pi|$ e, listando $\calf^\pi_m = \{F_1,F_2,\dots,F_{\ell}\}$, para qualquer $A \in \bbs^{\ell}_+$ vale que
@@ -130,11 +131,11 @@ Tome $m \geq \max_i(|\sigma_i|+2), \max_j(2m_j-|\pi_j|)$.
 Usando~(\ref{eq:guys-in-kernel}), podemos escrever as $r+s$ restrições como desigualdades em $\cala^\emptyflag_m$.
 
 De forma mais explícita, uma $(\sigma,p)$-restrição pode ser reescrita em $\cala^\emptyflag_m$ como
-\[ \sum_{F \in \calf^{\emptyflag}_m} \left(\sum_{X,Y \subseteq V(\sigma)} (p_Xp_Y+(1-p_X)(1-p_Y))\left([F]\average{F^\sigma_{X,Y}}\right)\right)F \geq 0.08, \]
+\[ \sum_{F \in \calf^{\emptyflag}_m} \left(\sum_{X,Y \subseteq V(\sigma)} (p_Xp_Y+(1-p_X)(1-p_Y))\left([F]\average{F^\sigma_{X,Y}}\right) - \frac{2}{25}[F]\average{\sigma}\right)F \geq 0, \]
 onde $[F]F'$ é o coeficiente de $F$ quando $F'$ é expandido em termos de flags de ordem $|F|$.
 Escreva cada uma das $(\sigma,p)$-restrições como
 \begin{equation}\label{eq:c-coeff}
-  \sum_{F \in \calf^{\emptyflag}_m} c(F)F \geq 0.08,
+  \sum_{F \in \calf^{\emptyflag}_m} c(F)F \geq 0,
 \end{equation}
 onde os $c(F)$'s são coeficientes não negativos.
 Analogamente, uma $(\pi,m)$-restrição pode ser reescrita como
@@ -148,9 +149,9 @@ Finalmente, escreva
 
 Combinando as equações (\ref{eq:c-coeff}), (\ref{ef:d-coeff}) e (\ref{eq:b-coeff}), obtemos
 \begin{align*}
-  \edge &\leq \sum_{F \in \calf^{\emptyflag}_m} \left(b(F) + \sum_{i=1}^r c_i(F) \cdot \alpha_i + \sum_{k=1}^s \sum_{i,j=1}^{\ell_k} d_{kij}(F) \cdot (A_k)_{ij}\right)F-\sum_{i=1}^r 0.08\alpha_i \\
-  &= \sum_{F \in \calf^{\emptyflag}_m} \left(b(F) + \sum_{i=1}^r (c_i(F)-0.08) \cdot \alpha_i + \sum_{k=1}^s \sum_{i,j=1}^{\ell_k} d_{kij}(F) \cdot (A_k)_{ij}\right)F \\
-  &\leq \max_{F \in \calf^{\emptyflag}_m} \left(b(F) + \sum_{i=1}^r (c_i(F)-0.08) \cdot \alpha_i + \sum_{k=1}^s \sum_{i,j=1}^{\ell_k} d_{kij}(F) \cdot (A_k)_{ij}\right),
+  \edge &\leq \sum_{F \in \calf^{\emptyflag}_m} \left(b(F) + \sum_{i=1}^r c_i(F) \cdot \alpha_i + \sum_{k=1}^s \sum_{i,j=1}^{\ell_k} d_{kij}(F) \cdot (A_k)_{ij}\right)F\\
+  %&= \sum_{F \in \calf^{\emptyflag}_m} \left(b(F) + \sum_{i=1}^r (c_i(F)-0.08) \cdot \alpha_i + \sum_{k=1}^s \sum_{i,j=1}^{\ell_k} d_{kij}(F) \cdot (A_k)_{ij}\right)F \\
+  &\leq \max_{F \in \calf^{\emptyflag}_m} \left(b(F) + \sum_{i=1}^r c_i(F) \cdot \alpha_i + \sum_{k=1}^s \sum_{i,j=1}^{\ell_k} d_{kij}(F) \cdot (A_k)_{ij}\right),
 \end{align*}
 onde $\alpha_1,\alpha_2,\dots,\alpha_r \geq 0$ são escalares.
 
@@ -158,7 +159,7 @@ Finalmente, podemos montar o seguinte programa semidefinido para encontrar o val
 \begin{alignat*}{2}
   \text{Minimizar} \quad & M \\
   \text{sujeito a}
-  \quad & M-\sum_{i=1}^r(c_i(F)-0.08) \; \alpha_i \\
+  \quad & M-\sum_{i=1}^rc_i(F) \; \alpha_i \\
   \quad & \hspace{1em}-\sum_{k=1}^s\sum_{i,j=1}^{\ell_k} d_{kij}(F) \; (A_k)_{ij} \geq b(F), &\quad \text{ para cada } F \in \calf^{\emptyflag}_m, \\
   \quad & M \geq 0,\\
   \quad & \alpha_i \geq 0, &\quad \text{ para cada } i \in [r], \\
@@ -168,7 +169,13 @@ Finalmente, podemos montar o seguinte programa semidefinido para encontrar o val
 Se $d^*$ é o valor ótimo desse programa, então a Conjectura~\ref{conj:make-bipartite} está provada para grafos com pelo menos $\frac{d^*}{2}n^2$ arestas.
 O nosso objetivo, é combinar $(\sigma,p)$-restrições e $(\pi,m)$-restrições que deem a valores menores de $d^*$.
 
-\noindent
-\text{\color{red} [o resto dessa seção depende de se eu vou conseguir debugar essa joça até dia 14]}
+Escolher bons cortes e boas escolhas de $p$ é um desafio porque o número de restrições geradas cresce muito rápido.
+Por exemplo, se $p_X \in \{0.0,0.5,1.0\}$ e $\sigma = \unlabeledCherryComplement$, há (sem otimizações) $3^8 \approx 6561$ cortes gerados apenas para essa escolha de $\sigma$.
 
-Usando algumas boas escolhas de restrições, conseguimos melhorar o resultado de~\ref{thm:n2/5} (que equivaleria a $d^*=0.40$) para $d^*=0.362867$.
+Duas otimizações imediatas podem ser feitas:
+\begin{enumerate}
+  \item Se $X$ não é independente em $\sigma$, então o valor de $p_X$ é irrelevante, porque $G$ é livre de triângulos.
+  No caso de $\unlabeledCherryComplement$, isso reduz o número de cortes para $3^6$ e  pode ser feito na hora de gerar as restrições que serão utilizadas.
+  \item Na hora de montar o programa, podemos rejeitar incluir novos cortes que deem desigualdades já presentes.
+  Por exemplo, em $\unlabeledCherry$ há dois vértices simétricos, e portanto é razoável esperar outra melhora por um fator constante nessa otimização.
+\end{enumerate}

@@ -1,6 +1,8 @@
 %!TeX root=../tese.tex
 \section{Considerações sobre software e questões numéricas}\label{sec:software}
 
+\text{\color{red} [Essa seção precisa ser escrita direito]}
+
 Até a data da entrega desse trabalho, não há um software unificado utilizado para realizar manipulações com álgebras de flag, mas há diversas implementações do método disponíveis.
 %(ver~\cite{parczyk2023fully})
 %O Sage ainda não possui algo de álgebra de flag, o que é uma pena.
@@ -8,7 +10,6 @@ Em problemas do tipo Turán, o software \href{https://lidicky.name/flagmatic/}{f
 Por exemplo, é possível verificar o resultado de~\cite{grzesik2012pentagon} em poucos segundos com uma instalação local do \texttt{flagmatic}. 
 %Há uma implementação para rust também.
 
-\text{\color{red} [esse parágrafo depende de se eu vou conseguir debugar essa joça até dia 14]}
 Nesse trabalho, optamos por utilizar o pacote~\texttt{flag-algebra-program-package} (desenvolvido por Leonardo Nagami Coregliano e disponível em~\href{https://github.com/robertoparente/flag-algebra-program-package}) para elaborar os programas, porque oferecia uma quantidade suficiente de abstração e maleabilidade para implementar o que precisávamos.
 Além disso, não fizemos as computações de forma exata.
 O \texttt{flagmatic} faz isso, mas aqui por simplicidade, para observar de forma empírica métodos de~\cite{baloghclemenlidicky}, fizemos numérico mesmo.
