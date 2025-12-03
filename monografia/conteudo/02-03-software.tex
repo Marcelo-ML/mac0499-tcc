@@ -5,7 +5,7 @@ O método de álgebras de flag foi originalmente introduzido por Razborov em um 
 De fato, não é difícil generalizar a descrição prática desse capítulo para contextos como de hipergrafos, digrafos, grafos com coloração, permutações, entre vários outros modelos.
 
 Apesar disso, ainda não há uma implementação ``padrão'' das álgebras de flag.
-O software \texttt{flagmatic} (\href{https://lidicky.name/flagmatic/}) é possivelmente a implementação mais acessível e tem sido usada com êxito tipo Turán, o software {flagmatic} já foi usado e testado com resultados prolíficos em diversos problemas de densidade em grafos e hipergrafos.
+O software \texttt{flagmatic} (\url{https://lidicky.name/flagmatic/}) é possivelmente a implementação mais acessível e tem sido usada com êxito tipo Turán, o software {flagmatic} já foi usado e testado com resultados prolíficos em diversos problemas de densidade em grafos e hipergrafos.
 Outras implementações podem ser encontradas facilmente e tem sido usados com êxito em problemas de combinatória extremal~(ver~\cite{brosch2022symmetry,brosch2025lower,lidicky2021semidefinite}).
 
 % https://github.com/DanielBrosch/SDPSymmetryReduction.jl (Julia)
@@ -15,7 +15,7 @@ Outras implementações podem ser encontradas facilmente e tem sido usados com �
 
 %Por exemplo, é possível verificar o resultado de~\cite{grzesik2012pentagon} em poucos segundos com uma instalação local do \texttt{flagmatic}. 
 
-Nesse trabalho, optamos por utilizar o pacote ~\texttt{flag-algebra-program-package} (desenvolvido por Leonardo Nagami Coregliano e disponível em~\href{https://github.com/robertoparente/flag-algebra-program-package}) para elaborar os programas, que é desenvolvido inteiramente em \texttt{C++} e foi usado para obter os resultados de~\cite{coregliano2015maximum}.
+Nesse trabalho, optamos por utilizar o pacote ~\texttt{flag-algebra-program-package} (desenvolvido por Leonardo Nagami Coregliano e disponível em~\url{https://github.com/robertoparente/flag-algebra-program-package}) para elaborar os programas, que é desenvolvido inteiramente em \texttt{C++} e foi usado para obter os resultados de~\cite{coregliano2015maximum}.
 Escolhemos esse pacote porque ele oferecia um nível suficiente de abstração e otimização para certas propriedades como normalização e produto de densidades, além de a documentação e linguagem serem mais acessíveis nas fases iniciais desse trabalho.
 Usamos o \texttt{csdp} para resolver os programas semidefinidos vindos da formulação em álgebras de flag.
 
@@ -24,4 +24,4 @@ Há métodos de arredondamento utilizados (implementados pelo \texttt{flagmatic}
 Como nesse trabalho nos preocupamos, principalmente, com o detalhamento da implementação dos métodos de~\cite{baloghclemenlidicky}, não realizamos cálculos de forma exata.
 
 De fato, em~\cite{baloghclemenlidicky} é fornecido um esboço de prova para o regime de densidade $e(G) \geq (0.2-\varepsilon)n^2$ para $\varepsilon \approx 10^{-8}$ (que depende dos erros máximos garantidos pela execução do \texttt{csdp}).
-A prova desse resultado utiliza um argumento de remoção de vértices de grau mínimo baixo e também o Teorema~\ref{thm:dG-dH-blowup-C5}.
+A prova desse resultado utiliza um argumento de remoção de vértices de grau baixo e também o Teorema~\ref{thm:dG-dH-blowup-C5}.
