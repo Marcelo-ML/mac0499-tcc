@@ -1,17 +1,27 @@
 %!TeX root=../tese.tex
 \section{Considerações sobre software e questões numéricas}\label{sec:software}
 
-\text{\color{red} [Essa seção precisa ser escrita direito]}
+O método de álgebras de flag foi originalmente introduzido por Razborov em um contexto muito mais geral que de grafos, na linguagem da Teoria dos Modelos Finitos.
+De fato, não é difícil generalizar a descrição prática desse capítulo para contextos como de hipergrafos, digrafos, grafos com coloração, permutações, entre vários outros modelos.
 
-Até a data da entrega desse trabalho, não há um software unificado utilizado para realizar manipulações com álgebras de flag, mas há diversas implementações do método disponíveis.
-%(ver~\cite{parczyk2023fully})
-%O Sage ainda não possui algo de álgebra de flag, o que é uma pena.
-Em problemas do tipo Turán, o software \href{https://lidicky.name/flagmatic/}{flagmatic} já foi usado e testado com resultados prolíficos em diversos problemas de densidade em grafos e hipergrafos.
-Por exemplo, é possível verificar o resultado de~\cite{grzesik2012pentagon} em poucos segundos com uma instalação local do \texttt{flagmatic}. 
-%Há uma implementação para rust também.
+Apesar disso, ainda não há uma implementação ``padrão'' das álgebras de flag.
+O software \texttt{flagmatic} (\href{https://lidicky.name/flagmatic/}) é possivelmente a implementação mais acessível e tem sido usada com êxito tipo Turán, o software {flagmatic} já foi usado e testado com resultados prolíficos em diversos problemas de densidade em grafos e hipergrafos.
+Outras implementações podem ser encontradas facilmente e tem sido usados com êxito em problemas de combinatória extremal~(ver~\cite{brosch2022symmetry,brosch2025lower,lidicky2021semidefinite}).
 
-Nesse trabalho, optamos por utilizar o pacote~\texttt{flag-algebra-program-package} (desenvolvido por Leonardo Nagami Coregliano e disponível em~\href{https://github.com/robertoparente/flag-algebra-program-package}) para elaborar os programas, porque oferecia uma quantidade suficiente de abstração e maleabilidade para implementar o que precisávamos.
-Além disso, não fizemos as computações de forma exata.
-O \texttt{flagmatic} faz isso, mas aqui por simplicidade, para observar de forma empírica métodos de~\cite{baloghclemenlidicky}, fizemos numérico mesmo.
-Ou seja, seria necessário verificar o resutado para $e(G) \geq (0.2-\epsilon)n^2$, onde $\epsilon$ vem da precisão da máquina.
-De fato, em~\cite{baloghclemenlidicky} fornecem um esboço de prova para esse regime de densidade, usando o Teorema~\ref{thm:dG-dH-blowup-C5}.
+% https://github.com/DanielBrosch/SDPSymmetryReduction.jl (Julia)
+% flag-algebra crate (Rust)
+% permpack (sage)
+% flag-ocaml (ocaml)
+
+%Por exemplo, é possível verificar o resultado de~\cite{grzesik2012pentagon} em poucos segundos com uma instalação local do \texttt{flagmatic}. 
+
+Nesse trabalho, optamos por utilizar o pacote ~\texttt{flag-algebra-program-package} (desenvolvido por Leonardo Nagami Coregliano e disponível em~\href{https://github.com/robertoparente/flag-algebra-program-package}) para elaborar os programas, que é desenvolvido inteiramente em \texttt{C++} e foi usado para obter os resultados de~\cite{coregliano2015maximum}.
+Escolhemos esse pacote porque ele oferecia um nível suficiente de abstração e otimização para certas propriedades como normalização e produto de densidades, além de a documentação e linguagem serem mais acessíveis nas fases iniciais desse trabalho.
+Usamos o \texttt{csdp} para resolver os programas semidefinidos vindos da formulação em álgebras de flag.
+
+Por fim, cabe ressaltar que muitas vezes os cálculos não são feitos de forma exata, e isso depende da implementação utilizada.
+Há métodos de arredondamento utilizados (implementados pelo \texttt{flagmatic}), mas no caso da geração de cortes locais, arredondar os resultados em ponto flutuante dos resultados do \texttt{csdp} incorreria em ainda mais tempo de execução para os programas.
+Como nesse trabalho nos preocupamos, principalmente, com o detalhamento da implementação dos métodos de~\cite{baloghclemenlidicky}, não realizamos cálculos de forma exata.
+
+De fato, em~\cite{baloghclemenlidicky} é fornecido um esboço de prova para o regime de densidade $e(G) \geq (0.2-\varepsilon)n^2$ para $\varepsilon \approx 10^{-8}$ (que depende dos erros máximos garantidos pela execução do \texttt{csdp}).
+A prova desse resultado utiliza um argumento de remoção de vértices de grau mínimo baixo e também o Teorema~\ref{thm:dG-dH-blowup-C5}.

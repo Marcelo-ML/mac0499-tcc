@@ -169,13 +169,19 @@ Finalmente, podemos montar o seguinte programa semidefinido para encontrar o val
 Se $d^*$ é o valor ótimo desse programa, então a Conjectura~\ref{conj:make-bipartite} está provada para grafos com pelo menos $\frac{d^*}{2}n^2$ arestas.
 O nosso objetivo, é combinar $(\sigma,p)$-restrições e $(\pi,m)$-restrições que deem a valores menores de $d^*$.
 
-Escolher bons cortes e boas escolhas de $p$ é um desafio porque o número de restrições geradas cresce muito rápido.
-Por exemplo, se $p_X \in \{0.0,0.5,1.0\}$ e $\sigma = \unlabeledCherryComplement$, há (sem otimizações) $3^8 \approx 6561$ cortes gerados apenas para essa escolha de $\sigma$.
+Escolher bons valores de $\sigma$ e $p$ é um desafio porque o número de restrições geradas cresce exponencialmente, e para $|\sigma| \geq 5$ já é impraticável gerar todas as $(\sigma,p)$-restrições sem escolher ``à mão'' valores de $\sigma$ e $p$.
+Em~\cite{baloghclemenlidicky}, os autores comentam pelo menos duas escolhas de $(\sigma,p)$-restrições com $|\sigma|=6$, uma delas formulada especialmente para lidar com o \emph{grafo de Clebsch}, um grafo de Cayley que é descrito como ``particularmente hostil'' com respeito à estratégia de cortes locais.
 
-Duas otimizações imediatas podem ser feitas:
-\begin{enumerate}
-  \item Se $X$ não é independente em $\sigma$, então o valor de $p_X$ é irrelevante, porque $G$ é livre de triângulos.
-  No caso de $\unlabeledCherryComplement$, isso reduz o número de cortes para $3^6$ e  pode ser feito na hora de gerar as restrições que serão utilizadas.
-  \item Na hora de montar o programa, podemos rejeitar incluir novos cortes que deem desigualdades já presentes.
-  Por exemplo, em $\unlabeledCherry$ há dois vértices simétricos, e portanto é razoável esperar outra melhora por um fator constante nessa otimização.
-\end{enumerate}
+%Por exemplo, se $p_X \in \{0.0,0.5,1.0\}$ e $\sigma = \unlabeledCherryComplement$, há (sem otimizações) $3^8 \approx 6561$ cortes gerados apenas para essa escolha de $\sigma$.
+%
+%Duas otimizações imediatas podem ser feitas:
+%\begin{enumerate}
+%  \item Se $X$ não é independente em $\sigma$, então o valor de $p_X$ é irrelevante, porque $G$ é livre de triângulos.
+%  No caso de $\unlabeledCherryComplement$, isso reduz o número de cortes para $3^6$ e  pode ser feito na hora de gerar as restrições que serão utilizadas.
+%  \item Na hora de montar o programa, podemos rejeitar incluir novos cortes que deem desigualdades já presentes.
+%  Por exemplo, em $\unlabeledCherry$ há dois vértices simétricos, e portanto é razoável esperar outra melhora por um fator constante nessa otimização.
+%\end{enumerate}
+
+Estamos desenvolvendo uma implementação do método de~\cite{baloghclemenlidicky} que pode ser encontrada em~\href{https://github.com/Marcelo-ML/flag-algebras}.
+Até o momento da conclusão desse trabalho, ainda não conseguimos reproduzir os resultados do Teorema~\ref{thm:baloghclemenlidicky}.
+Contudo, estamos buscando estratégias de otimização e incorporação de novas restrições locais que permitam agilizar a geração dos programas definidos correspondentes.
